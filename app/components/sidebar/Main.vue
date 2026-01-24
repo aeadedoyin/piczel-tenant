@@ -52,9 +52,9 @@ const appNavigation: Record<string, NavItem[]> = {
       url: '/gallery/collections',
       icon: resolveComponent('LucideFolders'),
       items: [
-        { title: 'Published', url: '/gallery/collections/published' },
-        { title: 'Hidden', url: '/gallery/collections/hidden' },
-        { title: 'Draft', url: '/gallery/collections/draft' },
+        { title: 'Published', url: '/gallery/collections?status=Published' },
+        { title: 'Hidden', url: '/gallery/collections?status=Hidden' },
+        { title: 'Draft', url: '/gallery/collections?status=Draft' },
       ],
     },
     {

@@ -22,12 +22,28 @@ defineProps<{
 const route = useRoute()
 
 function isActive(url: string): boolean {
+  // Handle URLs with query params
+  if (url.includes('?')) {
+    const [path, queryString] = url.split('?')
+    if (route.path !== path) return false
+
+    const params = new URLSearchParams(queryString)
+    for (const [key, value] of params.entries()) {
+      const routeValue = route.query[key]
+      if (!routeValue || typeof routeValue !== 'string') return false
+      // Check if the comma-separated route query contains this value
+      const routeValues = routeValue.split(',')
+      if (!routeValues.includes(value)) return false
+    }
+    return true
+  }
   return route.path === url
 }
 
 function isParentActive(item: NavItem): boolean {
   if (item.items?.length) {
-    return item.items.some(sub => route.path === sub.url || route.path.startsWith(`${sub.url}/`))
+    const basePath = item.url.split('?')[0]
+    return route.path === basePath || route.path.startsWith(`${basePath}/`)
   }
   return route.path === item.url
 }
@@ -46,16 +62,23 @@ function isParentActive(item: NavItem): boolean {
         >
           <SidebarMenuItem>
             <CollapsibleTrigger as-child>
-              <SidebarMenuButton class="py-2.5" :tooltip="item.title">
-                <component :is="item.icon" class="size-4 text-muted-foreground/70" />
-                <span>{{ item.title }}</span>
-                <LucideChevronRight
-                  class="
-                    ml-auto size-4 text-muted-foreground/50
-                    transition-transform duration-200
-                    group-data-[state=open]/collapsible:rotate-90
-                  "
-                />
+              <SidebarMenuButton
+                as-child
+                class="py-2.5"
+                :data-active="isActive(item.url)"
+                :tooltip="item.title"
+              >
+                <NuxtLink :to="item.url">
+                  <component :is="item.icon" class="size-4 text-muted-foreground/70" />
+                  <span>{{ item.title }}</span>
+                  <LucideChevronRight
+                    class="
+                      ml-auto size-4 text-muted-foreground/50
+                      transition-transform duration-200
+                      group-data-[state=open]/collapsible:rotate-90
+                    "
+                  />
+                </NuxtLink>
               </SidebarMenuButton>
             </CollapsibleTrigger>
             <CollapsibleContent>
