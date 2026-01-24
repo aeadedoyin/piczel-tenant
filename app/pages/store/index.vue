@@ -22,37 +22,37 @@ definePageMeta({
         md:grid-cols-4
       "
     >
-      <div class="bg-card rounded-xl border p-6">
+      <div class="rounded-xl border bg-card p-6">
         <div class="flex items-center gap-2">
-          <LucidePackage class="text-muted-foreground size-4" />
-          <span class="text-muted-foreground text-sm font-medium">Products</span>
+          <LucidePackage class="size-4 text-muted-foreground" />
+          <span class="text-sm font-medium text-muted-foreground">Products</span>
         </div>
         <div class="mt-2 text-2xl font-bold">
           24
         </div>
       </div>
-      <div class="bg-card rounded-xl border p-6">
+      <div class="rounded-xl border bg-card p-6">
         <div class="flex items-center gap-2">
-          <LucideShoppingCart class="text-muted-foreground size-4" />
-          <span class="text-muted-foreground text-sm font-medium">Orders</span>
+          <LucideShoppingCart class="size-4 text-muted-foreground" />
+          <span class="text-sm font-medium text-muted-foreground">Orders</span>
         </div>
         <div class="mt-2 text-2xl font-bold">
           156
         </div>
       </div>
-      <div class="bg-card rounded-xl border p-6">
+      <div class="rounded-xl border bg-card p-6">
         <div class="flex items-center gap-2">
-          <LucideDollarSign class="text-muted-foreground size-4" />
-          <span class="text-muted-foreground text-sm font-medium">Revenue</span>
+          <LucideDollarSign class="size-4 text-muted-foreground" />
+          <span class="text-sm font-medium text-muted-foreground">Revenue</span>
         </div>
         <div class="mt-2 text-2xl font-bold">
           $12,450
         </div>
       </div>
-      <div class="bg-card rounded-xl border p-6">
+      <div class="rounded-xl border bg-card p-6">
         <div class="flex items-center gap-2">
-          <LucideTruck class="text-muted-foreground size-4" />
-          <span class="text-muted-foreground text-sm font-medium">Pending</span>
+          <LucideTruck class="size-4 text-muted-foreground" />
+          <span class="text-sm font-medium text-muted-foreground">Pending</span>
         </div>
         <div class="mt-2 text-2xl font-bold">
           8
@@ -61,12 +61,12 @@ definePageMeta({
     </div>
 
     <!-- Placeholder -->
-    <div class="bg-muted/50 rounded-xl border p-12 text-center">
-      <LucideShoppingBag class="text-muted-foreground mx-auto size-12" />
+    <div class="rounded-xl border bg-muted/50 p-12 text-center">
+      <LucideShoppingBag class="mx-auto size-12 text-muted-foreground" />
       <h3 class="mt-4 font-medium">
         Store Overview
       </h3>
-      <p class="text-muted-foreground mt-2 text-sm">
+      <p class="mt-2 text-sm text-muted-foreground">
         Quick access to orders and products.
       </p>
     </div>

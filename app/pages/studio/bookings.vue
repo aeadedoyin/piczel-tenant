@@ -17,10 +17,9 @@ definePageMeta({
       </div>
       <button
         class="
-          bg-primary text-primary-foreground
+          inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm
+          font-medium text-primary-foreground
           hover:bg-primary/90
-          inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm
-          font-medium
         "
       >
         <LucidePlus class="size-4" />
@@ -29,12 +28,12 @@ definePageMeta({
     </div>
 
     <!-- Calendar Placeholder -->
-    <div class="bg-muted/50 rounded-xl border p-12 text-center">
-      <LucideCalendar class="text-muted-foreground mx-auto size-12" />
+    <div class="rounded-xl border bg-muted/50 p-12 text-center">
+      <LucideCalendar class="mx-auto size-12 text-muted-foreground" />
       <h3 class="mt-4 font-medium">
         Booking Calendar
       </h3>
-      <p class="text-muted-foreground mt-2 text-sm">
+      <p class="mt-2 text-sm text-muted-foreground">
         Calendar view coming soon...
       </p>
     </div>
@@ -47,7 +46,7 @@ definePageMeta({
       <div class="space-y-4">
         <div
           v-for="i in 3" :key="i" class="
-            bg-card flex items-center justify-between rounded-xl border p-4
+            flex items-center justify-between rounded-xl border bg-card p-4
           "
         >
           <div class="flex items-center gap-4">
@@ -55,7 +54,7 @@ definePageMeta({
               <div class="text-2xl font-bold">
                 {{ 15 + i }}
               </div>
-              <div class="text-muted-foreground text-xs">
+              <div class="text-xs text-muted-foreground">
                 Jan
               </div>
             </div>
@@ -63,7 +62,7 @@ definePageMeta({
               <h3 class="font-medium">
                 Wedding Photography Session
               </h3>
-              <p class="text-muted-foreground text-sm">
+              <p class="text-sm text-muted-foreground">
                 Client Name - 2:00 PM
               </p>
             </div>

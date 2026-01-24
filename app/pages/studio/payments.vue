@@ -22,28 +22,28 @@ definePageMeta({
         md:grid-cols-3
       "
     >
-      <div class="bg-card rounded-xl border p-6">
+      <div class="rounded-xl border bg-card p-6">
         <div class="flex items-center gap-2">
           <LucideCheckCircle class="size-4 text-green-500" />
-          <span class="text-muted-foreground text-sm font-medium">Received</span>
+          <span class="text-sm font-medium text-muted-foreground">Received</span>
         </div>
         <div class="mt-2 text-2xl font-bold">
           $8,250
         </div>
       </div>
-      <div class="bg-card rounded-xl border p-6">
+      <div class="rounded-xl border bg-card p-6">
         <div class="flex items-center gap-2">
           <LucideClock class="size-4 text-yellow-500" />
-          <span class="text-muted-foreground text-sm font-medium">Pending</span>
+          <span class="text-sm font-medium text-muted-foreground">Pending</span>
         </div>
         <div class="mt-2 text-2xl font-bold">
           $4,200
         </div>
       </div>
-      <div class="bg-card rounded-xl border p-6">
+      <div class="rounded-xl border bg-card p-6">
         <div class="flex items-center gap-2">
           <LucideAlertCircle class="size-4 text-red-500" />
-          <span class="text-muted-foreground text-sm font-medium">Overdue</span>
+          <span class="text-sm font-medium text-muted-foreground">Overdue</span>
         </div>
         <div class="mt-2 text-2xl font-bold">
           $1,500
@@ -59,14 +59,14 @@ definePageMeta({
       <div class="space-y-4">
         <div
           v-for="i in 5" :key="i" class="
-            bg-card flex items-center justify-between rounded-xl border p-4
+            flex items-center justify-between rounded-xl border bg-card p-4
           "
         >
           <div>
             <h3 class="font-medium">
               Invoice #{{ 1000 + i }}
             </h3>
-            <p class="text-muted-foreground text-sm">
+            <p class="text-sm text-muted-foreground">
               Client Name - Wedding Package
             </p>
           </div>

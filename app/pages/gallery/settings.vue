@@ -16,29 +16,29 @@ definePageMeta({
     </div>
 
     <div class="max-w-2xl space-y-6">
-      <div class="bg-card rounded-xl border p-6">
+      <div class="rounded-xl border bg-card p-6">
         <h3 class="font-medium">
           Default Gallery Settings
         </h3>
-        <p class="text-muted-foreground mt-1 text-sm">
+        <p class="mt-1 text-sm text-muted-foreground">
           Settings coming soon...
         </p>
       </div>
 
-      <div class="bg-card rounded-xl border p-6">
+      <div class="rounded-xl border bg-card p-6">
         <h3 class="font-medium">
           Watermark Settings
         </h3>
-        <p class="text-muted-foreground mt-1 text-sm">
+        <p class="mt-1 text-sm text-muted-foreground">
           Watermark configuration coming soon...
         </p>
       </div>
 
-      <div class="bg-card rounded-xl border p-6">
+      <div class="rounded-xl border bg-card p-6">
         <h3 class="font-medium">
           Download Options
         </h3>
-        <p class="text-muted-foreground mt-1 text-sm">
+        <p class="mt-1 text-sm text-muted-foreground">
           Download settings coming soon...
         </p>
       </div>

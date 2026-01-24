@@ -25,7 +25,7 @@ definePageMeta({
     >
       <div
         v-for="i in 8" :key="i" class="
-          group bg-muted relative aspect-square overflow-hidden rounded-lg
+          group relative aspect-square overflow-hidden rounded-lg bg-muted
         "
       >
         <div class="absolute top-2 right-2">

@@ -16,41 +16,41 @@ definePageMeta({
     </div>
 
     <!-- Editor Placeholder -->
-    <div class="bg-muted/50 rounded-xl border p-12 text-center">
-      <LucidePencil class="text-muted-foreground mx-auto size-12" />
+    <div class="rounded-xl border bg-muted/50 p-12 text-center">
+      <LucidePencil class="mx-auto size-12 text-muted-foreground" />
       <h3 class="mt-4 font-medium">
         Website Editor
       </h3>
-      <p class="text-muted-foreground mt-2 text-sm">
+      <p class="mt-2 text-sm text-muted-foreground">
         Drag-and-drop website editor coming soon...
       </p>
     </div>
 
     <!-- Quick Settings -->
     <div class="max-w-2xl space-y-6">
-      <div class="bg-card rounded-xl border p-6">
+      <div class="rounded-xl border bg-card p-6">
         <h3 class="font-medium">
           Site Information
         </h3>
-        <p class="text-muted-foreground mt-1 text-sm">
+        <p class="mt-1 text-sm text-muted-foreground">
           Basic site configuration coming soon...
         </p>
       </div>
 
-      <div class="bg-card rounded-xl border p-6">
+      <div class="rounded-xl border bg-card p-6">
         <h3 class="font-medium">
           Theme & Colors
         </h3>
-        <p class="text-muted-foreground mt-1 text-sm">
+        <p class="mt-1 text-sm text-muted-foreground">
           Theme customization coming soon...
         </p>
       </div>
 
-      <div class="bg-card rounded-xl border p-6">
+      <div class="rounded-xl border bg-card p-6">
         <h3 class="font-medium">
           Pages & Sections
         </h3>
-        <p class="text-muted-foreground mt-1 text-sm">
+        <p class="mt-1 text-sm text-muted-foreground">
           Page management coming soon...
         </p>
       </div>

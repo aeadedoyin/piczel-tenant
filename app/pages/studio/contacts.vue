@@ -17,10 +17,9 @@ definePageMeta({
       </div>
       <button
         class="
-          bg-primary text-primary-foreground
+          inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm
+          font-medium text-primary-foreground
           hover:bg-primary/90
-          inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm
-          font-medium
         "
       >
         <LucidePlus class="size-4" />
@@ -32,29 +31,29 @@ definePageMeta({
     <div class="space-y-4">
       <div
         v-for="i in 6" :key="i" class="
-          bg-card flex items-center justify-between rounded-xl border p-4
+          flex items-center justify-between rounded-xl border bg-card p-4
         "
       >
         <div class="flex items-center gap-4">
           <div
             class="
-              bg-muted flex size-10 items-center justify-center rounded-full
+              flex size-10 items-center justify-center rounded-full bg-muted
             "
           >
-            <LucideUser class="text-muted-foreground size-5" />
+            <LucideUser class="size-5 text-muted-foreground" />
           </div>
           <div>
             <h3 class="font-medium">
               Contact {{ i }}
             </h3>
-            <p class="text-muted-foreground text-sm">
+            <p class="text-sm text-muted-foreground">
               contact{{ i }}@example.com
             </p>
           </div>
         </div>
         <div class="flex items-center gap-4">
-          <span class="text-muted-foreground text-sm">3 projects</span>
-          <LucideMoreHorizontal class="text-muted-foreground size-4" />
+          <span class="text-sm text-muted-foreground">3 projects</span>
+          <LucideMoreHorizontal class="size-4 text-muted-foreground" />
         </div>
       </div>
     </div>

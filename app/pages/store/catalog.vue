@@ -17,10 +17,9 @@ definePageMeta({
       </div>
       <button
         class="
-          bg-primary text-primary-foreground
+          inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm
+          font-medium text-primary-foreground
           hover:bg-primary/90
-          inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm
-          font-medium
         "
       >
         <LucidePlus class="size-4" />
@@ -38,20 +37,20 @@ definePageMeta({
     >
       <div
         v-for="i in 6" :key="i" class="
-          bg-card overflow-hidden rounded-xl border
+          overflow-hidden rounded-xl border bg-card
         "
       >
-        <div class="bg-muted aspect-square" />
+        <div class="aspect-square bg-muted" />
         <div class="p-4">
           <h3 class="font-medium">
             Product {{ i }}
           </h3>
-          <p class="text-muted-foreground text-sm">
+          <p class="text-sm text-muted-foreground">
             Print - 8x10
           </p>
           <div class="mt-2 flex items-center justify-between">
             <span class="font-medium">${{ 25 * i }}</span>
-            <span class="text-muted-foreground text-sm">12 sold</span>
+            <span class="text-sm text-muted-foreground">12 sold</span>
           </div>
         </div>
       </div>

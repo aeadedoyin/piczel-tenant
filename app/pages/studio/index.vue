@@ -22,37 +22,37 @@ definePageMeta({
         md:grid-cols-4
       "
     >
-      <div class="bg-card rounded-xl border p-6">
+      <div class="rounded-xl border bg-card p-6">
         <div class="flex items-center gap-2">
-          <LucideFolderKanban class="text-muted-foreground size-4" />
-          <span class="text-muted-foreground text-sm font-medium">Active Projects</span>
+          <LucideFolderKanban class="size-4 text-muted-foreground" />
+          <span class="text-sm font-medium text-muted-foreground">Active Projects</span>
         </div>
         <div class="mt-2 text-2xl font-bold">
           8
         </div>
       </div>
-      <div class="bg-card rounded-xl border p-6">
+      <div class="rounded-xl border bg-card p-6">
         <div class="flex items-center gap-2">
-          <LucideUsers class="text-muted-foreground size-4" />
-          <span class="text-muted-foreground text-sm font-medium">Contacts</span>
+          <LucideUsers class="size-4 text-muted-foreground" />
+          <span class="text-sm font-medium text-muted-foreground">Contacts</span>
         </div>
         <div class="mt-2 text-2xl font-bold">
           156
         </div>
       </div>
-      <div class="bg-card rounded-xl border p-6">
+      <div class="rounded-xl border bg-card p-6">
         <div class="flex items-center gap-2">
-          <LucideCalendar class="text-muted-foreground size-4" />
-          <span class="text-muted-foreground text-sm font-medium">Upcoming</span>
+          <LucideCalendar class="size-4 text-muted-foreground" />
+          <span class="text-sm font-medium text-muted-foreground">Upcoming</span>
         </div>
         <div class="mt-2 text-2xl font-bold">
           5
         </div>
       </div>
-      <div class="bg-card rounded-xl border p-6">
+      <div class="rounded-xl border bg-card p-6">
         <div class="flex items-center gap-2">
-          <LucideDollarSign class="text-muted-foreground size-4" />
-          <span class="text-muted-foreground text-sm font-medium">Pending</span>
+          <LucideDollarSign class="size-4 text-muted-foreground" />
+          <span class="text-sm font-medium text-muted-foreground">Pending</span>
         </div>
         <div class="mt-2 text-2xl font-bold">
           $4,200
@@ -61,12 +61,12 @@ definePageMeta({
     </div>
 
     <!-- Placeholder -->
-    <div class="bg-muted/50 rounded-xl border p-12 text-center">
-      <LucideBriefcase class="text-muted-foreground mx-auto size-12" />
+    <div class="rounded-xl border bg-muted/50 p-12 text-center">
+      <LucideBriefcase class="mx-auto size-12 text-muted-foreground" />
       <h3 class="mt-4 font-medium">
         Studio Overview
       </h3>
-      <p class="text-muted-foreground mt-2 text-sm">
+      <p class="mt-2 text-sm text-muted-foreground">
         Quick access to your studio management tools.
       </p>
     </div>

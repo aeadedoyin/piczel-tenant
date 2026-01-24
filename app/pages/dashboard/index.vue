@@ -23,54 +23,54 @@ definePageMeta({
         lg:grid-cols-4
       "
     >
-      <div class="bg-card rounded-xl border p-6">
+      <div class="rounded-xl border bg-card p-6">
         <div class="flex items-center gap-2">
-          <LucideDollarSign class="text-muted-foreground size-4" />
-          <span class="text-muted-foreground text-sm font-medium">Revenue</span>
+          <LucideDollarSign class="size-4 text-muted-foreground" />
+          <span class="text-sm font-medium text-muted-foreground">Revenue</span>
         </div>
         <div class="mt-2 text-2xl font-bold">
           $12,450
         </div>
-        <p class="text-muted-foreground text-xs">
+        <p class="text-xs text-muted-foreground">
           +12% from last month
         </p>
       </div>
 
-      <div class="bg-card rounded-xl border p-6">
+      <div class="rounded-xl border bg-card p-6">
         <div class="flex items-center gap-2">
-          <LucideUsers class="text-muted-foreground size-4" />
-          <span class="text-muted-foreground text-sm font-medium">Clients</span>
+          <LucideUsers class="size-4 text-muted-foreground" />
+          <span class="text-sm font-medium text-muted-foreground">Clients</span>
         </div>
         <div class="mt-2 text-2xl font-bold">
           48
         </div>
-        <p class="text-muted-foreground text-xs">
+        <p class="text-xs text-muted-foreground">
           +3 new this month
         </p>
       </div>
 
-      <div class="bg-card rounded-xl border p-6">
+      <div class="rounded-xl border bg-card p-6">
         <div class="flex items-center gap-2">
-          <LucideImage class="text-muted-foreground size-4" />
-          <span class="text-muted-foreground text-sm font-medium">Photos</span>
+          <LucideImage class="size-4 text-muted-foreground" />
+          <span class="text-sm font-medium text-muted-foreground">Photos</span>
         </div>
         <div class="mt-2 text-2xl font-bold">
           2,340
         </div>
-        <p class="text-muted-foreground text-xs">
+        <p class="text-xs text-muted-foreground">
           +180 uploaded this week
         </p>
       </div>
 
-      <div class="bg-card rounded-xl border p-6">
+      <div class="rounded-xl border bg-card p-6">
         <div class="flex items-center gap-2">
-          <LucideShoppingBag class="text-muted-foreground size-4" />
-          <span class="text-muted-foreground text-sm font-medium">Orders</span>
+          <LucideShoppingBag class="size-4 text-muted-foreground" />
+          <span class="text-sm font-medium text-muted-foreground">Orders</span>
         </div>
         <div class="mt-2 text-2xl font-bold">
           24
         </div>
-        <p class="text-muted-foreground text-xs">
+        <p class="text-xs text-muted-foreground">
           8 pending delivery
         </p>
       </div>
@@ -83,19 +83,19 @@ definePageMeta({
         md:grid-cols-2
       "
     >
-      <div class="bg-muted/50 rounded-xl border p-6">
+      <div class="rounded-xl border bg-muted/50 p-6">
         <h3 class="font-medium">
           Recent Activity
         </h3>
-        <p class="text-muted-foreground mt-2 text-sm">
+        <p class="mt-2 text-sm text-muted-foreground">
           Activity feed coming soon...
         </p>
       </div>
-      <div class="bg-muted/50 rounded-xl border p-6">
+      <div class="rounded-xl border bg-muted/50 p-6">
         <h3 class="font-medium">
           Quick Actions
         </h3>
-        <p class="text-muted-foreground mt-2 text-sm">
+        <p class="mt-2 text-sm text-muted-foreground">
           Quick actions coming soon...
         </p>
       </div>

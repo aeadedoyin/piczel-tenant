@@ -22,28 +22,28 @@ definePageMeta({
         md:grid-cols-3
       "
     >
-      <div class="bg-card rounded-xl border p-6">
+      <div class="rounded-xl border bg-card p-6">
         <div class="flex items-center gap-2">
-          <LucideFolderOpen class="text-muted-foreground size-4" />
-          <span class="text-muted-foreground text-sm font-medium">Collections</span>
+          <LucideFolderOpen class="size-4 text-muted-foreground" />
+          <span class="text-sm font-medium text-muted-foreground">Collections</span>
         </div>
         <div class="mt-2 text-2xl font-bold">
           12
         </div>
       </div>
-      <div class="bg-card rounded-xl border p-6">
+      <div class="rounded-xl border bg-card p-6">
         <div class="flex items-center gap-2">
-          <LucideStar class="text-muted-foreground size-4" />
-          <span class="text-muted-foreground text-sm font-medium">Starred</span>
+          <LucideStar class="size-4 text-muted-foreground" />
+          <span class="text-sm font-medium text-muted-foreground">Starred</span>
         </div>
         <div class="mt-2 text-2xl font-bold">
           48
         </div>
       </div>
-      <div class="bg-card rounded-xl border p-6">
+      <div class="rounded-xl border bg-card p-6">
         <div class="flex items-center gap-2">
-          <LucideImage class="text-muted-foreground size-4" />
-          <span class="text-muted-foreground text-sm font-medium">Total Photos</span>
+          <LucideImage class="size-4 text-muted-foreground" />
+          <span class="text-sm font-medium text-muted-foreground">Total Photos</span>
         </div>
         <div class="mt-2 text-2xl font-bold">
           2,340
@@ -52,12 +52,12 @@ definePageMeta({
     </div>
 
     <!-- Placeholder -->
-    <div class="bg-muted/50 rounded-xl border p-12 text-center">
-      <LucideImage class="text-muted-foreground mx-auto size-12" />
+    <div class="rounded-xl border bg-muted/50 p-12 text-center">
+      <LucideImage class="mx-auto size-12 text-muted-foreground" />
       <h3 class="mt-4 font-medium">
         Gallery Overview
       </h3>
-      <p class="text-muted-foreground mt-2 text-sm">
+      <p class="mt-2 text-sm text-muted-foreground">
         Quick access to your collections and recent uploads.
       </p>
     </div>

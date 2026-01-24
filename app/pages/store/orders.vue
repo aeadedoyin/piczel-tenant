@@ -19,32 +19,32 @@ definePageMeta({
     <div class="flex gap-2">
       <button
         class="
-          bg-primary text-primary-foreground rounded-md px-3 py-1.5 text-sm
-          font-medium
+          rounded-md bg-primary px-3 py-1.5 text-sm font-medium
+          text-primary-foreground
         "
       >
         All
       </button>
       <button
         class="
-          hover:bg-accent
           rounded-md border px-3 py-1.5 text-sm font-medium
+          hover:bg-accent
         "
       >
         Pending
       </button>
       <button
         class="
-          hover:bg-accent
           rounded-md border px-3 py-1.5 text-sm font-medium
+          hover:bg-accent
         "
       >
         Processing
       </button>
       <button
         class="
-          hover:bg-accent
           rounded-md border px-3 py-1.5 text-sm font-medium
+          hover:bg-accent
         "
       >
         Completed
@@ -55,16 +55,16 @@ definePageMeta({
     <div class="space-y-4">
       <div
         v-for="i in 6" :key="i" class="
-          bg-card flex items-center justify-between rounded-xl border p-4
+          flex items-center justify-between rounded-xl border bg-card p-4
         "
       >
         <div class="flex items-center gap-4">
-          <div class="bg-muted size-12 rounded-lg" />
+          <div class="size-12 rounded-lg bg-muted" />
           <div>
             <h3 class="font-medium">
               Order #{{ 10000 + i }}
             </h3>
-            <p class="text-muted-foreground text-sm">
+            <p class="text-sm text-muted-foreground">
               2 items - Client Name
             </p>
           </div>
@@ -84,7 +84,7 @@ definePageMeta({
               {{ i % 3 === 0 ? 'Completed' : i % 2 === 0 ? 'Processing' : 'Pending' }}
             </span>
           </div>
-          <LucideMoreHorizontal class="text-muted-foreground size-4" />
+          <LucideMoreHorizontal class="size-4 text-muted-foreground" />
         </div>
       </div>
     </div>
