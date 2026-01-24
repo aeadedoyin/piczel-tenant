@@ -50,8 +50,8 @@ const tooltipLabel = computed(() => {
   <div
     :class="cn(
       `
-        border-border/50 bg-background grid min-w-32 items-start gap-1.5
-        rounded-lg border px-2.5 py-1.5 text-xs shadow-xl
+        grid min-w-32 items-start gap-1.5 rounded-lg border border-border/50
+        bg-background px-2.5 py-1.5 text-xs shadow-xl
       `,
       props.class,
     )"
@@ -66,9 +66,8 @@ const tooltipLabel = computed(() => {
           :key="key"
           :class="
             cn(`
-              [&>svg]:text-muted-foreground
               flex w-full flex-wrap items-stretch gap-2
-              [&>svg]:size-2.5
+              [&>svg]:size-2.5 [&>svg]:text-muted-foreground
             `,
                indicator === 'dot' && 'items-center')"
         >
@@ -76,7 +75,7 @@ const tooltipLabel = computed(() => {
           <template v-else-if="!hideIndicator">
             <div
               :class="cn(
-                'shrink-0 rounded-[2px] border-(--color-border) bg-(--color-bg)',
+                'shrink-0 rounded-[2px] border-border bg-(--color-bg)',
                 {
                   'size-2.5': indicator === 'dot',
                   'w-1': indicator === 'line',
@@ -107,7 +106,7 @@ const tooltipLabel = computed(() => {
             </div>
             <span
               v-if="value" class="
-                text-foreground font-mono font-medium tabular-nums
+                font-mono font-medium text-foreground tabular-nums
               "
             >
               {{ value.toLocaleString() }}

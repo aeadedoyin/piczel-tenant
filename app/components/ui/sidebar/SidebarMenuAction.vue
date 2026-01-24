@@ -18,11 +18,11 @@ const props = withDefaults(defineProps<PrimitiveProps & {
     :as-child="asChild"
     :class="cn(
       `
-        text-sidebar-foreground ring-sidebar-ring
-        hover:bg-sidebar-accent hover:text-sidebar-accent-foreground
-        peer-hover/menu-button:text-sidebar-accent-foreground
         absolute top-1.5 right-1 flex aspect-square w-5 items-center
-        justify-center rounded-md p-0 outline-hidden transition-transform
+        justify-center rounded-md p-0 text-sidebar-foreground ring-sidebar-ring
+        outline-hidden transition-transform
+        peer-hover/menu-button:text-sidebar-accent-foreground
+        hover:bg-sidebar-accent hover:text-sidebar-accent-foreground
         focus-visible:ring-2
         [&>svg]:size-4 [&>svg]:shrink-0
       `,
@@ -36,9 +36,9 @@ const props = withDefaults(defineProps<PrimitiveProps & {
       'group-data-[collapsible=icon]:hidden',
       showOnHover
         && `
-          peer-data-[active=true]/menu-button:text-sidebar-accent-foreground
           group-focus-within/menu-item:opacity-100
           group-hover/menu-item:opacity-100
+          peer-data-[active=true]/menu-button:text-sidebar-accent-foreground
           data-[state=open]:opacity-100
           md:opacity-0
         `,

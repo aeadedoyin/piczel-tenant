@@ -18,14 +18,11 @@ const forwarded = useForwardProps(delegatedProps)
     v-bind="forwarded"
     :class="cn(
       `
-        text-muted-foreground/50 inline-flex size-8 items-center justify-center
-        rounded-full
+        inline-flex size-8 items-center justify-center rounded-full
+        text-muted-foreground/50
       `,
       // Disabled
-      `
-        group-data-[disabled]:text-muted-foreground
-        group-data-disabled:opacity-50
-      `,
+      `group-data-disabled:text-muted-foreground group-data-disabled:opacity-50`,
       // Active
       `
         group-data-[state=active]:bg-primary

@@ -22,13 +22,12 @@ const forwardedProps = useForwardProps(delegatedProps)
       :class="
         cn(
           `
-            origin-top-center bg-popover text-popover-foreground
-            data-[state=open]:animate-in
-            data-[state=closed]:animate-out data-[state=closed]:zoom-out-95
-            data-[state=open]:zoom-in-90
-            relative left-(--reka-navigation-menu-viewport-left) mt-1.5
+            origin-top-center relative
+            left-(--reka-navigation-menu-viewport-left) mt-1.5
             h-(--reka-navigation-menu-viewport-height) w-full overflow-hidden
-            rounded-md border shadow-sm
+            rounded-md border bg-popover text-popover-foreground shadow-sm
+            data-[state=closed]:animate-out data-[state=closed]:zoom-out-95
+            data-[state=open]:animate-in data-[state=open]:zoom-in-90
             md:w-(--reka-navigation-menu-viewport-width)
           `,
           props.class,

@@ -10,7 +10,7 @@ const props = defineProps<{
 <template>
   <div
     :class="cn(`
-      text-muted-foreground col-start-2 grid justify-items-start gap-1 text-sm
+      col-start-2 grid justify-items-start gap-1 text-sm text-muted-foreground
       [&_p]:leading-relaxed
     `, props.class)"
     data-slot="alert-description"

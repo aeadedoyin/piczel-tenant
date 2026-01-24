@@ -43,9 +43,8 @@ onMounted(() => {
       :key="key"
       :class="cn(
         `
-          [&>svg]:text-muted-foreground
           flex items-center gap-1.5
-          [&>svg]:size-3
+          [&>svg]:size-3 [&>svg]:text-muted-foreground
         `,
       )"
     >

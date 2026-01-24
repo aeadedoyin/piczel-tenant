@@ -15,8 +15,8 @@ const props = defineProps<PrimitiveProps & {
     :as-child="asChild"
     :class="cn(
       `
-        text-sidebar-foreground/70 ring-sidebar-ring flex h-8 shrink-0
-        items-center rounded-md px-2 text-xs font-medium outline-hidden
+        flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium
+        text-sidebar-foreground/70 ring-sidebar-ring outline-hidden
         transition-[margin,opacity] duration-200 ease-linear
         focus-visible:ring-2
         [&>svg]:size-4 [&>svg]:shrink-0

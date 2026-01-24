@@ -11,12 +11,12 @@ const props = defineProps<{
   <p
     :class="cn(
       `
-        text-muted-foreground line-clamp-2 text-sm/normal font-normal
-        text-balance
+        line-clamp-2 text-sm/normal font-normal text-balance
+        text-muted-foreground
       `,
       `
-        [&>a:hover]:text-primary
         [&>a]:underline [&>a]:underline-offset-4
+        [&>a:hover]:text-primary
       `,
       props.class,
     )"

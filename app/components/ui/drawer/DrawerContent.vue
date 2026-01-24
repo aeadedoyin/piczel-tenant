@@ -22,7 +22,7 @@ const forwarded = useForwardPropsEmits(props, emits)
     <DrawerContent
       v-bind="{ ...$attrs, ...forwarded }"
       :class="cn(
-        'group/drawer-content bg-background fixed z-50 flex h-auto flex-col',
+        'group/drawer-content fixed z-50 flex h-auto flex-col bg-background',
         `
           data-[vaul-drawer-direction=top]:inset-x-0
           data-[vaul-drawer-direction=top]:top-0
@@ -55,7 +55,7 @@ const forwarded = useForwardPropsEmits(props, emits)
     >
       <div
         class="
-          bg-muted mx-auto mt-4 hidden h-2 w-[100px] shrink-0 rounded-full
+          mx-auto mt-4 hidden h-2 w-[100px] shrink-0 rounded-full bg-muted
           group-data-[vaul-drawer-direction=bottom]/drawer-content:block
         "
       />

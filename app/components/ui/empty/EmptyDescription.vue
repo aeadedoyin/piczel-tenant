@@ -11,10 +11,9 @@ defineProps<{
   <p
     :class="cn(
       `
-        text-muted-foreground
-        [&>a:hover]:text-primary
-        text-sm/relaxed
+        text-sm/relaxed text-muted-foreground
         [&>a]:underline [&>a]:underline-offset-4
+        [&>a:hover]:text-primary
       `,
       $attrs.class ?? '',
     )"

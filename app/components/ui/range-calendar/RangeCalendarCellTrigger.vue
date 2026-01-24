@@ -29,29 +29,25 @@ const forwardedProps = useForwardProps(delegatedProps)
       `,
       // Selection Start
       `
-        data-[selection-start]:bg-primary
-        data-[selection-start]:text-primary-foreground
-        data-[selection-start]:hover:bg-primary
-        data-[selection-start]:hover:text-primary-foreground
-        data-[selection-start]:focus:bg-primary
-        data-[selection-start]:focus:text-primary-foreground
+        data-selection-start:bg-primary
+        data-selection-start:text-primary-foreground
+        data-selection-start:hover:bg-primary
+        data-selection-start:hover:text-primary-foreground
+        data-selection-start:focus:bg-primary
+        data-selection-start:focus:text-primary-foreground
       `,
       // Selection End
       `
-        data-[selection-end]:bg-primary
-        data-[selection-end]:text-primary-foreground
-        data-[selection-end]:hover:bg-primary
-        data-[selection-end]:hover:text-primary-foreground
-        data-[selection-end]:focus:bg-primary
-        data-[selection-end]:focus:text-primary-foreground
+        data-selection-end:bg-primary data-selection-end:text-primary-foreground
+        data-selection-end:hover:bg-primary
+        data-selection-end:hover:text-primary-foreground
+        data-selection-end:focus:bg-primary
+        data-selection-end:focus:text-primary-foreground
       `,
       // Outside months
-      'data-[outside-view]:text-muted-foreground',
+      'data-outside-view:text-muted-foreground',
       // Disabled
-      `
-        data-[disabled]:text-muted-foreground
-        data-disabled:opacity-50
-      `,
+      `data-disabled:text-muted-foreground data-disabled:opacity-50`,
       // Unavailable
       `
         data-[unavailable]:text-destructive-foreground

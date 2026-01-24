@@ -14,7 +14,7 @@ const delegatedProps = reactiveOmit(props, 'class')
   <ContextMenuLabel
     v-bind="delegatedProps"
     :class="cn(`
-      text-foreground px-2 py-1.5 text-sm font-medium
+      px-2 py-1.5 text-sm font-medium text-foreground
       data-inset:pl-8
     `, props.class)"
     :data-inset="inset ? '' : undefined"

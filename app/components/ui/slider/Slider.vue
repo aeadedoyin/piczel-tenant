@@ -30,7 +30,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
   >
     <SliderTrack
       class="
-        bg-muted relative grow overflow-hidden rounded-full
+        relative grow overflow-hidden rounded-full bg-muted
         data-[orientation=horizontal]:h-1.5 data-[orientation=horizontal]:w-full
         data-[orientation=vertical]:h-full data-[orientation=vertical]:w-1.5
       "
@@ -38,7 +38,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
     >
       <SliderRange
         class="
-          bg-primary absolute
+          absolute bg-primary
           data-[orientation=horizontal]:h-full
           data-[orientation=vertical]:w-full
         "
@@ -50,8 +50,8 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
       v-for="(_, key) in modelValue"
       :key="key"
       class="
-        border-primary ring-ring/50 block size-4 shrink-0 rounded-full border
-        bg-white shadow-sm transition-[color,box-shadow]
+        block size-4 shrink-0 rounded-full border border-primary bg-white
+        shadow-sm ring-ring/50 transition-[color,box-shadow]
         hover:ring-4
         focus-visible:ring-4 focus-visible:outline-hidden
         disabled:pointer-events-none disabled:opacity-50

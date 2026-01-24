@@ -69,9 +69,8 @@ provideSidebarContext({
   <TooltipProvider :delay-duration="0">
     <div
       :class="cn(`
-        group/sidebar-wrapper
+        group/sidebar-wrapper flex min-h-svh w-full
         has-data-[variant=inset]:bg-sidebar
-        flex min-h-svh w-full
       `, props.class)"
       data-slot="sidebar-wrapper"
       :style="{

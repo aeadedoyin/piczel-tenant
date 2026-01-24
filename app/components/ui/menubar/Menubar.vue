@@ -23,7 +23,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
     :class="
       cn(
         `
-          bg-background flex h-9 items-center gap-1 rounded-md border p-1
+          flex h-9 items-center gap-1 rounded-md border bg-background p-1
           shadow-xs
         `,
         props.class,

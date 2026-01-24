@@ -14,13 +14,12 @@ export { default as ItemTitle } from './ItemTitle.vue'
 
 export const itemVariants = cva(
   `
-    group/item
-    [a]:hover:bg-accent/50
-    focus-visible:border-ring focus-visible:ring-ring/50
-    flex flex-wrap items-center rounded-md border border-transparent text-sm
-    transition-colors duration-100 outline-none
-    focus-visible:ring-[3px]
+    group/item flex flex-wrap items-center rounded-md border border-transparent
+    text-sm transition-colors duration-100 outline-none
+    focus-visible:border-ring focus-visible:ring-[3px]
+    focus-visible:ring-ring/50
     [a]:transition-colors
+    [a]:hover:bg-accent/50
   `,
   {
     variants: {
@@ -53,7 +52,7 @@ export const itemMediaVariants = cva(
       variant: {
         default: 'bg-transparent',
         icon: `
-          bg-muted size-8 rounded-sm border
+          size-8 rounded-sm border bg-muted
           [&_svg:not([class*='size-'])]:size-4
         `,
         image:
