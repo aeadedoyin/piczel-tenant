@@ -1,6 +1,14 @@
+<script setup lang="ts">
+import { SidebarProvider } from '@/components/ui/sidebar'
+import { Toaster } from '@/components/ui/sonner'
+</script>
+
 <template>
-  <div>
+  <SidebarProvider>
     <NuxtRouteAnnouncer />
-    <NuxtWelcome />
-  </div>
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+    <Toaster />
+  </SidebarProvider>
 </template>
