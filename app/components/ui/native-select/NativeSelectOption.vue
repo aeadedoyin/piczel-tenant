@@ -9,7 +9,7 @@ const props = defineProps<{ class?: HTMLAttributes['class'] }>()
 </script>
 
 <template>
-  <option :class="cn('bg-popover text-popover-foreground', props.class)" data-slot="native-select-option">
+  <option v-bind="{ 'data-slot': 'native-select-option' }" :class="cn('bg-popover text-popover-foreground', props.class)">
     <slot />
   </option>
 </template>

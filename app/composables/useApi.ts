@@ -1,8 +1,9 @@
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
+type RequestBody = Record<string, unknown> | FormData | null
 
 interface ApiOptions {
   method?: HttpMethod
-  body?: unknown
+  body?: RequestBody
   query?: Record<string, unknown>
 }
 
@@ -27,7 +28,7 @@ export async function useApi<T = unknown>(
   }
 
   return await $fetch<T>(url, {
-    baseURL: config.public.apiBaseUrl || '/api',
+    baseURL: config.public.apiBaseUrl as string,
     headers,
     method: options.method,
     body: options.body,

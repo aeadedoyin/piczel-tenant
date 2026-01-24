@@ -10,7 +10,6 @@ const mockUser: User = {
   id: '1',
   name: 'John Doe',
   email: 'user@example.com',
-  avatar: null,
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
 }
@@ -28,10 +27,9 @@ export const useAuth = defineStore('auth', () => {
 
     // Mock validation
     if (credentials.email !== 'user@example.com' || credentials.password !== 'password') {
-      throw {
-        statusCode: 401,
-        data: { message: 'Invalid credentials. Please try again.' },
-      }
+      const error = new Error('Invalid credentials. Please try again.')
+      Object.assign(error, { statusCode: 401, data: { message: 'Invalid credentials. Please try again.' } })
+      throw error
     }
 
     token.value = 'mock-jwt-token'
@@ -43,10 +41,9 @@ export const useAuth = defineStore('auth', () => {
 
     // Mock validation - email already exists
     if (data.email === 'taken@example.com') {
-      throw {
-        statusCode: 422,
-        data: { errors: { email: ['This email is already registered.'] } },
-      }
+      const error = new Error('Email already registered')
+      Object.assign(error, { statusCode: 422, data: { errors: { email: ['This email is already registered.'] } } })
+      throw error
     }
 
     token.value = 'mock-jwt-token'
