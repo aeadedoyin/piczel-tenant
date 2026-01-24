@@ -51,7 +51,7 @@ async function handleSignOut() {
             size="lg"
           >
             <Avatar class="size-8 rounded-lg">
-              <AvatarImage :alt="user.name" :src="user.avatar" />
+              <AvatarImage v-if="user.avatar" :alt="user.name" :src="user.avatar" />
               <AvatarFallback class="rounded-lg">
                 {{ getInitials(user.name) }}
               </AvatarFallback>
@@ -72,7 +72,7 @@ async function handleSignOut() {
           <DropdownMenuLabel class="p-0 font-normal">
             <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
               <Avatar class="size-8 rounded-lg">
-                <AvatarImage :alt="user.name" :src="user.avatar" />
+                <AvatarImage v-if="user.avatar" :alt="user.name" :src="user.avatar" />
                 <AvatarFallback class="rounded-lg">
                   {{ getInitials(user.name) }}
                 </AvatarFallback>

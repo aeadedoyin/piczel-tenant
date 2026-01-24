@@ -21,8 +21,7 @@ const breadcrumbs = computed<BreadcrumbSegment[]>(() => {
   const result: BreadcrumbSegment[] = []
 
   let currentPath = ''
-  for (let i = 0; i < segments.length; i++) {
-    const segment = segments[i]
+  segments.forEach((segment, i) => {
     currentPath += `/${segment}`
 
     // Capitalize and format segment name
@@ -38,7 +37,7 @@ const breadcrumbs = computed<BreadcrumbSegment[]>(() => {
     else {
       result.push({ title, href: currentPath })
     }
-  }
+  })
 
   return result
 })

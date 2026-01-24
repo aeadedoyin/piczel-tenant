@@ -5,9 +5,6 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
   SidebarRail,
 } from '@/components/ui/sidebar'
 
@@ -20,7 +17,7 @@ const user = computed(() => ({
   avatar: auth.user?.avatar || '',
 }))
 
-// Navigation items
+// Main navigation items (collapsible groups)
 const navMain: NavItem[] = [
   {
     title: 'Dashboard',
@@ -32,6 +29,7 @@ const navMain: NavItem[] = [
     url: '/gallery',
     icon: resolveComponent('LucideImage'),
     items: [
+      { title: 'All Photos', url: '/gallery' },
       { title: 'Collections', url: '/gallery/collections' },
       { title: 'Starred', url: '/gallery/starred' },
       { title: 'Settings', url: '/gallery/settings' },
@@ -42,6 +40,7 @@ const navMain: NavItem[] = [
     url: '/studio',
     icon: resolveComponent('LucideBriefcase'),
     items: [
+      { title: 'Overview', url: '/studio' },
       { title: 'Projects', url: '/studio/projects' },
       { title: 'Contacts', url: '/studio/contacts' },
       { title: 'Bookings', url: '/studio/bookings' },
@@ -53,7 +52,9 @@ const navMain: NavItem[] = [
     url: '/website',
     icon: resolveComponent('LucideGlobe'),
     items: [
+      { title: 'Overview', url: '/website' },
       { title: 'Edit Site', url: '/website/edit' },
+      { title: 'Pages', url: '/website/pages' },
       { title: 'Settings', url: '/website/settings' },
     ],
   },
@@ -62,9 +63,31 @@ const navMain: NavItem[] = [
     url: '/store',
     icon: resolveComponent('LucideShoppingBag'),
     items: [
+      { title: 'Overview', url: '/store' },
       { title: 'Orders', url: '/store/orders' },
       { title: 'Catalog', url: '/store/catalog' },
+      { title: 'Customers', url: '/store/customers' },
     ],
+  },
+]
+
+// Secondary navigation items (bottom of sidebar content)
+const navSecondary = [
+  {
+    title: 'Settings',
+    url: '/settings',
+    icon: resolveComponent('LucideSettings'),
+  },
+  {
+    title: 'Help & Support',
+    url: 'https://help.piczel.io',
+    icon: resolveComponent('LucideLifeBuoy'),
+    external: true,
+  },
+  {
+    title: 'Feedback',
+    url: '/feedback',
+    icon: resolveComponent('LucideMessageSquare'),
   },
 ]
 </script>
@@ -72,27 +95,17 @@ const navMain: NavItem[] = [
 <template>
   <Sidebar collapsible="icon">
     <SidebarHeader>
-      <SidebarMenu>
-        <SidebarMenuItem>
-          <SidebarMenuButton as-child size="lg">
-            <NuxtLink to="/dashboard">
-              <Icon class="size-8" name="piczel:piczel-logo-logomark" />
-              <div class="grid flex-1 text-left text-sm/tight">
-                <span class="truncate font-semibold">Piczel</span>
-                <span class="truncate text-xs">Photography Studio</span>
-              </div>
-            </NuxtLink>
-          </SidebarMenuButton>
-        </SidebarMenuItem>
-      </SidebarMenu>
+      <SidebarSwitcher />
     </SidebarHeader>
 
     <SidebarContent>
-      <NavMain :items="navMain" />
+      <SidebarNav :items="navMain" />
+      <SidebarNavSecondary :items="navSecondary" />
+      <SidebarNavStorage />
     </SidebarContent>
 
     <SidebarFooter>
-      <NavUser :user="user" />
+      <SidebarNavUser :user="user" />
     </SidebarFooter>
 
     <SidebarRail />

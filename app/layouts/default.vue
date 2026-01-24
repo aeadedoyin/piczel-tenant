@@ -4,7 +4,7 @@ import { SidebarInset, SidebarTrigger } from '@/components/ui/sidebar'
 </script>
 
 <template>
-  <AppSidebar />
+  <SidebarMain />
   <SidebarInset>
     <header
       class="
@@ -16,7 +16,7 @@ import { SidebarInset, SidebarTrigger } from '@/components/ui/sidebar'
       <div class="flex items-center gap-2 px-4">
         <SidebarTrigger class="-ml-1" />
         <Separator class="mr-2 h-4" orientation="vertical" />
-        <AppBreadcrumb />
+        <SidebarBreadcrumb />
       </div>
     </header>
     <main class="flex flex-1 flex-col gap-4 p-4 pt-0">
