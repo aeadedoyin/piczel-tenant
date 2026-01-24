@@ -26,6 +26,14 @@ interface App {
 const route = useRoute()
 const { isMobile } = useSidebar()
 
+const dashboard: App = {
+  id: 'dashboard',
+  name: 'Dashboard',
+  description: 'Overview',
+  icon: resolveComponent('LucideLayoutDashboard'),
+  url: '/dashboard',
+}
+
 const apps: App[] = [
   {
     id: 'gallery',
@@ -59,7 +67,8 @@ const apps: App[] = [
 
 const activeApp = computed((): App => {
   const path = route.path
-  return apps.find(app => path.startsWith(app.url)) ?? apps[0]!
+  if (path.startsWith('/dashboard')) return dashboard
+  return apps.find(app => path.startsWith(app.url)) ?? dashboard
 })
 </script>
 
@@ -124,13 +133,13 @@ const activeApp = computed((): App => {
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem as-child class="gap-2 p-2">
-            <NuxtLink to="/dashboard">
+            <NuxtLink :to="dashboard.url">
               <Avatar class="size-6 rounded-sm border bg-transparent">
                 <AvatarFallback class="rounded-sm bg-transparent">
-                  <LucideLayoutDashboard class="size-3.5" />
+                  <component :is="dashboard.icon" class="size-3.5" />
                 </AvatarFallback>
               </Avatar>
-              <span class="font-medium text-muted-foreground">Dashboard</span>
+              <span class="font-medium text-muted-foreground">{{ dashboard.name }}</span>
             </NuxtLink>
           </DropdownMenuItem>
         </DropdownMenuContent>

@@ -7,7 +7,6 @@ import {
 } from '@/components/shadcn-ui/collapsible'
 import {
   SidebarGroup,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -23,30 +22,37 @@ defineProps<{
 const route = useRoute()
 
 function isActive(url: string): boolean {
-  return route.path === url || route.path.startsWith(`${url}/`)
+  return route.path === url
+}
+
+function isParentActive(item: NavItem): boolean {
+  if (item.items?.length) {
+    return item.items.some(sub => route.path === sub.url || route.path.startsWith(`${sub.url}/`))
+  }
+  return route.path === item.url
 }
 </script>
 
 <template>
-  <SidebarGroup>
-    <SidebarGroupLabel>Platform</SidebarGroupLabel>
-    <SidebarMenu>
+  <SidebarGroup class="py-2">
+    <SidebarMenu class="gap-1">
       <template v-for="item in items" :key="item.title">
         <!-- Items with sub-items: Collapsible -->
         <Collapsible
           v-if="item.items?.length"
           as-child
           class="group/collapsible"
-          :default-open="isActive(item.url)"
+          :default-open="isParentActive(item)"
         >
           <SidebarMenuItem>
             <CollapsibleTrigger as-child>
-              <SidebarMenuButton :tooltip="item.title">
-                <component :is="item.icon" />
+              <SidebarMenuButton class="py-2.5" :tooltip="item.title">
+                <component :is="item.icon" class="size-4 text-muted-foreground/70" />
                 <span>{{ item.title }}</span>
                 <LucideChevronRight
                   class="
-                    ml-auto transition-transform duration-200
+                    ml-auto size-4 text-muted-foreground/50
+                    transition-transform duration-200
                     group-data-[state=open]/collapsible:rotate-90
                   "
                 />
@@ -73,11 +79,12 @@ function isActive(url: string): boolean {
         <SidebarMenuItem v-else>
           <SidebarMenuButton
             as-child
+            class="py-2.5"
             :data-active="isActive(item.url)"
             :tooltip="item.title"
           >
             <NuxtLink :to="item.url">
-              <component :is="item.icon" />
+              <component :is="item.icon" class="size-4 text-muted-foreground/70" />
               <span>{{ item.title }}</span>
             </NuxtLink>
           </SidebarMenuButton>
