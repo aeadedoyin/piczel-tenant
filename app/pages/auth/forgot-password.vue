@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { toast } from 'vue-sonner'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+import { Button } from '@/components/shadcn-ui/button'
+import { Input } from '@/components/shadcn-ui/input'
+import { Label } from '@/components/shadcn-ui/label'
 
 definePageMeta({
   layout: 'auth',

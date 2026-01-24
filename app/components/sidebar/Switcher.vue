@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import { Avatar, AvatarFallback } from '@/components/shadcn-ui/avatar'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,13 +7,13 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+} from '@/components/shadcn-ui/dropdown-menu'
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from '@/components/ui/sidebar'
+} from '@/components/shadcn-ui/sidebar'
 
 interface App {
   id: string

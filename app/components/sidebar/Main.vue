@@ -6,7 +6,7 @@ import {
   SidebarFooter,
   SidebarHeader,
   SidebarRail,
-} from '@/components/ui/sidebar'
+} from '@/components/shadcn-ui/sidebar'
 
 const auth = useAuth()
 

@@ -24,7 +24,7 @@ export default defineNuxtConfig({
 
   shadcn: {
     prefix: 'Shad',
-    componentDir: './app/components/ui',
+    componentDir: './app/components/shadcn-ui',
   },
 
   colorMode: {

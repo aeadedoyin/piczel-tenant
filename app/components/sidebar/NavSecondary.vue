@@ -6,7 +6,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from '@/components/ui/sidebar'
+} from '@/components/shadcn-ui/sidebar'
 
 interface NavItem {
   title: string

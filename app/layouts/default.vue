@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Separator } from '@/components/ui/separator'
-import { SidebarInset, SidebarTrigger } from '@/components/ui/sidebar'
+import { Separator } from '@/components/shadcn-ui/separator'
+import { SidebarInset, SidebarTrigger } from '@/components/shadcn-ui/sidebar'
 </script>
 
 <template>

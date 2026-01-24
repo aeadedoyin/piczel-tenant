@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { Progress } from '@/components/ui/progress'
+import { Progress } from '@/components/shadcn-ui/progress'
 import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarMenu,
   SidebarMenuItem,
-} from '@/components/ui/sidebar'
+} from '@/components/shadcn-ui/sidebar'
 
 // TODO: Replace with real data from API
 const storage = reactive({
