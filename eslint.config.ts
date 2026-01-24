@@ -18,7 +18,7 @@ export default antfu({
 
   settings: {
     'better-tailwindcss': {
-      entryPoint: 'assets/css/tailwind.css',
+      entryPoint: 'app/assets/css/tailwind.css',
     }
   },
 

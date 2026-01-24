@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { SidebarProvider } from '@/components/ui/sidebar'
-import { Toaster } from '@/components/ui/sonner'
 </script>
 
 <template>
@@ -9,6 +8,6 @@ import { Toaster } from '@/components/ui/sonner'
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
-    <Toaster />
+    <ShadToaster />
   </SidebarProvider>
 </template>

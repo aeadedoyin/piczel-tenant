@@ -10,11 +10,21 @@ export default defineNuxtConfig({
     'nuxt-lucide-icons',
     '@nuxtjs/color-mode',
     '@pinia/nuxt',
+    '@nuxt/icon',
   ],
+
+  icon: {
+    customCollections: [
+      {
+        prefix: 'piczel',
+        dir: './app/assets/icons',
+      },
+    ],
+  },
 
   shadcn: {
     prefix: 'Shad',
-    componentDir: './shadcn/components/ui',
+    componentDir: './app/components/ui',
   },
 
   colorMode: {
@@ -25,5 +35,12 @@ export default defineNuxtConfig({
 
   vite: {
     plugins: [tailwindcss()],
+  },
+
+  runtimeConfig: {
+    public: {
+      apiBaseUrl: '/api',
+      prefillCredential: false,
+    },
   },
 })

@@ -21,6 +21,7 @@ defineProps<{
   user: User
 }>()
 
+const auth = useAuth()
 const { isMobile } = useSidebar()
 
 function getInitials(name: string): string {
@@ -30,6 +31,10 @@ function getInitials(name: string): string {
     .join('')
     .toUpperCase()
     .slice(0, 2)
+}
+
+async function handleSignOut() {
+  await auth.signOut()
 }
 </script>
 
@@ -100,7 +105,7 @@ function getInitials(name: string): string {
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>
+          <DropdownMenuItem @click="handleSignOut">
             <LucideLogOut class="mr-2 size-4" />
             Log out
           </DropdownMenuItem>

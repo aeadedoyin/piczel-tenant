@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { NavItem, User } from '~/types/navigation'
+import type { NavItem } from '~/types/navigation'
 import {
   Sidebar,
   SidebarContent,
@@ -11,12 +11,14 @@ import {
   SidebarRail,
 } from '@/components/ui/sidebar'
 
-// Mock user data (will be replaced with auth store)
-const user: User = {
-  name: 'John Photographer',
-  email: 'john@example.com',
-  avatar: '',
-}
+const auth = useAuth()
+
+// Computed user data from auth store with fallback
+const user = computed(() => ({
+  name: auth.user?.name || 'Guest',
+  email: auth.user?.email || '',
+  avatar: auth.user?.avatar || '',
+}))
 
 // Navigation items
 const navMain: NavItem[] = [
@@ -74,14 +76,7 @@ const navMain: NavItem[] = [
         <SidebarMenuItem>
           <SidebarMenuButton as-child size="lg">
             <NuxtLink to="/dashboard">
-              <div
-                class="
-                  bg-sidebar-primary text-sidebar-primary-foreground flex
-                  aspect-square size-8 items-center justify-center rounded-lg
-                "
-              >
-                <LucideCamera class="size-4" />
-              </div>
+              <Icon class="size-8" name="piczel:piczel-logo-logomark" />
               <div class="grid flex-1 text-left text-sm/tight">
                 <span class="truncate font-semibold">Piczel</span>
                 <span class="truncate text-xs">Photography Studio</span>
