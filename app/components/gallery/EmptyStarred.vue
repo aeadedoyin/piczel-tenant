@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { LucideImage, LucideStar } from 'lucide-vue-next'
-
 const emit = defineEmits<{
   browse: []
 }>()
@@ -23,11 +21,11 @@ const emit = defineEmits<{
           Star your favorite photos and collections to find them quickly here.
         </ShadEmptyDescription>
       </ShadEmptyHeader>
-      <ShadEmptyActions>
+      <ShadEmpty>
         <ShadButton variant="outline" @click="emit('browse')">
           Browse Gallery
         </ShadButton>
-      </ShadEmptyActions>
+      </ShadEmpty>
     </ShadEmptyContent>
   </ShadEmpty>
 </template>

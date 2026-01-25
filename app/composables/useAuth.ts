@@ -1,4 +1,4 @@
-import type { ForgotPasswordData, LoginCredentials, RegisterData, User } from '~/types/auth'
+import type { ForgotPasswordData, LoginCredentials, RegisterData, User } from '@/types/auth'
 
 // Mock delay to simulate network latency
 function delay(ms: number = 500): Promise<void> {

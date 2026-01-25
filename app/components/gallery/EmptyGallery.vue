@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { LucideImage, LucideUpload } from 'lucide-vue-next'
-
 const emit = defineEmits<{
   upload: []
 }>()
@@ -18,12 +16,12 @@ const emit = defineEmits<{
           Upload your first photo to get started with your gallery.
         </ShadEmptyDescription>
       </ShadEmptyHeader>
-      <ShadEmptyActions>
+      <ShadEmpty>
         <ShadButton @click="emit('upload')">
           <LucideUpload class="mr-2 size-4" />
           Upload Photos
         </ShadButton>
-      </ShadEmptyActions>
+      </ShadEmpty>
     </ShadEmptyContent>
   </ShadEmpty>
 </template>

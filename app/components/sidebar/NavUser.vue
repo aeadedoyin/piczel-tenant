@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { User } from '~/types/navigation'
+import type { User } from '@/types/navigation'
 
 defineProps<{
   user: User
@@ -7,15 +7,6 @@ defineProps<{
 
 const auth = useAuth()
 const { isMobile } = useSidebar()
-
-function getInitials(name: string): string {
-  return name
-    .split(' ')
-    .map(n => n[0])
-    .join('')
-    .toUpperCase()
-    .slice(0, 2)
-}
 
 async function handleSignOut() {
   await auth.signOut()

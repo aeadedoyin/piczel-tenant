@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { Photo } from '@/types/gallery'
-import { LucideCheck, LucideEye, LucideStar } from 'lucide-vue-next'
 
 defineProps<{
   photo: Photo

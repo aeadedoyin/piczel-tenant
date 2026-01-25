@@ -6,13 +6,6 @@ const storage = reactive({
 })
 
 const percentage = computed(() => Math.round((storage.used / storage.total) * 100))
-
-function formatSize(gb: number): string {
-  if (gb < 1) {
-    return `${Math.round(gb * 1024)} MB`
-  }
-  return `${gb.toFixed(1)} GB`
-}
 </script>
 
 <template>
@@ -27,19 +20,16 @@ function formatSize(gb: number): string {
                 <span>Storage</span>
               </div>
               <span class="text-muted-foreground">
-                {{ formatSize(storage.used) }} / {{ formatSize(storage.total) }}
+                {{ formatSizeGB(storage.used) }} / {{ formatSizeGB(storage.total) }}
               </span>
             </div>
             <ShadProgress class="h-1.5" :model-value="percentage" />
-            <NuxtLink
-              class="
-                text-xs text-muted-foreground transition-colors
-                hover:text-foreground
-              "
-              to="/settings/storage"
+            <!-- TODO: Add settings/storage page when implemented -->
+            <span
+              class="text-xs text-muted-foreground cursor-not-allowed"
             >
               Upgrade storage
-            </NuxtLink>
+            </span>
           </div>
         </ShadSidebarMenuItem>
       </ShadSidebarMenu>

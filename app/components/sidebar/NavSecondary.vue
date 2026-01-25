@@ -1,12 +1,5 @@
 <script setup lang="ts">
-import type { Component, ConcreteComponent } from 'vue'
-
-interface NavItem {
-  title: string
-  url: string
-  icon: Component | ConcreteComponent | string
-  external?: boolean
-}
+import type { NavItem } from '@/types/navigation'
 
 withDefaults(defineProps<{
   items: NavItem[]

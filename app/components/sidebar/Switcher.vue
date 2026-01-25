@@ -1,56 +1,12 @@
 <script setup lang="ts">
 const { isMobile } = useSidebar()
-
-interface App {
-  id: string
-  name: string
-  description: string
-  icon: ReturnType<typeof resolveComponent>
-  url: string
-}
-
 const route = useRoute()
 
-const dashboard: App = {
-  id: 'dashboard',
-  name: 'Dashboard',
-  description: 'Overview',
-  icon: resolveComponent('LucideLayoutDashboard'),
-  url: '/dashboard',
-}
+// App definitions from utils
+const dashboard = getDashboardApp()
+const apps = getApps()
 
-const apps: App[] = [
-  {
-    id: 'gallery',
-    name: 'Gallery',
-    description: 'Photo management',
-    icon: resolveComponent('LucideImage'),
-    url: '/gallery',
-  },
-  {
-    id: 'studio',
-    name: 'Studio',
-    description: 'Client & project manager',
-    icon: resolveComponent('LucideBriefcase'),
-    url: '/studio',
-  },
-  {
-    id: 'website',
-    name: 'Website',
-    description: 'Site builder',
-    icon: resolveComponent('LucideGlobe'),
-    url: '/website',
-  },
-  {
-    id: 'store',
-    name: 'Store',
-    description: 'E-commerce',
-    icon: resolveComponent('LucideShoppingBag'),
-    url: '/store',
-  },
-]
-
-const activeApp = computed((): App => {
+const activeApp = computed(() => {
   const path = route.path
   if (path.startsWith('/dashboard'))
     return dashboard

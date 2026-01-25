@@ -1,13 +1,5 @@
 <script setup lang="ts">
 import type { Collection, Photo } from '@/types/gallery'
-import {
-  LucideFolderOpen,
-  LucideFolderPlus,
-  LucideHardDrive,
-  LucideImage,
-  LucideStar,
-  LucideUpload,
-} from 'lucide-vue-next'
 
 definePageMeta({
   title: 'Gallery',
@@ -16,21 +8,16 @@ definePageMeta({
 const gallery = useGallery()
 const router = useRouter()
 
+// Icons for stats cards (resolved at runtime for prop passing)
+const IconImage = resolveComponent('LucideImage')
+const IconFolderOpen = resolveComponent('LucideFolderOpen')
+const IconStar = resolveComponent('LucideStar')
+const IconHardDrive = resolveComponent('LucideHardDrive')
+
 // Fetch data on mount
 onMounted(async () => {
   await Promise.all([gallery.fetchPhotos(), gallery.fetchCollections()])
 })
-
-// Format storage size
-function formatStorage(bytes: number): string {
-  if (bytes < 1024)
-    return `${bytes} B`
-  if (bytes < 1024 * 1024)
-    return `${(bytes / 1024).toFixed(1)} KB`
-  if (bytes < 1024 * 1024 * 1024)
-    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
-  return `${(bytes / (1024 * 1024 * 1024)).toFixed(2)} GB`
-}
 
 function handleUpload() {
   // TODO: Implement upload functionality
@@ -87,25 +74,25 @@ function handleCollectionEdit(collection: Collection) {
     >
       <GalleryStatsCard
         :change="12"
-        :icon="LucideImage"
+        :icon="IconImage"
         label="Total Photos"
         :value="gallery.stats.totalPhotos"
       />
       <GalleryStatsCard
         :change="8"
-        :icon="LucideFolderOpen"
+        :icon="IconFolderOpen"
         label="Collections"
         :value="gallery.stats.totalCollections"
       />
       <GalleryStatsCard
         :change="-3"
-        :icon="LucideStar"
+        :icon="IconStar"
         label="Starred"
         :value="gallery.stats.starredPhotos"
       />
       <GalleryStatsCard
         :change="24"
-        :icon="LucideHardDrive"
+        :icon="IconHardDrive"
         label="Storage Used"
         :value="formatStorage(gallery.stats.storageUsed)"
       />

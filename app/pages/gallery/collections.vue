@@ -19,19 +19,8 @@ const gallery = useGallery()
 const isModalOpen = ref(false)
 const editingCollection = ref<Collection | null>(null)
 
-// Filter definitions
-const filters = [
-  {
-    id: 'status',
-    label: 'Status',
-    options: ['All', 'Published', 'Hidden', 'Draft'] as const,
-  },
-  {
-    id: 'category',
-    label: 'Category',
-    options: ['All', 'Wedding', 'Portrait', 'Event', 'Nature', 'Other'] as const,
-  },
-]
+// Filter definitions from utils
+const filters = collectionFilters
 
 // Initialize from URL query params
 function parseFiltersFromQuery(): Record<string, string[]> {

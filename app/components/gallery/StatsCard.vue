@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import type { Component } from 'vue'
-import { LucideTrendingDown, LucideTrendingUp } from 'lucide-vue-next'
+import type { Component, ConcreteComponent } from 'vue'
 
 defineProps<{
   label: string
   value: string | number
   change?: number
-  icon: Component
+  icon: Component | ConcreteComponent | string
 }>()
 </script>
 

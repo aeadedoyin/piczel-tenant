@@ -1,1 +1,1 @@
-export { provideSidebarContext, useSidebar } from '@/components/shadcn-ui/sidebar/utils'
+export { provideSidebarContext, useSidebar } from '@@/shadcn/ui/sidebar/utils'

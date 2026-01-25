@@ -1,11 +1,8 @@
 <script setup lang="ts">
 import type {
   Collection,
-  CollectionCategory,
-  CollectionStatus,
   CreateCollectionData,
 } from '@/types/gallery'
-import { LucideLoader2 } from 'lucide-vue-next'
 
 const props = defineProps<{
   open: boolean
@@ -33,22 +30,6 @@ const formData = reactive<CreateCollectionData>({
 
 const isSubmitting = ref(false)
 const errors = ref<Partial<Record<keyof CreateCollectionData, string>>>({})
-
-// Status options
-const statusOptions: { value: CollectionStatus, label: string }[] = [
-  { value: 'draft', label: 'Draft' },
-  { value: 'published', label: 'Published' },
-  { value: 'hidden', label: 'Hidden' },
-]
-
-// Category options
-const categoryOptions: { value: CollectionCategory, label: string }[] = [
-  { value: 'wedding', label: 'Wedding' },
-  { value: 'portrait', label: 'Portrait' },
-  { value: 'event', label: 'Event' },
-  { value: 'nature', label: 'Nature' },
-  { value: 'other', label: 'Other' },
-]
 
 // Reset form when modal opens/closes or collection changes
 watch(
@@ -167,7 +148,7 @@ function handleClose() {
               </ShadSelectTrigger>
               <ShadSelectContent>
                 <ShadSelectItem
-                  v-for="option in statusOptions"
+                  v-for="option in collectionStatusOptions"
                   :key="option.value"
                   :value="option.value"
                 >
@@ -186,7 +167,7 @@ function handleClose() {
               </ShadSelectTrigger>
               <ShadSelectContent>
                 <ShadSelectItem
-                  v-for="option in categoryOptions"
+                  v-for="option in collectionCategoryOptions"
                   :key="option.value"
                   :value="option.value"
                 >

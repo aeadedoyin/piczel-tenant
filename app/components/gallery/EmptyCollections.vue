@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { LucideFolderOpen, LucidePlus } from 'lucide-vue-next'
-
 defineProps<{
   hasFilters?: boolean
 }>()
@@ -29,7 +27,7 @@ const emit = defineEmits<{
           }}
         </ShadEmptyDescription>
       </ShadEmptyHeader>
-      <ShadEmptyActions>
+      <ShadEmpty>
         <ShadButton
           v-if="hasFilters"
           variant="outline"
@@ -41,7 +39,7 @@ const emit = defineEmits<{
           <LucidePlus class="mr-2 size-4" />
           New Collection
         </ShadButton>
-      </ShadEmptyActions>
+      </ShadEmpty>
     </ShadEmptyContent>
   </ShadEmpty>
 </template>

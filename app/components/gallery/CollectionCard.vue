@@ -1,16 +1,5 @@
 <script setup lang="ts">
-import type { Collection, CollectionStatus } from '@/types/gallery'
-import {
-  LucideEllipsisVertical,
-  LucideEye,
-  LucideEyeOff,
-  LucideFileEdit,
-  LucideImage,
-  LucideLock,
-  LucidePencil,
-  LucideStar,
-  LucideTrash2,
-} from 'lucide-vue-next'
+import type { Collection } from '@/types/gallery'
 
 defineProps<{
   collection: Collection
@@ -22,15 +11,6 @@ const emit = defineEmits<{
   delete: [collectionId: string]
   view: [collection: Collection]
 }>()
-
-const statusConfig: Record<
-  CollectionStatus,
-  { label: string, variant: 'default' | 'secondary' | 'outline', icon: typeof LucideEye }
-> = {
-  published: { label: 'Published', variant: 'default', icon: LucideEye },
-  hidden: { label: 'Hidden', variant: 'secondary', icon: LucideEyeOff },
-  draft: { label: 'Draft', variant: 'outline', icon: LucideFileEdit },
-}
 </script>
 
 <template>
@@ -84,13 +64,13 @@ const statusConfig: Record<
       <div class="absolute bottom-2 left-2">
         <ShadBadge
           :class="{ 'bg-background': collection.status === 'draft' }"
-          :variant="statusConfig[collection.status].variant"
+          :variant="collectionStatusConfig[collection.status].variant"
         >
           <component
-            :is="statusConfig[collection.status].icon"
+            :is="collectionStatusConfig[collection.status].icon"
             class="mr-1 size-3"
           />
-          {{ statusConfig[collection.status].label }}
+          {{ collectionStatusConfig[collection.status].label }}
         </ShadBadge>
       </div>
     </div>
