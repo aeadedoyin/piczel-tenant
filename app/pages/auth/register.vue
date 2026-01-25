@@ -7,15 +7,16 @@ definePageMeta({
 })
 
 useHead({
-  title: 'Sign In | Piczel',
+  title: 'Create Account | Piczel',
 })
 
 const auth = useAuth()
-const config = useRuntimeConfig()
 
 const formData = reactive({
-  email: config.public.prefillCredential ? 'user@example.com' : '',
-  password: config.public.prefillCredential ? 'password' : '',
+  name: '',
+  email: '',
+  password: '',
+  passwordConfirmation: '',
 })
 
 const errors = ref<Record<string, string[]>>({})
@@ -26,8 +27,8 @@ async function handleSubmit() {
   errors.value = {}
 
   try {
-    await auth.signIn(formData)
-    toast.success('Welcome back!')
+    await auth.signUp(formData)
+    toast.success('Account created successfully!')
     await navigateTo('/dashboard')
   }
   catch (error: unknown) {
@@ -36,7 +37,7 @@ async function handleSubmit() {
       errors.value = err.data.errors
     }
     else {
-      toast.error(err?.data?.message || 'Invalid credentials. Please try again.')
+      toast.error(err?.data?.message || 'Failed to create account. Please try again.')
     }
   }
   finally {
@@ -56,10 +57,28 @@ function handleSocialLogin(provider: string) {
         <form class="flex flex-col justify-center gap-6 p-6 md:p-8" @submit.prevent="handleSubmit">
           <div class="flex flex-col items-center gap-2 text-center">
             <h1 class="text-2xl font-bold">
-              Welcome back
+              Create your account
             </h1>
             <p class="text-sm text-muted-foreground text-balance">
-              Enter your credentials to access your account
+              Start managing your photography business today
+            </p>
+          </div>
+
+          <!-- Name -->
+          <div class="space-y-2">
+            <ShadLabel for="name">
+              Full name
+            </ShadLabel>
+            <ShadInput
+              id="name"
+              v-model="formData.name"
+              :disabled="loading"
+              placeholder="John Doe"
+              required
+              type="text"
+            />
+            <p v-if="errors.name" class="text-sm text-destructive">
+              {{ errors.name[0] }}
             </p>
           </div>
 
@@ -81,36 +100,49 @@ function handleSocialLogin(provider: string) {
             </p>
           </div>
 
-          <!-- Password -->
+          <!-- Password Row -->
           <div class="space-y-2">
-            <div class="flex items-center justify-between">
-              <ShadLabel for="password">
-                Password
-              </ShadLabel>
-              <NuxtLink
-                class="text-sm text-muted-foreground underline-offset-4 hover:text-primary hover:underline"
-                to="/auth/forgot-password"
-              >
-                Forgot password?
-              </NuxtLink>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="space-y-2">
+                <ShadLabel for="password">
+                  Password
+                </ShadLabel>
+                <ShadInput
+                  id="password"
+                  v-model="formData.password"
+                  :disabled="loading"
+                  required
+                  type="password"
+                />
+              </div>
+              <div class="space-y-2">
+                <ShadLabel for="password-confirmation">
+                  Confirm
+                </ShadLabel>
+                <ShadInput
+                  id="password-confirmation"
+                  v-model="formData.passwordConfirmation"
+                  :disabled="loading"
+                  required
+                  type="password"
+                />
+              </div>
             </div>
-            <ShadInput
-              id="password"
-              v-model="formData.password"
-              :disabled="loading"
-              placeholder="Enter your password"
-              required
-              type="password"
-            />
             <p v-if="errors.password" class="text-sm text-destructive">
               {{ errors.password[0] }}
+            </p>
+            <p v-else-if="errors.passwordConfirmation" class="text-sm text-destructive">
+              {{ errors.passwordConfirmation[0] }}
+            </p>
+            <p v-else class="text-sm text-muted-foreground">
+              Must be at least 8 characters long.
             </p>
           </div>
 
           <!-- Submit -->
           <ShadButton class="w-full" :disabled="loading" type="submit">
             <LucideLoader2 v-if="loading" class="mr-2 size-4 animate-spin" />
-            {{ loading ? 'Signing in...' : 'Sign in' }}
+            {{ loading ? 'Creating account...' : 'Create Account' }}
           </ShadButton>
 
           <!-- Separator -->
@@ -129,7 +161,7 @@ function handleSocialLogin(provider: string) {
                   fill="currentColor"
                 />
               </svg>
-              <span class="sr-only">Sign in with Apple</span>
+              <span class="sr-only">Sign up with Apple</span>
             </ShadButton>
             <ShadButton type="button" variant="outline" @click="handleSocialLogin('Google')">
               <svg class="size-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -138,7 +170,7 @@ function handleSocialLogin(provider: string) {
                   fill="currentColor"
                 />
               </svg>
-              <span class="sr-only">Sign in with Google</span>
+              <span class="sr-only">Sign up with Google</span>
             </ShadButton>
             <ShadButton type="button" variant="outline" @click="handleSocialLogin('Meta')">
               <svg class="size-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -147,18 +179,18 @@ function handleSocialLogin(provider: string) {
                   fill="currentColor"
                 />
               </svg>
-              <span class="sr-only">Sign in with Meta</span>
+              <span class="sr-only">Sign up with Meta</span>
             </ShadButton>
           </div>
 
-          <!-- Register link -->
+          <!-- Sign in link -->
           <p class="text-center text-sm text-muted-foreground">
-            Don't have an account?
+            Already have an account?
             <NuxtLink
               class="font-medium text-foreground underline-offset-4 hover:underline"
-              to="/auth/register"
+              to="/auth/signin"
             >
-              Create account
+              Sign in
             </NuxtLink>
           </p>
         </form>
@@ -168,10 +200,22 @@ function handleSocialLogin(provider: string) {
           <img
             alt="Photography"
             class="absolute inset-0 size-full object-cover dark:brightness-[0.2] dark:grayscale"
-            src="https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=800&q=80"
+            src="https://images.unsplash.com/photo-1554048612-b6a482bc67e5?w=800&q=80"
           >
         </div>
       </ShadCardContent>
     </ShadCard>
+
+    <!-- Terms -->
+    <p class="px-6 text-center text-xs text-muted-foreground">
+      By clicking continue, you agree to our
+      <NuxtLink class="underline underline-offset-4 hover:text-primary" to="/terms">
+        Terms of Service
+      </NuxtLink>
+      and
+      <NuxtLink class="underline underline-offset-4 hover:text-primary" to="/privacy">
+        Privacy Policy
+      </NuxtLink>.
+    </p>
   </div>
 </template>

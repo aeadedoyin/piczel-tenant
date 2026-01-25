@@ -45,73 +45,85 @@ async function handleSubmit() {
 </script>
 
 <template>
-  <div class="space-y-6">
-    <div class="space-y-2">
-      <h1 class="text-2xl font-semibold tracking-tight">
-        Forgot password?
-      </h1>
-      <p class="text-sm text-muted-foreground">
-        Enter your email and we'll send you a link to reset your password
-      </p>
-    </div>
+  <div class="flex flex-col gap-6">
+    <ShadCard class="overflow-hidden p-0">
+      <ShadCardContent class="grid p-0 lg:grid-cols-2 lg:min-h-[75vh]">
+        <div class="flex flex-col justify-center gap-6 p-6 md:p-8">
+          <div class="flex flex-col items-center gap-2 text-center">
+            <h1 class="text-2xl font-bold">
+              Forgot password?
+            </h1>
+            <p class="text-sm text-muted-foreground text-balance">
+              Enter your email and we'll send you a link to reset your password
+            </p>
+          </div>
 
-    <template v-if="!submitted">
-      <form class="space-y-4" @submit.prevent="handleSubmit">
-        <div class="space-y-2">
-          <ShadLabel for="email">
-            Email
-          </ShadLabel>
-          <ShadInput
-            id="email"
-            v-model="formData.email"
-            :disabled="loading"
-            placeholder="you@example.com"
-            required
-            type="email"
-          />
-          <p v-if="errors.email" class="text-sm text-destructive">
-            {{ errors.email[0] }}
+          <template v-if="!submitted">
+            <form class="flex flex-col gap-6" @submit.prevent="handleSubmit">
+              <div class="space-y-2">
+                <ShadLabel for="email">
+                  Email
+                </ShadLabel>
+                <ShadInput
+                  id="email"
+                  v-model="formData.email"
+                  :disabled="loading"
+                  placeholder="you@example.com"
+                  required
+                  type="email"
+                />
+                <p v-if="errors.email" class="text-sm text-destructive">
+                  {{ errors.email[0] }}
+                </p>
+              </div>
+
+              <ShadButton class="w-full" :disabled="loading" type="submit">
+                <LucideLoader2 v-if="loading" class="mr-2 size-4 animate-spin" />
+                {{ loading ? 'Sending...' : 'Send reset link' }}
+              </ShadButton>
+            </form>
+          </template>
+
+          <template v-else>
+            <div class="rounded-lg border bg-muted/50 p-6 text-center">
+              <LucideMail class="mx-auto size-12 text-muted-foreground" />
+              <h3 class="mt-4 font-medium">
+                Check your email
+              </h3>
+              <p class="mt-2 text-sm text-muted-foreground">
+                We've sent a password reset link to
+                <strong>{{ formData.email }}</strong>
+              </p>
+              <ShadButton
+                class="mt-4"
+                variant="outline"
+                @click="submitted = false"
+              >
+                Try another email
+              </ShadButton>
+            </div>
+          </template>
+
+          <p class="text-center text-sm text-muted-foreground">
+            Remember your password?
+            <NuxtLink
+              class="font-medium text-foreground underline-offset-4 hover:underline"
+              to="/auth/signin"
+            >
+              Sign in
+            </NuxtLink>
           </p>
         </div>
 
-        <ShadButton class="w-full" :disabled="loading" type="submit">
-          <LucideLoader2 v-if="loading" class="mr-2 size-4 animate-spin" />
-          {{ loading ? 'Sending...' : 'Send reset link' }}
-        </ShadButton>
-      </form>
-    </template>
-
-    <template v-else>
-      <div class="rounded-lg border bg-muted/50 p-6 text-center">
-        <LucideMail class="mx-auto size-12 text-muted-foreground" />
-        <h3 class="mt-4 font-medium">
-          Check your email
-        </h3>
-        <p class="mt-2 text-sm text-muted-foreground">
-          We've sent a password reset link to
-          <strong>{{ formData.email }}</strong>
-        </p>
-        <ShadButton
-          class="mt-4"
-          variant="outline"
-          @click="submitted = false"
-        >
-          Try another email
-        </ShadButton>
-      </div>
-    </template>
-
-    <div class="text-center text-sm">
-      Remember your password?
-      <NuxtLink
-        class="
-          font-medium text-primary underline-offset-4
-          hover:underline
-        "
-        to="/auth/signin"
-      >
-        Sign in
-      </NuxtLink>
-    </div>
+        <!-- Image Side -->
+        <div class="relative hidden bg-muted lg:block">
+          <img
+            alt="Photography"
+            class="absolute inset-0 size-full object-cover dark:brightness-[0.2] dark:grayscale"
+            src="https://images.unsplash.com/photo-1493863641943-9b68992a8d07?w=800&q=80"
+          >
+        </div>
+      </ShadCardContent>
+    </ShadCard>
   </div>
 </template>
