@@ -1,4 +1,11 @@
 <script setup lang="ts">
+import type {
+  Collection,
+  CollectionCategory,
+  CollectionFilters,
+  CollectionStatus,
+  CreateCollectionData,
+} from '@/types/gallery'
 import { Button } from '@/components/shadcn-ui/button'
 import {
   DropdownMenu,
@@ -13,13 +20,24 @@ definePageMeta({
 
 const route = useRoute()
 const router = useRouter()
+const gallery = useGallery()
 
+// Modal state
+const isModalOpen = ref(false)
+const editingCollection = ref<Collection | null>(null)
+
+// Filter definitions
 const filters = [
-  { id: 'status', label: 'Status', options: ['All', 'Published', 'Hidden', 'Draft'] },
-  { id: 'category', label: 'Category Tag', options: ['All', 'Wedding', 'Portrait', 'Event', 'Commercial'] },
-  { id: 'eventDate', label: 'Event Date', options: ['All', 'This Week', 'This Month', 'This Year', 'Custom'] },
-  { id: 'expiryDate', label: 'Expiry Date', options: ['All', 'Expiring Soon', 'Expired', 'No Expiry'] },
-  { id: 'starred', label: 'Starred', options: ['All', 'Starred', 'Not Starred'] },
+  {
+    id: 'status',
+    label: 'Status',
+    options: ['All', 'Published', 'Hidden', 'Draft'] as const,
+  },
+  {
+    id: 'category',
+    label: 'Category',
+    options: ['All', 'Wedding', 'Portrait', 'Event', 'Nature', 'Other'] as const,
+  },
 ]
 
 // Initialize from URL query params
@@ -27,9 +45,6 @@ function parseFiltersFromQuery(): Record<string, string[]> {
   const result: Record<string, string[]> = {
     status: [],
     category: [],
-    eventDate: [],
-    expiryDate: [],
-    starred: [],
   }
 
   for (const filter of filters) {
@@ -44,10 +59,21 @@ function parseFiltersFromQuery(): Record<string, string[]> {
 
 const selectedFilters = ref<Record<string, string[]>>(parseFiltersFromQuery())
 
-// Watch for route query changes (e.g., when clicking sidebar links)
-watch(() => route.query, () => {
-  selectedFilters.value = parseFiltersFromQuery()
-}, { immediate: false })
+// Watch for route query changes
+watch(
+  () => route.query,
+  () => {
+    selectedFilters.value = parseFiltersFromQuery()
+
+    // Check for new=true query param to open modal
+    if (route.query.new === 'true') {
+      editingCollection.value = null
+      isModalOpen.value = true
+      router.replace({ query: { ...route.query, new: undefined } })
+    }
+  },
+  { immediate: true },
+)
 
 // Sync filters to URL
 function updateUrl() {
@@ -75,7 +101,8 @@ function toggleFilter(filterId: string, value: string) {
 
   if (index === -1) {
     selectedFilters.value[filterId] = [...current, value]
-  } else {
+  }
+  else {
     selectedFilters.value[filterId] = current.filter(v => v !== value)
   }
 
@@ -97,9 +124,69 @@ function isSelected(filterId: string, option: string) {
 
 function getSelectedDisplay(filterId: string) {
   const selected = selectedFilters.value[filterId]
-  if (!selected || selected.length === 0) return ''
-  if (selected.length <= 2) return selected.join(', ')
+  if (!selected || selected.length === 0)
+    return ''
+  if (selected.length <= 2)
+    return selected.join(', ')
   return `${selected.length} selected`
+}
+
+function clearFilters() {
+  selectedFilters.value = { status: [], category: [] }
+  updateUrl()
+}
+
+// Computed filtered collections
+const hasFilters = computed(() => {
+  const status = selectedFilters.value.status ?? []
+  const category = selectedFilters.value.category ?? []
+  return status.length > 0 || category.length > 0
+})
+
+const filteredCollections = computed(() => {
+  const status = selectedFilters.value.status ?? []
+  const category = selectedFilters.value.category ?? []
+  const filterData: CollectionFilters = {
+    status: status.map(s => s.toLowerCase()) as CollectionStatus[],
+    category: category.map(c => c.toLowerCase()) as CollectionCategory[],
+  }
+  return gallery.filterCollections(filterData)
+})
+
+// Fetch data on mount
+onMounted(async () => {
+  await gallery.fetchCollections()
+})
+
+// Modal handlers
+function openNewModal() {
+  editingCollection.value = null
+  isModalOpen.value = true
+}
+
+function handleEdit(collection: Collection) {
+  editingCollection.value = collection
+  isModalOpen.value = true
+}
+
+async function handleSave(data: CreateCollectionData) {
+  if (editingCollection.value) {
+    await gallery.updateCollection({ id: editingCollection.value.id, ...data })
+  }
+  else {
+    await gallery.createCollection(data)
+  }
+  isModalOpen.value = false
+  editingCollection.value = null
+}
+
+async function handleDelete(collectionId: string) {
+  // TODO: Replace with proper confirmation dialog
+  await gallery.deleteCollection(collectionId)
+}
+
+function handleView(collection: Collection) {
+  router.push(`/gallery/collections/${collection.id}`)
 }
 </script>
 
@@ -114,7 +201,7 @@ function getSelectedDisplay(filterId: string) {
           Organize your photos into collections.
         </p>
       </div>
-      <Button class="gap-2">
+      <Button class="gap-2" @click="openNewModal">
         <LucidePlus class="size-4" />
         New Collection
       </Button>
@@ -122,19 +209,29 @@ function getSelectedDisplay(filterId: string) {
 
     <!-- Filters -->
     <div class="flex flex-wrap items-center gap-2">
-      <DropdownMenu v-for="filter in filters" :key="filter.id" :close-on-select="false">
+      <DropdownMenu
+        v-for="filter in filters"
+        :key="filter.id"
+        :close-on-select="false"
+      >
         <DropdownMenuTrigger as-child>
           <button
             class="
               inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5
-              text-sm transition-colors hover:bg-muted
+              text-sm transition-colors
+              hover:bg-muted
             "
-            :class="hasActiveFilter(filter.id)
-              ? 'border-emerald-500/30 bg-emerald-500/5'
-              : 'border-border bg-background'"
+            :class="
+              hasActiveFilter(filter.id)
+                ? 'border-emerald-500/30 bg-emerald-500/5'
+                : 'border-border bg-background'
+            "
           >
             <span>{{ filter.label }}<template v-if="hasActiveFilter(filter.id)">:</template></span>
-            <span v-if="hasActiveFilter(filter.id)" class="text-xs font-semibold text-emerald-600">
+            <span
+              v-if="hasActiveFilter(filter.id)"
+              class="text-xs font-semibold text-emerald-600"
+            >
               {{ getSelectedDisplay(filter.id) }}
             </span>
             <LucideChevronDown class="size-3 text-muted-foreground" />
@@ -144,19 +241,46 @@ function getSelectedDisplay(filterId: string) {
           <DropdownMenuItem
             v-for="option in filter.options"
             :key="option"
-            class="flex cursor-pointer items-center justify-between gap-6 py-1.5 text-sm"
+            class="
+              flex cursor-pointer items-center justify-between gap-6 py-1.5
+              text-sm
+            "
             @click.prevent="toggleFilter(filter.id, option)"
             @select.prevent
           >
             {{ option }}
-            <LucideCheck v-if="isSelected(filter.id, option)" class="size-3.5 text-emerald-500" />
+            <LucideCheck
+              v-if="isSelected(filter.id, option)"
+              class="size-3.5 text-emerald-500"
+            />
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+
+      <!-- Clear filters button -->
+      <Button
+        v-if="hasFilters"
+        class="h-8 px-2 text-muted-foreground"
+        size="sm"
+        variant="ghost"
+        @click="clearFilters"
+      >
+        <LucideX class="mr-1 size-3" />
+        Clear
+      </Button>
     </div>
 
-    <!-- Placeholder Grid -->
+    <!-- Empty State -->
+    <GalleryEmptyCollections
+      v-if="!gallery.isLoadingCollections && filteredCollections.length === 0"
+      :has-filters="hasFilters"
+      @clear-filters="clearFilters"
+      @create="openNewModal"
+    />
+
+    <!-- Loading State -->
     <div
+      v-else-if="gallery.isLoadingCollections"
       class="
         grid gap-4
         md:grid-cols-2
@@ -164,20 +288,42 @@ function getSelectedDisplay(filterId: string) {
       "
     >
       <div
-        v-for="i in 6" :key="i" class="
-          group overflow-hidden rounded-xl border bg-card
-        "
+        v-for="i in 6"
+        :key="i"
+        class="overflow-hidden rounded-xl border bg-card"
       >
-        <div class="aspect-video bg-muted" />
+        <div class="aspect-video animate-pulse bg-muted" />
         <div class="p-4">
-          <h3 class="font-medium">
-            Collection {{ i }}
-          </h3>
-          <p class="text-sm text-muted-foreground">
-            24 photos
-          </p>
+          <div class="h-5 w-2/3 animate-pulse rounded-sm bg-muted" />
+          <div class="mt-2 h-4 w-1/3 animate-pulse rounded-sm bg-muted" />
         </div>
       </div>
     </div>
+
+    <!-- Collections Grid -->
+    <div
+      v-else class="
+        grid gap-4
+        md:grid-cols-2
+        lg:grid-cols-3
+      "
+    >
+      <GalleryCollectionCard
+        v-for="collection in filteredCollections"
+        :key="collection.id"
+        :collection="collection"
+        @delete="handleDelete"
+        @edit="handleEdit"
+        @star="gallery.toggleCollectionStar"
+        @view="handleView"
+      />
+    </div>
+
+    <!-- Collection Modal -->
+    <GalleryCollectionModal
+      v-model:open="isModalOpen"
+      :collection="editingCollection"
+      @save="handleSave"
+    />
   </div>
 </template>
