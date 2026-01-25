@@ -22,10 +22,16 @@ export default antfu({
     'quotes': ['error', 'single', { avoidEscape: true }],
     'prefer-template': 'off',
     'no-restricted-imports': ['error', {
-      patterns: [{
-        group: ['@@/shadcn/*'],
-        message: 'Use auto-imported Shad* components instead (e.g., ShadButton, ShadInput).',
-      }],
+      patterns: [
+        {
+          group: ['@@/shadcn/*'],
+          message: 'Use auto-imported Shad* components instead (e.g., ShadButton, ShadInput).',
+        },
+        {
+          group: ['~', '~/*', '~~', '~~/*'],
+          message: 'Use @ or @@ instead of ~ or ~~ for imports.',
+        },
+      ],
     }],
 
     // vue - rules
