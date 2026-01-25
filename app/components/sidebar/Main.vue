@@ -32,13 +32,9 @@ const appNavigation: Record<string, NavItem[]> = {
   ],
   gallery: [
     {
-      title: 'All Media',
+      title: 'Overview',
       url: '/gallery',
-      icon: resolveComponent('LucideImage'),
-      items: [
-        { title: 'Photos', url: '/gallery/photos' },
-        { title: 'Videos', url: '/gallery/videos' },
-      ],
+      icon: resolveComponent('LucideLayoutDashboard'),
     },
     {
       title: 'Collections',
