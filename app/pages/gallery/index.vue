@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Collection, Photo } from '@/types/gallery'
+import type { Collection, CreateCollectionData, Photo } from '@/types/gallery'
 
 useHead({
   title: 'Gallery | Piczel',
@@ -7,6 +7,9 @@ useHead({
 
 const gallery = useGallery()
 const router = useRouter()
+
+// Modal state
+const isModalOpen = ref(false)
 
 // Icons for stats cards (resolved at runtime for prop passing)
 const IconImage = resolveComponent('LucideImage')
@@ -24,7 +27,13 @@ function handleUpload() {
 }
 
 function handleNewCollection() {
-  router.push('/gallery/collections?new=true')
+  isModalOpen.value = true
+}
+
+async function handleSaveCollection(data: CreateCollectionData) {
+  await gallery.createCollection(data)
+  isModalOpen.value = false
+  router.push('/gallery/collections')
 }
 
 function handlePhotoView(_photo: Photo) {
@@ -191,5 +200,11 @@ function handleCollectionEdit(collection: Collection) {
         @view="handlePhotoView"
       />
     </div>
+
+    <!-- New Collection Modal -->
+    <GalleryCollectionModal
+      v-model:open="isModalOpen"
+      @save="handleSaveCollection"
+    />
   </div>
 </template>
