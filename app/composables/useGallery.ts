@@ -15,7 +15,7 @@ function delay(ms: number = 300): Promise<void> {
 // Generate mock photos
 function generateMockPhotos(): Photo[] {
   const photos: Photo[] = []
-  for (let i = 1; i <= 12; i++) {
+  for (let i = 1; i <= 18; i++) {
     const width = 800 + Math.floor(Math.random() * 400)
     const height = 600 + Math.floor(Math.random() * 300)
     photos.push({
@@ -102,7 +102,7 @@ function generateMockCollections(): Collection[] {
     {
       id: 'collection-6',
       title: 'Untitled Collection',
-      description: '',
+      description: '--',
       coverUrl: undefined,
       status: 'draft',
       category: 'other',
@@ -110,6 +110,54 @@ function generateMockCollections(): Collection[] {
       starred: false,
       createdAt: new Date(Date.now() - 1 * 86400000).toISOString(),
       updatedAt: new Date(Date.now() - 1 * 86400000).toISOString(),
+    },
+    {
+      id: 'collection-7',
+      title: 'Graduation Ceremony',
+      description: 'Class of 2024 graduation photos',
+      coverUrl: 'https://picsum.photos/seed/grad1/800/600',
+      status: 'published',
+      category: 'event',
+      photoCount: 52,
+      starred: false,
+      createdAt: new Date(Date.now() - 25 * 86400000).toISOString(),
+      updatedAt: new Date(Date.now() - 12 * 86400000).toISOString(),
+    },
+    {
+      id: 'collection-8',
+      title: 'Product Shoot',
+      description: 'E-commerce product photography',
+      coverUrl: 'https://picsum.photos/seed/product1/800/600',
+      status: 'hidden',
+      category: 'other',
+      photoCount: 24,
+      starred: true,
+      createdAt: new Date(Date.now() - 30 * 86400000).toISOString(),
+      updatedAt: new Date(Date.now() - 14 * 86400000).toISOString(),
+    },
+    {
+      id: 'collection-9',
+      title: 'Engagement Session',
+      description: 'Pre-wedding couple photoshoot',
+      coverUrl: 'https://picsum.photos/seed/engage1/800/600',
+      status: 'published',
+      category: 'wedding',
+      photoCount: 38,
+      starred: false,
+      createdAt: new Date(Date.now() - 35 * 86400000).toISOString(),
+      updatedAt: new Date(Date.now() - 18 * 86400000).toISOString(),
+    },
+    {
+      id: 'collection-10',
+      title: 'Birthday Party',
+      description: 'Kids birthday celebration',
+      coverUrl: 'https://picsum.photos/seed/bday1/800/600',
+      status: 'draft',
+      category: 'event',
+      photoCount: 19,
+      starred: false,
+      createdAt: new Date(Date.now() - 40 * 86400000).toISOString(),
+      updatedAt: new Date(Date.now() - 20 * 86400000).toISOString(),
     },
   ]
 }
@@ -119,8 +167,8 @@ export const useGallery = defineStore('gallery', () => {
   const photos = ref<Photo[]>([])
   const collections = ref<Collection[]>([])
   const selectedPhotoIds = ref<Set<string>>(new Set())
-  const isLoadingPhotos = ref(false)
-  const isLoadingCollections = ref(false)
+  const isLoadingPhotos = ref(true)
+  const isLoadingCollections = ref(true)
   const error = ref<string | null>(null)
 
   // Computed
@@ -152,7 +200,7 @@ export const useGallery = defineStore('gallery', () => {
         (a, b) =>
           new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
       )
-      .slice(0, 6),
+      .slice(0, 4),
   )
 
   const selectedPhotos = computed(() =>
