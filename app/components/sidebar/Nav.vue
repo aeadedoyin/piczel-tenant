@@ -25,15 +25,18 @@ function isActive(url: string): boolean {
   // Handle URLs with query params
   if (url.includes('?')) {
     const [path, queryString] = url.split('?')
-    if (route.path !== path) return false
+    if (route.path !== path)
+      return false
 
     const params = new URLSearchParams(queryString)
     for (const [key, value] of params.entries()) {
       const routeValue = route.query[key]
-      if (!routeValue || typeof routeValue !== 'string') return false
+      if (!routeValue || typeof routeValue !== 'string')
+        return false
       // Check if the comma-separated route query contains this value
       const routeValues = routeValue.split(',')
-      if (!routeValues.includes(value)) return false
+      if (!routeValues.includes(value))
+        return false
     }
     return true
   }
@@ -69,7 +72,9 @@ function isParentActive(item: NavItem): boolean {
                 :tooltip="item.title"
               >
                 <NuxtLink :to="item.url">
-                  <component :is="item.icon" class="size-4 text-muted-foreground/70" />
+                  <component
+                    :is="item.icon" class="size-4 text-muted-foreground/70"
+                  />
                   <span>{{ item.title }}</span>
                   <LucideChevronRight
                     class="

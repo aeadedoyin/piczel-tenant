@@ -33,13 +33,13 @@ const activeTab = computed(() => {
       </p>
     </div>
 
-    <Tabs :model-value="activeTab" class="w-full">
+    <Tabs class="w-full" :model-value="activeTab">
       <TabsList class="w-full justify-start">
         <TabsTrigger
           v-for="tab in tabs"
           :key="tab.value"
-          :value="tab.value"
           as-child
+          :value="tab.value"
         >
           <NuxtLink :to="tab.to">
             {{ tab.label }}

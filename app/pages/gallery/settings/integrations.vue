@@ -8,8 +8,7 @@ const integrations = [
     id: 'lightroom',
     name: 'Lightroom Plugin',
     description: 'Download the official Piczel Lightroom Plugin that allows you to upload directly from Lightroom Classic to Piczel, re-publish new edits easily and sync collections structure for easy organizing.',
-    icon: resolveComponent('LucideCamera'),
-    iconBg: 'bg-blue-900',
+    icon: 'simple-icons:adobelightroom',
     action: 'Download Plugin',
     actionIcon: resolveComponent('LucideDownload'),
     learnMore: true,
@@ -18,8 +17,7 @@ const integrations = [
     id: 'google-analytics',
     name: 'Google Analytics',
     description: 'Enable Google Analytics on your collections by entering your Google Analytics Tracking ID.',
-    icon: resolveComponent('LucideBarChart2'),
-    iconBg: 'bg-amber-500',
+    icon: 'simple-icons:googleanalytics',
     action: 'Connect Google Analytics',
     actionIcon: resolveComponent('LucidePlus'),
     learnMore: false,
@@ -28,8 +26,7 @@ const integrations = [
     id: 'dropbox',
     name: 'Dropbox',
     description: 'Automatically backup your photos to Dropbox. Keep your originals safe and synced across all your devices.',
-    icon: resolveComponent('LucideCloud'),
-    iconBg: 'bg-blue-500',
+    icon: 'simple-icons:dropbox',
     action: 'Connect Dropbox',
     actionIcon: resolveComponent('LucidePlus'),
     learnMore: false,
@@ -38,8 +35,7 @@ const integrations = [
     id: 'zapier',
     name: 'Zapier',
     description: 'Connect Piczel to thousands of apps with Zapier. Automate workflows like adding new clients to your CRM or sending notifications.',
-    icon: resolveComponent('LucideZap'),
-    iconBg: 'bg-orange-500',
+    icon: 'simple-icons:zapier',
     action: 'Connect Zapier',
     actionIcon: resolveComponent('LucidePlus'),
     learnMore: true,
@@ -56,24 +52,10 @@ const integrations = [
     >
       <!-- Logo Area -->
       <div class="flex w-40 shrink-0 items-center justify-center">
-        <div class="flex items-center gap-3">
-          <div
-            class="
-              flex size-12 items-center justify-center rounded-lg text-white
-            "
-            :class="integration.iconBg"
-          >
-            <component :is="integration.icon" class="size-6" />
-          </div>
-          <LucideArrowRight class="size-4 text-muted-foreground/50" />
-          <div
-            class="
-              flex size-12 items-center justify-center rounded-lg border
-              border-border bg-background
-            "
-          >
-            <Icon name="piczel:piczel-logo-logomark" size="24" />
-          </div>
+        <div class="flex items-center gap-4">
+          <Icon :name="integration.icon" class="size-12" mode="svg" />
+          <LucideArrowRight class="size-5 text-muted-foreground/50" />
+          <Icon name="piczel:piczel-logo-logomark" class="size-12" mode="svg" />
         </div>
       </div>
 

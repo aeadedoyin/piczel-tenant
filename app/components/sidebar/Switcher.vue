@@ -67,7 +67,8 @@ const apps: App[] = [
 
 const activeApp = computed((): App => {
   const path = route.path
-  if (path.startsWith('/dashboard')) return dashboard
+  if (path.startsWith('/dashboard'))
+    return dashboard
   return apps.find(app => path.startsWith(app.url)) ?? dashboard
 })
 </script>

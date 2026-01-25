@@ -156,10 +156,14 @@ const appNavigation: Record<string, NavItem[]> = {
 // Get active app based on current route
 const activeAppId = computed(() => {
   const path = route.path
-  if (path.startsWith('/gallery')) return 'gallery'
-  if (path.startsWith('/studio')) return 'studio'
-  if (path.startsWith('/website')) return 'website'
-  if (path.startsWith('/store')) return 'store'
+  if (path.startsWith('/gallery'))
+    return 'gallery'
+  if (path.startsWith('/studio'))
+    return 'studio'
+  if (path.startsWith('/website'))
+    return 'website'
+  if (path.startsWith('/store'))
+    return 'store'
   return 'dashboard'
 })
 
