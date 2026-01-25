@@ -1,6 +1,4 @@
-import type { Component } from 'vue'
 import type { NavItem } from '@/types/navigation'
-import { icons } from '@/composables/useIconResolver'
 
 export interface AppDefinition {
   id: string
@@ -18,7 +16,7 @@ export function getDashboardApp(): AppDefinition {
     id: 'dashboard',
     name: 'Dashboard',
     description: 'Overview',
-    icon: icons.LucideLayoutDashboard,
+    icon: LucidIcons.LucideLayoutDashboard,
     url: '/dashboard',
   }
 }
@@ -32,28 +30,28 @@ export function getApps(): AppDefinition[] {
       id: 'gallery',
       name: 'Gallery',
       description: 'Photo management',
-      icon: icons.LucideImage,
+      icon: LucidIcons.LucideImage,
       url: '/gallery',
     },
     {
       id: 'studio',
       name: 'Studio',
       description: 'Client & project manager',
-      icon: icons.LucideBriefcase,
+      icon: LucidIcons.LucideBriefcase,
       url: '/studio',
     },
     {
       id: 'website',
       name: 'Website',
       description: 'Site builder',
-      icon: icons.LucideGlobe,
+      icon: LucidIcons.LucideGlobe,
       url: '/website',
     },
     {
       id: 'store',
       name: 'Store',
       description: 'E-commerce',
-      icon: icons.LucideShoppingBag,
+      icon: LucidIcons.LucideShoppingBag,
       url: '/store',
     },
   ]
@@ -68,30 +66,30 @@ export function getAppNavigation(): Record<string, NavItem[]> {
       {
         title: 'Overview',
         url: '/dashboard',
-        icon: icons.LucideLayoutDashboard,
+        icon: LucidIcons.LucideLayoutDashboard,
       },
       // TODO: Add these pages when implemented
       // {
       //   title: 'Analytics',
       //   url: '/dashboard/analytics',
-      //   icon: icons.LucideBarChart3,
+      //   icon: LucidIcons.LucideBarChart3,
       // },
       // {
       //   title: 'Activity',
       //   url: '/dashboard/activity',
-      //   icon: icons.LucideActivity,
+      //   icon: LucidIcons.LucideActivity,
       // },
     ],
     gallery: [
       {
         title: 'Overview',
         url: '/gallery',
-        icon: icons.LucideLayoutDashboard,
+        icon: LucidIcons.LucideLayoutDashboard,
       },
       {
         title: 'Collections',
         url: '/gallery/collections',
-        icon: icons.LucideFolders,
+        icon: LucidIcons.LucideFolders,
         items: [
           { title: 'Published', url: '/gallery/collections?status=Published' },
           { title: 'Hidden', url: '/gallery/collections?status=Hidden' },
@@ -101,7 +99,7 @@ export function getAppNavigation(): Record<string, NavItem[]> {
       {
         title: 'Starred',
         url: '/gallery/starred/collections',
-        icon: icons.LucideStar,
+        icon: LucidIcons.LucideStar,
         items: [
           { title: 'Collections', url: '/gallery/starred/collections' },
           { title: 'Photos', url: '/gallery/starred/photos' },
@@ -111,7 +109,7 @@ export function getAppNavigation(): Record<string, NavItem[]> {
       {
         title: 'Settings',
         url: '/gallery/settings',
-        icon: icons.LucideSettings,
+        icon: LucidIcons.LucideSettings,
         items: [
           { title: 'Branding', url: '/gallery/settings/branding' },
           { title: 'Watermark Presets', url: '/gallery/settings/watermarks' },
@@ -125,73 +123,73 @@ export function getAppNavigation(): Record<string, NavItem[]> {
       {
         title: 'Overview',
         url: '/studio',
-        icon: icons.LucideBriefcase,
+        icon: LucidIcons.LucideBriefcase,
       },
       {
         title: 'Projects',
         url: '/studio/projects',
-        icon: icons.LucideFolderKanban,
+        icon: LucidIcons.LucideFolderKanban,
       },
       {
         title: 'Contacts',
         url: '/studio/contacts',
-        icon: icons.LucideUsers,
+        icon: LucidIcons.LucideUsers,
       },
       {
         title: 'Bookings',
         url: '/studio/bookings',
-        icon: icons.LucideCalendarDays,
+        icon: LucidIcons.LucideCalendarDays,
       },
       {
         title: 'Payments',
         url: '/studio/payments',
-        icon: icons.LucideCreditCard,
+        icon: LucidIcons.LucideCreditCard,
       },
     ],
     website: [
       {
         title: 'Overview',
         url: '/website',
-        icon: icons.LucideGlobe,
+        icon: LucidIcons.LucideGlobe,
       },
       {
         title: 'Edit Site',
         url: '/website/edit',
-        icon: icons.LucidePenSquare,
+        icon: LucidIcons.LucidePenSquare,
       },
       // TODO: Add pages page when implemented
       // {
       //   title: 'Pages',
       //   url: '/website/pages',
-      //   icon: icons.LucideFileText,
+      //   icon: LucidIcons.LucideFileText,
       // },
       {
         title: 'Settings',
         url: '/website/settings',
-        icon: icons.LucideSettings,
+        icon: LucidIcons.LucideSettings,
       },
     ],
     store: [
       {
         title: 'Overview',
         url: '/store',
-        icon: icons.LucideShoppingBag,
+        icon: LucidIcons.LucideShoppingBag,
       },
       {
         title: 'Orders',
         url: '/store/orders',
-        icon: icons.LucidePackage,
+        icon: LucidIcons.LucidePackage,
       },
       {
         title: 'Catalog',
         url: '/store/catalog',
-        icon: icons.LucideGrid3x3,
+        icon: LucidIcons.LucideGrid3x3,
       },
       // TODO: Add customers page when implemented
       // {
       //   title: 'Customers',
       //   url: '/store/customers',
-      //   icon: icons.LucideUsers,
+      //   icon: LucidIcons.LucideUsers,
       // },
     ],
   }
@@ -206,19 +204,19 @@ export function getNavSecondary(): NavItem[] {
     // {
     //   title: 'Settings',
     //   url: '/settings',
-    //   icon: icons.LucideSettings,
+    //   icon: LucidIcons.LucideSettings,
     // },
     {
       title: 'Help & Support',
       url: 'https://help.piczel.io',
-      icon: icons.LucideLifeBuoy,
+      icon: LucidIcons.LucideLifeBuoy,
       external: true,
     },
     // TODO: Add feedback page when implemented
     // {
     //   title: 'Feedback',
     //   url: '/feedback',
-    //   icon: icons.LucideMessageSquare,
+    //   icon: LucidIcons.LucideMessageSquare,
     // },
   ]
 }

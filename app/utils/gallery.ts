@@ -1,9 +1,10 @@
 import type { CollectionCategory, CollectionStatus } from '@/types/gallery'
+import { LucideEye, LucideEyeOff, LucideFileEdit } from '#components'
 
 export interface StatusConfig {
   label: string
   variant: 'default' | 'secondary' | 'outline'
-  icon: string
+  icon: Component
 }
 
 export interface SelectOption<T = string> {
@@ -21,9 +22,9 @@ export interface FilterDefinition {
  * Status configuration for collection badges
  */
 export const collectionStatusConfig: Record<CollectionStatus, StatusConfig> = {
-  published: { label: 'Published', variant: 'default', icon: 'LucideEye' },
-  hidden: { label: 'Hidden', variant: 'secondary', icon: 'LucideEyeOff' },
-  draft: { label: 'Draft', variant: 'outline', icon: 'LucideFileEdit' },
+  published: { label: 'Published', variant: 'default', icon: LucideEye },
+  hidden: { label: 'Hidden', variant: 'secondary', icon: LucideEyeOff },
+  draft: { label: 'Draft', variant: 'outline', icon: LucideFileEdit },
 }
 
 /**
