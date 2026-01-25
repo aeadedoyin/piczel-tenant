@@ -289,6 +289,7 @@ const cookieBanner = ref(false)
             focus-visible:ring-0
           "
           placeholder="Enter your privacy policy..."
+          :rows="5"
         />
       </div>
       <p class="mt-3 text-sm/relaxed text-muted-foreground">

@@ -39,7 +39,7 @@ export default defineNuxtConfig({
     customCollections: [
       {
         prefix: 'piczel',
-        dir: '@/assets/icons',
+        dir: './app/assets/icons',
       },
     ],
   },

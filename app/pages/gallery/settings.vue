@@ -37,6 +37,7 @@ const activeTab = computed(() => {
           v-for="tab in tabs"
           :key="tab.value"
           as-child
+          class="px-4 py-1"
           :value="tab.value"
         >
           <NuxtLink :to="tab.to">
