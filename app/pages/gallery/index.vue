@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Photo } from '@/types/gallery'
+import type { Collection, Photo } from '@/types/gallery'
 import { LucideFolderPlus, LucideUpload } from 'lucide-vue-next'
 
 definePageMeta({
@@ -35,6 +35,14 @@ function handleNewCollection() {
 
 function handlePhotoView(_photo: Photo) {
   // TODO: Implement photo viewer
+}
+
+function handleCollectionView(collection: Collection) {
+  router.push(`/gallery/collections/${collection.id}`)
+}
+
+function handleCollectionEdit(collection: Collection) {
+  router.push(`/gallery/collections?edit=${collection.id}`)
 }
 </script>
 
@@ -108,6 +116,67 @@ function handlePhotoView(_photo: Photo) {
       </div>
     </div>
 
+    <!-- Recent Collections Section -->
+    <div class="space-y-4">
+      <div class="flex items-center justify-between">
+        <h2 class="text-lg font-semibold">
+          Recent Collections
+        </h2>
+        <NuxtLink
+          class="
+            text-sm text-muted-foreground
+            hover:text-foreground
+          "
+          to="/gallery/collections"
+        >
+          View all
+        </NuxtLink>
+      </div>
+
+      <!-- Empty State -->
+      <GalleryEmptyCollections
+        v-if="!gallery.isLoadingCollections && gallery.collections.length === 0"
+        @create="handleNewCollection"
+      />
+
+      <!-- Collections Grid -->
+      <div
+        v-else-if="gallery.isLoadingCollections"
+        class="
+          grid grid-cols-2 gap-4
+          md:grid-cols-3
+          lg:grid-cols-4
+          2xl:grid-cols-6
+        "
+      >
+        <div
+          v-for="i in 6"
+          :key="i"
+          class="aspect-video animate-pulse rounded-lg bg-muted"
+        />
+      </div>
+
+      <div
+        v-else
+        class="
+          grid grid-cols-2 gap-4
+          md:grid-cols-3
+          lg:grid-cols-4
+          2xl:grid-cols-6
+        "
+      >
+        <GalleryCollectionCard
+          v-for="collection in gallery.recentCollections"
+          :key="collection.id"
+          :collection="collection"
+          @delete="gallery.deleteCollection"
+          @edit="handleCollectionEdit"
+          @star="gallery.toggleCollectionStar"
+          @view="handleCollectionView"
+        />
+      </div>
+    </div>
+
     <!-- Recent Uploads Section -->
     <div class="space-y-4">
       <div class="flex items-center justify-between">
@@ -134,7 +203,7 @@ function handlePhotoView(_photo: Photo) {
       <!-- Photo Grid -->
       <GalleryPhotoGrid
         v-else
-        :columns="4"
+        :columns="6"
         :loading="gallery.isLoadingPhotos"
         :photos="gallery.recentPhotos"
         :selected-ids="gallery.selectedPhotoIds"

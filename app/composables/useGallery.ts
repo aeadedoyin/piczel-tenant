@@ -143,7 +143,16 @@ export const useGallery = defineStore('gallery', () => {
         (a, b) =>
           new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
       )
-      .slice(0, 8),
+      .slice(0, 12),
+  )
+
+  const recentCollections = computed(() =>
+    [...collections.value]
+      .sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+      )
+      .slice(0, 6),
   )
 
   const selectedPhotos = computed(() =>
@@ -329,6 +338,7 @@ export const useGallery = defineStore('gallery', () => {
     starredPhotos,
     starredCollections,
     recentPhotos,
+    recentCollections,
     selectedPhotos,
 
     // Photo Actions
