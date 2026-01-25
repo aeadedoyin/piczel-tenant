@@ -21,7 +21,7 @@ function generateMockPhotos(): Photo[] {
     photos.push({
       id: `photo-${i}`,
       url: `https://picsum.photos/seed/${i}/${width}/${height}`,
-      thumbnailUrl: `https://picsum.photos/seed/${i}/400/300`,
+      thumbnailUrl: `https://picsum.photos/seed/${i}/${Math.floor(width / 1.2)}/${Math.floor(height / 1.2)}`,
       title: `Photo ${i}`,
       width,
       height,

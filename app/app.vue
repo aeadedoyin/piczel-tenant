@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import { SidebarProvider } from '@/components/shadcn-ui/sidebar'
 </script>
 
 <template>
-  <SidebarProvider>
+  <ShadSidebarProvider>
     <NuxtRouteAnnouncer />
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
     <ShadToaster />
-  </SidebarProvider>
+  </ShadSidebarProvider>
 </template>
