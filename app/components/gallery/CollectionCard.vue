@@ -16,8 +16,8 @@ const emit = defineEmits<{
 <template>
   <ShadCard
     class="
-      group cursor-pointer overflow-hidden transition-shadow
-      hover:shadow-md
+      group cursor-pointer overflow-hidden transition-all
+      pt-0 pb-2 shadow-2xs hover:shadow-md/8
     "
     @click="emit('view', collection)"
   >
@@ -40,15 +40,20 @@ const emit = defineEmits<{
         <LucideImage class="size-12 text-muted-foreground" />
       </div>
 
-      <!-- Starred Indicator -->
-      <div
-        v-if="collection.starred"
-        class="absolute top-2 left-2"
+      <!-- Star Button -->
+      <button
+        class="
+          absolute top-2 left-2 flex size-7 items-center justify-center
+          rounded-full bg-black/50 text-white transition-all
+          hover:bg-black/70 hover:scale-110
+        "
+        @click.stop="emit('star', collection.id)"
       >
         <LucideStar
-          class="size-5 fill-yellow-400 text-yellow-400 drop-shadow-sm"
+          class="size-4"
+          :class="collection.starred ? 'fill-yellow-400 text-yellow-400' : ''"
         />
-      </div>
+      </button>
 
       <!-- Password Protected Indicator -->
       <div
@@ -76,7 +81,7 @@ const emit = defineEmits<{
     </div>
 
     <!-- Content -->
-    <ShadCardContent class="p-4">
+    <ShadCardContent class="px-3 py-2">
       <div class="flex items-start justify-between gap-2">
         <div class="min-w-0 flex-1">
           <h3 class="truncate font-medium">
@@ -100,14 +105,14 @@ const emit = defineEmits<{
             </ShadButton>
           </ShadDropdownMenuTrigger>
           <ShadDropdownMenuContent align="start" side="left">
-            <ShadDropdownMenuItem @click.stop="emit('star', collection.id)">
+            <ShadDropdownMenuItem @select="emit('star', collection.id)">
               <LucideStar
                 class="mr-2 size-4"
                 :class="{ 'fill-yellow-400 text-yellow-400': collection.starred }"
               />
               {{ collection.starred ? 'Unstar' : 'Star' }}
             </ShadDropdownMenuItem>
-            <ShadDropdownMenuItem @click.stop="emit('edit', collection)">
+            <ShadDropdownMenuItem @select="emit('edit', collection)">
               <LucidePencil class="mr-2 size-4" />
               Edit
             </ShadDropdownMenuItem>
@@ -117,7 +122,7 @@ const emit = defineEmits<{
                 text-destructive
                 focus:text-destructive
               "
-              @click.stop="emit('delete', collection.id)"
+              @select="emit('delete', collection.id)"
             >
               <LucideTrash2 class="mr-2 size-4" />
               Delete

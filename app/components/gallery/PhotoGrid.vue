@@ -29,7 +29,7 @@ const emit = defineEmits<{
       }"
     >
       <div
-        v-for="i in columns === 6 ? 12 : 8"
+        v-for="i in 6"
         :key="i"
         class="aspect-square animate-pulse rounded-lg bg-muted"
       />

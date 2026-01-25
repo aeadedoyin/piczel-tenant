@@ -62,7 +62,7 @@ const isHovered = ref(false)
               `"
             @click.stop="emit('select', photo.id)"
           >
-            <LucideCheck v-if="selected" class="size-3.5 text-white" />
+            <LucideCheck v-if="selected" class="size-3.5" />
             <div
               v-else
               class="size-3.5 rounded-full border-2 border-gray-400"
@@ -98,15 +98,6 @@ const isHovered = ref(false)
           >
             <LucideEye class="size-3.5" />
           </button>
-        </div>
-
-        <!-- Bottom Info -->
-        <div
-          class="absolute inset-x-0 bottom-0 bg-linear-to-t from-black/60 p-2"
-        >
-          <p class="truncate text-sm font-medium text-white">
-            {{ photo.title }}
-          </p>
         </div>
       </div>
     </Transition>

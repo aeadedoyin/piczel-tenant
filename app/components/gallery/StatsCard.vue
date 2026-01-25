@@ -10,11 +10,11 @@ defineProps<{
 </script>
 
 <template>
-  <div class="relative overflow-hidden rounded-xl border bg-card p-6">
+  <div class="group relative overflow-hidden rounded-xl border bg-card p-6">
     <!-- Background Icon -->
     <component
       :is="icon"
-      class="absolute -top-4 -right-4 size-24 rotate-12 text-emerald-500/15"
+      class="absolute -top-4 -right-4 size-24 rotate-12 text-muted transition-transform duration-300 ease-out group-hover:scale-110"
       :stroke-width="1.5"
     />
 
@@ -37,7 +37,7 @@ defineProps<{
         <LucideTrendingUp v-if="change >= 0" class="size-4" />
         <LucideTrendingDown v-else class="size-4" />
         <span>{{ change >= 0 ? '+' : '' }}{{ change }}%</span>
-        <span class="font-normal text-muted-foreground">vs last month</span>
+        <span class="font-normal text-muted-foreground/20 text-xs">vs last month</span>
       </div>
     </div>
   </div>
