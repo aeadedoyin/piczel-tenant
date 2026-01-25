@@ -15,9 +15,7 @@ defineProps<{
     <!-- Background Icon -->
     <component
       :is="icon"
-      class="
-        absolute -top-2 -right-2 size-20 rotate-12 text-muted-foreground/10
-      "
+      class="absolute -top-4 -right-4 size-24 rotate-12 text-emerald-500/15"
       :stroke-width="1.5"
     />
 

@@ -119,7 +119,7 @@ const statusConfig: Record<
               <LucideEllipsisVertical class="size-4" />
             </ShadButton>
           </ShadDropdownMenuTrigger>
-          <ShadDropdownMenuContent align="end">
+          <ShadDropdownMenuContent align="start" side="left">
             <ShadDropdownMenuItem @click.stop="emit('star', collection.id)">
               <LucideStar
                 class="mr-2 size-4"
