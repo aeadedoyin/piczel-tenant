@@ -5,6 +5,12 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   future: { compatibilityVersion: 4 },
 
+  typescript: {
+    tsConfig: {
+      include: ['../shadcn/**/*'],
+    },
+  },
+
   modules: [
     'shadcn-nuxt',
     'nuxt-lucide-icons',
@@ -17,21 +23,25 @@ export default defineNuxtConfig({
     customCollections: [
       {
         prefix: 'piczel',
-        dir: './app/assets/icons',
+        dir: '@/assets/icons',
       },
     ],
   },
 
+  lucide: {
+    namePrefix: 'Lucide',
+  },
+
   shadcn: {
     prefix: 'Shad',
-    componentDir: './app/components/shadcn-ui',
+    componentDir: '@@/shadcn/ui',
   },
 
   colorMode: {
     classSuffix: '',
   },
 
-  css: ['~/assets/css/tailwind.css'],
+  css: ['@/assets/css/tailwind.css'],
 
   vite: {
     plugins: [tailwindcss()],
