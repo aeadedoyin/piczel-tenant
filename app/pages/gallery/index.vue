@@ -179,6 +179,7 @@ function handleCollectionEdit(collection: Collection) {
           Recent Uploads
         </h2>
         <NuxtLink
+          v-if="false"
           class="
             text-sm text-muted-foreground
             hover:text-foreground
