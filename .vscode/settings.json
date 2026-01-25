@@ -1,4 +1,10 @@
 {
+  "search.exclude": {
+    "**/shadcn-ui/**": true
+  },
+  "files.exclude": {
+    "**/shadcn-ui/**": true
+  },
   "prettier.enable": false,
   "editor.codeActionsOnSave": {
     "source.fixAll": "always"
