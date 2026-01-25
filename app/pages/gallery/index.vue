@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import type { Collection, Photo } from '@/types/gallery'
-import { LucideFolderPlus, LucideUpload } from 'lucide-vue-next'
+import {
+  LucideFolderOpen,
+  LucideFolderPlus,
+  LucideHardDrive,
+  LucideImage,
+  LucideStar,
+  LucideUpload,
+} from 'lucide-vue-next'
 
 definePageMeta({
   title: 'Gallery',
@@ -78,42 +85,30 @@ function handleCollectionEdit(collection: Collection) {
         md:grid-cols-4
       "
     >
-      <div class="rounded-xl border bg-card p-6">
-        <div class="flex items-center gap-2">
-          <LucideImage class="size-4 text-muted-foreground" />
-          <span class="text-sm font-medium text-muted-foreground">Total Photos</span>
-        </div>
-        <div class="mt-2 text-2xl font-bold">
-          {{ gallery.stats.totalPhotos.toLocaleString() }}
-        </div>
-      </div>
-      <div class="rounded-xl border bg-card p-6">
-        <div class="flex items-center gap-2">
-          <LucideFolderOpen class="size-4 text-muted-foreground" />
-          <span class="text-sm font-medium text-muted-foreground">Collections</span>
-        </div>
-        <div class="mt-2 text-2xl font-bold">
-          {{ gallery.stats.totalCollections }}
-        </div>
-      </div>
-      <div class="rounded-xl border bg-card p-6">
-        <div class="flex items-center gap-2">
-          <LucideStar class="size-4 text-muted-foreground" />
-          <span class="text-sm font-medium text-muted-foreground">Starred</span>
-        </div>
-        <div class="mt-2 text-2xl font-bold">
-          {{ gallery.stats.starredPhotos }}
-        </div>
-      </div>
-      <div class="rounded-xl border bg-card p-6">
-        <div class="flex items-center gap-2">
-          <LucideHardDrive class="size-4 text-muted-foreground" />
-          <span class="text-sm font-medium text-muted-foreground">Storage Used</span>
-        </div>
-        <div class="mt-2 text-2xl font-bold">
-          {{ formatStorage(gallery.stats.storageUsed) }}
-        </div>
-      </div>
+      <GalleryStatsCard
+        :change="12"
+        :icon="LucideImage"
+        label="Total Photos"
+        :value="gallery.stats.totalPhotos"
+      />
+      <GalleryStatsCard
+        :change="8"
+        :icon="LucideFolderOpen"
+        label="Collections"
+        :value="gallery.stats.totalCollections"
+      />
+      <GalleryStatsCard
+        :change="-3"
+        :icon="LucideStar"
+        label="Starred"
+        :value="gallery.stats.starredPhotos"
+      />
+      <GalleryStatsCard
+        :change="24"
+        :icon="LucideHardDrive"
+        label="Storage Used"
+        :value="formatStorage(gallery.stats.storageUsed)"
+      />
     </div>
 
     <!-- Recent Collections Section -->
