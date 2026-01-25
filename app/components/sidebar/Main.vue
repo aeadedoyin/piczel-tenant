@@ -1,12 +1,5 @@
 <script setup lang="ts">
 import type { NavItem } from '~/types/navigation'
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarHeader,
-  SidebarRail,
-} from '@/components/shadcn-ui/sidebar'
 
 const route = useRoute()
 const auth = useAuth()
@@ -192,21 +185,21 @@ const navSecondary = [
 </script>
 
 <template>
-  <Sidebar collapsible="icon">
-    <SidebarHeader>
+  <ShadSidebar collapsible="icon">
+    <ShadSidebarHeader>
       <SidebarSwitcher />
-    </SidebarHeader>
+    </ShadSidebarHeader>
 
-    <SidebarContent>
+    <ShadSidebarContent>
       <SidebarNav :items="navItems" />
       <SidebarNavSecondary :items="navSecondary" />
       <SidebarNavStorage />
-    </SidebarContent>
+    </ShadSidebarContent>
 
-    <SidebarFooter>
+    <ShadSidebarFooter>
       <SidebarNavUser :user="user" />
-    </SidebarFooter>
+    </ShadSidebarFooter>
 
-    <SidebarRail />
-  </Sidebar>
+    <ShadSidebarRail />
+  </ShadSidebar>
 </template>

@@ -1,12 +1,5 @@
 <script setup lang="ts">
 import type { Component, ConcreteComponent } from 'vue'
-import {
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from '@/components/shadcn-ui/sidebar'
 
 interface NavItem {
   title: string
@@ -27,11 +20,11 @@ function isActive(url: string): boolean {
 </script>
 
 <template>
-  <SidebarGroup class="mt-auto">
-    <SidebarGroupContent>
-      <SidebarMenu>
-        <SidebarMenuItem v-for="item in items" :key="item.title">
-          <SidebarMenuButton
+  <ShadSidebarGroup class="mt-auto">
+    <ShadSidebarGroupContent>
+      <ShadSidebarMenu>
+        <ShadSidebarMenuItem v-for="item in items" :key="item.title">
+          <ShadSidebarMenuButton
             as-child
             :data-active="isActive(item.url)"
             :tooltip="item.title"
@@ -44,9 +37,9 @@ function isActive(url: string): boolean {
               <span>{{ item.title }}</span>
               <LucideExternalLink v-if="item.external" class="ml-auto size-3" />
             </NuxtLink>
-          </SidebarMenuButton>
-        </SidebarMenuItem>
-      </SidebarMenu>
-    </SidebarGroupContent>
-  </SidebarGroup>
+          </ShadSidebarMenuButton>
+        </ShadSidebarMenuItem>
+      </ShadSidebarMenu>
+    </ShadSidebarGroupContent>
+  </ShadSidebarGroup>
 </template>

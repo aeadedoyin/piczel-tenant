@@ -1,19 +1,5 @@
 <script setup lang="ts">
 import type { NavItem } from '~/types/navigation'
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@/components/shadcn-ui/collapsible'
-import {
-  SidebarGroup,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
-} from '@/components/shadcn-ui/sidebar'
 
 defineProps<{
   items: NavItem[]
@@ -53,19 +39,19 @@ function isParentActive(item: NavItem): boolean {
 </script>
 
 <template>
-  <SidebarGroup class="py-2">
-    <SidebarMenu class="gap-1">
+  <ShadSidebarGroup class="py-2">
+    <ShadSidebarMenu class="gap-1">
       <template v-for="item in items" :key="item.title">
         <!-- Items with sub-items: Collapsible -->
-        <Collapsible
+        <ShadCollapsible
           v-if="item.items?.length"
           as-child
           class="group/collapsible"
           :default-open="isParentActive(item)"
         >
-          <SidebarMenuItem>
-            <CollapsibleTrigger as-child>
-              <SidebarMenuButton
+          <ShadSidebarMenuItem>
+            <ShadCollapsibleTrigger as-child>
+              <ShadSidebarMenuButton
                 as-child
                 class="py-2.5"
                 :data-active="isActive(item.url)"
@@ -84,28 +70,28 @@ function isParentActive(item: NavItem): boolean {
                     "
                   />
                 </NuxtLink>
-              </SidebarMenuButton>
-            </CollapsibleTrigger>
-            <CollapsibleContent>
-              <SidebarMenuSub>
-                <SidebarMenuSubItem v-for="subItem in item.items" :key="subItem.title">
-                  <SidebarMenuSubButton
+              </ShadSidebarMenuButton>
+            </ShadCollapsibleTrigger>
+            <ShadCollapsibleContent>
+              <ShadSidebarMenuSub>
+                <ShadSidebarMenuSubItem v-for="subItem in item.items" :key="subItem.title">
+                  <ShadSidebarMenuSubButton
                     as-child
                     :data-active="isActive(subItem.url)"
                   >
                     <NuxtLink :to="subItem.url">
                       <span>{{ subItem.title }}</span>
                     </NuxtLink>
-                  </SidebarMenuSubButton>
-                </SidebarMenuSubItem>
-              </SidebarMenuSub>
-            </CollapsibleContent>
-          </SidebarMenuItem>
-        </Collapsible>
+                  </ShadSidebarMenuSubButton>
+                </ShadSidebarMenuSubItem>
+              </ShadSidebarMenuSub>
+            </ShadCollapsibleContent>
+          </ShadSidebarMenuItem>
+        </ShadCollapsible>
 
         <!-- Items without sub-items: Direct link -->
-        <SidebarMenuItem v-else>
-          <SidebarMenuButton
+        <ShadSidebarMenuItem v-else>
+          <ShadSidebarMenuButton
             as-child
             class="py-2.5"
             :data-active="isActive(item.url)"
@@ -115,9 +101,9 @@ function isParentActive(item: NavItem): boolean {
               <component :is="item.icon" class="size-4 text-muted-foreground/70" />
               <span>{{ item.title }}</span>
             </NuxtLink>
-          </SidebarMenuButton>
-        </SidebarMenuItem>
+          </ShadSidebarMenuButton>
+        </ShadSidebarMenuItem>
       </template>
-    </SidebarMenu>
-  </SidebarGroup>
+    </ShadSidebarMenu>
+  </ShadSidebarGroup>
 </template>

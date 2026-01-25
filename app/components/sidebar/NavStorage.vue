@@ -1,12 +1,4 @@
 <script setup lang="ts">
-import { Progress } from '@/components/shadcn-ui/progress'
-import {
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarMenu,
-  SidebarMenuItem,
-} from '@/components/shadcn-ui/sidebar'
-
 // TODO: Replace with real data from API
 const storage = reactive({
   used: 2.4, // GB
@@ -24,10 +16,10 @@ function formatSize(gb: number): string {
 </script>
 
 <template>
-  <SidebarGroup class="group-data-[collapsible=icon]:hidden">
-    <SidebarGroupContent>
-      <SidebarMenu>
-        <SidebarMenuItem>
+  <ShadSidebarGroup class="group-data-[collapsible=icon]:hidden">
+    <ShadSidebarGroupContent>
+      <ShadSidebarMenu>
+        <ShadSidebarMenuItem>
           <div class="flex flex-col gap-2 px-2 py-1.5">
             <div class="flex items-center justify-between text-xs">
               <div class="flex items-center gap-2 text-muted-foreground">
@@ -38,7 +30,7 @@ function formatSize(gb: number): string {
                 {{ formatSize(storage.used) }} / {{ formatSize(storage.total) }}
               </span>
             </div>
-            <Progress class="h-1.5" :model-value="percentage" />
+            <ShadProgress class="h-1.5" :model-value="percentage" />
             <NuxtLink
               class="
                 text-xs text-muted-foreground transition-colors
@@ -49,8 +41,8 @@ function formatSize(gb: number): string {
               Upgrade storage
             </NuxtLink>
           </div>
-        </SidebarMenuItem>
-      </SidebarMenu>
-    </SidebarGroupContent>
-  </SidebarGroup>
+        </ShadSidebarMenuItem>
+      </ShadSidebarMenu>
+    </ShadSidebarGroupContent>
+  </ShadSidebarGroup>
 </template>

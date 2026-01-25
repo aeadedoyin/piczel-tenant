@@ -1,13 +1,4 @@
 <script setup lang="ts">
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/components/shadcn-ui/breadcrumb'
-
 interface BreadcrumbSegment {
   title: string
   href?: string
@@ -44,24 +35,24 @@ const breadcrumbs = computed<BreadcrumbSegment[]>(() => {
 </script>
 
 <template>
-  <Breadcrumb>
-    <BreadcrumbList>
+  <ShadBreadcrumb>
+    <ShadBreadcrumbList>
       <template v-for="(crumb, index) in breadcrumbs" :key="crumb.title">
-        <BreadcrumbItem :class="{ 'hidden md:block': index < breadcrumbs.length - 1 }">
-          <BreadcrumbLink v-if="crumb.href" as-child>
+        <ShadBreadcrumbItem :class="{ 'hidden md:block': index < breadcrumbs.length - 1 }">
+          <ShadBreadcrumbLink v-if="crumb.href" as-child>
             <NuxtLink :to="crumb.href">
               {{ crumb.title }}
             </NuxtLink>
-          </BreadcrumbLink>
-          <BreadcrumbPage v-else>
+          </ShadBreadcrumbLink>
+          <ShadBreadcrumbPage v-else>
             {{ crumb.title }}
-          </BreadcrumbPage>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator
+          </ShadBreadcrumbPage>
+        </ShadBreadcrumbItem>
+        <ShadBreadcrumbSeparator
           v-if="index < breadcrumbs.length - 1"
           :class="{ 'hidden md:block': index < breadcrumbs.length - 2 }"
         />
       </template>
-    </BreadcrumbList>
-  </Breadcrumb>
+    </ShadBreadcrumbList>
+  </ShadBreadcrumb>
 </template>
