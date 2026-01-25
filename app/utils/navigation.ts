@@ -100,7 +100,7 @@ export function getAppNavigation(): Record<string, NavItem[]> {
       },
       {
         title: 'Starred',
-        url: '/gallery/starred',
+        url: '/gallery/starred/collections',
         icon: icons.LucideStar,
         items: [
           { title: 'Collections', url: '/gallery/starred/collections' },
