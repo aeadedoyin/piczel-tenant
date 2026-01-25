@@ -6,27 +6,32 @@ const betterTailwindRules = {
   ...betterTailwind.configs['recommended-error']?.rules,
 }
 
-export default antfu({
+const baseOptions = {
   vue: true,
   typescript: true,
   stylistic: true,
   ignores: [],
 
   plugins: {
-    'better-tailwindcss': betterTailwind
+    'better-tailwindcss': betterTailwind,
   },
 
   settings: {
     'better-tailwindcss': {
       entryPoint: 'app/assets/css/tailwind.css',
-    }
+    },
   },
 
   rules: {
     // eslint - rules
     'quotes': ['error', 'single', { avoidEscape: true }],
     'prefer-template': 'off',
-    'style/comma-dangle': 'off',
+    'no-restricted-imports': ['error', {
+      patterns: [{
+        group: ['@/components/shadcn-ui/*', '~/components/shadcn-ui/*'],
+        message: 'Use auto-imported Shad* components instead (e.g., ShadButton, ShadInput).',
+      }],
+    }],
 
     // vue - rules
     'vue/attribute-hyphenation': 'off',
@@ -35,21 +40,31 @@ export default antfu({
     'vue/attributes-order': [
       'error',
       {
-        alphabetical: true
-      }
-    ],
-
-    ...betterTailwindRules,
-
-    'better-tailwindcss/no-unknown-classes': [
-      'error',
-      {
-        detectComponentClasses: true,
-        ignore: []
-      }
+        alphabetical: true,
+      },
     ],
 
     // node - rules
     'node/prefer-global/process': 'off',
-  }
-})
+
+    // betterTailwind - rules
+    ...betterTailwindRules,
+    'better-tailwindcss/no-unknown-classes': [
+      'error',
+      {
+        detectComponentClasses: true,
+        ignore: [],
+      },
+    ],
+  },
+}
+
+const shadcnOptions = {
+  files: ['app/components/shadcn-ui/**/*', 'app/composables/useSidebar.ts'],
+  rules: {
+    'no-restricted-imports': 'off',
+    'better-tailwindcss/no-unknown-classes': 'off',
+  },
+}
+
+export default antfu(baseOptions, shadcnOptions)
