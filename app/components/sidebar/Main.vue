@@ -36,6 +36,6 @@ const navItems = computed(() => appNavigation[activeAppId.value] || [])
       <SidebarNavUser :user="user" />
     </ShadSidebarFooter>
 
-    <ShadSidebarRail />
+    <ShadSidebarRail class="hover:after:bg-transparent" />
   </ShadSidebar>
 </template>
