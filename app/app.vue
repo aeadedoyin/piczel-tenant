@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <ShadSidebarProvider>
+  <ShadSidebarProvider class="bg-sidebar">
     <NuxtRouteAnnouncer />
     <NuxtLayout>
       <NuxtPage />

@@ -21,7 +21,7 @@ const navItems = computed(() => appNavigation[activeAppId.value] || [])
 </script>
 
 <template>
-  <ShadSidebar collapsible="icon">
+  <ShadSidebar variant="inset">
     <ShadSidebarHeader>
       <SidebarSwitcher />
     </ShadSidebarHeader>
