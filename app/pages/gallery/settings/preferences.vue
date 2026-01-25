@@ -1,6 +1,6 @@
 <script setup lang="ts">
-definePageMeta({
-  title: 'Preferences - Gallery Settings',
+useHead({
+  title: 'Preferences | Piczel',
 })
 
 const language = ref('english')

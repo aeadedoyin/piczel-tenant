@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { Collection, Photo } from '@/types/gallery'
 
-definePageMeta({
-  title: 'Gallery',
+useHead({
+  title: 'Gallery | Piczel',
 })
 
 const gallery = useGallery()
@@ -55,7 +55,7 @@ function handleCollectionEdit(collection: Collection) {
       <!-- Quick Actions -->
       <div class="flex gap-2">
         <ShadButton variant="outline" @click="handleNewCollection">
-          <LucideFolderPlus class="mr-2 size-4" />
+          <LucidePlus class="mr-2 size-4" />
           New Collection
         </ShadButton>
         <ShadButton @click="handleUpload">
@@ -75,7 +75,7 @@ function handleCollectionEdit(collection: Collection) {
       <GalleryStatsCard
         :change="12"
         :icon="IconImage"
-        label="Total Photos"
+        label="Media"
         :value="gallery.stats.totalPhotos"
       />
       <GalleryStatsCard
@@ -126,13 +126,11 @@ function handleCollectionEdit(collection: Collection) {
         v-else-if="gallery.isLoadingCollections"
         class="
           grid grid-cols-2 gap-4
-          md:grid-cols-3
           lg:grid-cols-4
-          2xl:grid-cols-6
         "
       >
         <div
-          v-for="i in 6"
+          v-for="i in 4"
           :key="i"
           class="aspect-video animate-pulse rounded-lg bg-muted"
         />
@@ -142,9 +140,7 @@ function handleCollectionEdit(collection: Collection) {
         v-else
         class="
           grid grid-cols-2 gap-4
-          md:grid-cols-3
           lg:grid-cols-4
-          2xl:grid-cols-6
         "
       >
         <GalleryCollectionCard

@@ -7,8 +7,8 @@ import type {
   CreateCollectionData,
 } from '@/types/gallery'
 
-definePageMeta({
-  title: 'Collections',
+useHead({
+  title: 'Collections | Piczel',
 })
 
 const route = useRoute()
@@ -270,7 +270,7 @@ function handleView(collection: Collection) {
       "
     >
       <div
-        v-for="i in 6"
+        v-for="i in 4"
         :key="i"
         class="overflow-hidden rounded-xl border bg-card"
       >

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-definePageMeta({
-  title: 'Gallery Settings',
+useHead({
+  title: 'Gallery Settings | Piczel',
 })
 
 const route = useRoute()

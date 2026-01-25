@@ -1,6 +1,6 @@
 <script setup lang="ts">
-definePageMeta({
-  title: 'Starred',
+useHead({
+  title: 'Starred | Piczel',
 })
 
 const route = useRoute()

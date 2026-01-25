@@ -1,6 +1,6 @@
 <script setup lang="ts">
-definePageMeta({
-  title: 'Watermark Presets - Gallery Settings',
+useHead({
+  title: 'Watermarks | Piczel',
 })
 
 const applyToWebSize = ref(false)

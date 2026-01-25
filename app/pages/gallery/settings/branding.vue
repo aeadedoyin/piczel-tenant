@@ -1,6 +1,6 @@
 <script setup lang="ts">
-definePageMeta({
-  title: 'Branding - Gallery Settings',
+useHead({
+  title: 'Branding | Piczel',
 })
 
 const auth = useAuth()

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-definePageMeta({
-  title: 'Projects',
+useHead({
+  title: 'Projects | Piczel',
 })
 </script>
 

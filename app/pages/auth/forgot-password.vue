@@ -3,8 +3,11 @@ import { toast } from 'vue-sonner'
 
 definePageMeta({
   layout: 'auth',
-  title: 'Forgot Password',
   middleware: ['guest'],
+})
+
+useHead({
+  title: 'Forgot Password | Piczel',
 })
 
 const auth = useAuth()

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-definePageMeta({
-  title: 'Email Templates - Gallery Settings',
+useHead({
+  title: 'Email Templates | Piczel',
 })
 
 const collectionTemplates = ref([

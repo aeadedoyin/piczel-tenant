@@ -1,6 +1,6 @@
 <script setup lang="ts">
-definePageMeta({
-  title: 'Integrations - Gallery Settings',
+useHead({
+  title: 'Integrations | Piczel',
 })
 
 const integrations = [
