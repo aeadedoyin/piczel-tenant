@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from "vue"
+import type { HTMLAttributes } from 'vue'
 import { cn } from '@@/shadcn/lib/utils'
 
 interface SkeletonProps {
-  class?: HTMLAttributes["class"]
+  class?: HTMLAttributes['class']
 }
 
 const props = defineProps<SkeletonProps>()
@@ -11,7 +11,7 @@ const props = defineProps<SkeletonProps>()
 
 <template>
   <div
-    data-slot="skeleton"
     :class="cn('animate-pulse rounded-md bg-primary/10', props.class)"
+    data-slot="skeleton"
   />
 </template>

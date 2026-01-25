@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from "vue"
+import type { HTMLAttributes } from 'vue'
 import { cn } from '@@/shadcn/lib/utils'
 
 const props = defineProps<{
-  class?: HTMLAttributes["class"]
+  class?: HTMLAttributes['class']
 }>()
 </script>
 
 <template>
   <ul
-    data-slot="sidebar-menu"
-    data-sidebar="menu"
     :class="cn('flex w-full min-w-0 flex-col gap-1', props.class)"
+    data-sidebar="menu"
+    data-slot="sidebar-menu"
   >
     <slot />
   </ul>

@@ -1,17 +1,17 @@
 <script lang="ts" setup>
-import type { RangeCalendarHeadingProps } from "reka-ui"
-import type { HTMLAttributes } from "vue"
-import { reactiveOmit } from "@vueuse/core"
-import { RangeCalendarHeading, useForwardProps } from "reka-ui"
+import type { RangeCalendarHeadingProps } from 'reka-ui'
+import type { HTMLAttributes } from 'vue'
 import { cn } from '@@/shadcn/lib/utils'
+import { reactiveOmit } from '@vueuse/core'
+import { RangeCalendarHeading, useForwardProps } from 'reka-ui'
 
-const props = defineProps<RangeCalendarHeadingProps & { class?: HTMLAttributes["class"] }>()
+const props = defineProps<RangeCalendarHeadingProps & { class?: HTMLAttributes['class'] }>()
 
 defineSlots<{
   default: (props: { headingValue: string }) => any
 }>()
 
-const delegatedProps = reactiveOmit(props, "class")
+const delegatedProps = reactiveOmit(props, 'class')
 
 const forwardedProps = useForwardProps(delegatedProps)
 </script>
@@ -19,8 +19,8 @@ const forwardedProps = useForwardProps(delegatedProps)
 <template>
   <RangeCalendarHeading
     v-slot="{ headingValue }"
-    data-slot="range-calendar-heading"
     :class="cn('text-sm font-medium', props.class)"
+    data-slot="range-calendar-heading"
     v-bind="forwardedProps"
   >
     <slot :heading-value>

@@ -1,29 +1,29 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from "vue"
-import { computed, onMounted, ref } from "vue"
+import type { HTMLAttributes } from 'vue'
 import { cn } from '@@/shadcn/lib/utils'
-import { useChart } from "."
+import { computed, onMounted, ref } from 'vue'
+import { useChart } from '.'
 
 const props = withDefaults(defineProps<{
   hideIcon?: boolean
   nameKey?: string
-  verticalAlign?: "bottom" | "top"
+  verticalAlign?: 'bottom' | 'top'
   // payload?: any[]
-  class?: HTMLAttributes["class"]
+  class?: HTMLAttributes['class']
 }>(), {
-  verticalAlign: "bottom",
+  verticalAlign: 'bottom',
 })
 
 const { id, config } = useChart()
 
-const payload = computed(() => Object.entries(config.value).map(([key, value]) => {
+const payload = computed(() => Object.entries(config.value).map(([key, _value]) => {
   return {
     key: props.nameKey || key,
     itemConfig: config.value[key],
   }
 }))
 
-const containerSelector = ref("")
+const containerSelector = ref('')
 onMounted(() => {
   containerSelector.value = `[data-chart="chart-${id}"]>[data-vis-xy-container]`
 })
@@ -42,13 +42,16 @@ onMounted(() => {
       v-for="{ key, itemConfig } in payload"
       :key="key"
       :class="cn(
-        '[&>svg]:text-muted-foreground flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3',
+        `
+          flex items-center gap-1.5
+          [&>svg]:size-3 [&>svg]:text-muted-foreground
+        `,
       )"
     >
       <component :is="itemConfig.icon" v-if="itemConfig?.icon" />
       <div
         v-else
-        class="h-2 w-2 shrink-0 rounded-[2px]"
+        class="size-2 shrink-0 rounded-[2px]"
         :style="{
           backgroundColor: itemConfig.color,
         }"

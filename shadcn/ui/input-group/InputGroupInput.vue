@@ -1,19 +1,23 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from "vue"
+import type { HTMLAttributes } from 'vue'
 import { cn } from '@@/shadcn/lib/utils'
 import { Input } from '@@/shadcn/ui/input'
 
 const props = defineProps<{
-  class?: HTMLAttributes["class"]
+  class?: HTMLAttributes['class']
 }>()
 </script>
 
 <template>
   <Input
-    data-slot="input-group-control"
     :class="cn(
-      'flex-1 rounded-none border-0 bg-transparent shadow-none focus-visible:ring-0 dark:bg-transparent',
+      `
+        flex-1 rounded-none border-0 bg-transparent shadow-none
+        focus-visible:ring-0
+        dark:bg-transparent
+      `,
       props.class,
     )"
+    data-slot="input-group-control"
   />
 </template>

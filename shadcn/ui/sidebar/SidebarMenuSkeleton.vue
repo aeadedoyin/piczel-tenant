@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from "vue"
-import { computed } from "vue"
+import type { HTMLAttributes } from 'vue'
 import { cn } from '@@/shadcn/lib/utils'
 import { Skeleton } from '@@/shadcn/ui/skeleton'
+import { computed } from 'vue'
 
 const props = defineProps<{
   showIcon?: boolean
-  class?: HTMLAttributes["class"]
+  class?: HTMLAttributes['class']
 }>()
 
 const width = computed(() => {
@@ -16,9 +16,9 @@ const width = computed(() => {
 
 <template>
   <div
-    data-slot="sidebar-menu-skeleton"
-    data-sidebar="menu-skeleton"
     :class="cn('flex h-8 items-center gap-2 rounded-md px-2', props.class)"
+    data-sidebar="menu-skeleton"
+    data-slot="sidebar-menu-skeleton"
   >
     <Skeleton
       v-if="showIcon"

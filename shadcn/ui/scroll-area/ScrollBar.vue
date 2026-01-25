@@ -1,20 +1,19 @@
 <script setup lang="ts">
-import type { ScrollAreaScrollbarProps } from "reka-ui"
-import type { HTMLAttributes } from "vue"
-import { reactiveOmit } from "@vueuse/core"
-import { ScrollAreaScrollbar, ScrollAreaThumb } from "reka-ui"
+import type { ScrollAreaScrollbarProps } from 'reka-ui'
+import type { HTMLAttributes } from 'vue'
 import { cn } from '@@/shadcn/lib/utils'
+import { reactiveOmit } from '@vueuse/core'
+import { ScrollAreaScrollbar, ScrollAreaThumb } from 'reka-ui'
 
-const props = withDefaults(defineProps<ScrollAreaScrollbarProps & { class?: HTMLAttributes["class"] }>(), {
-  orientation: "vertical",
+const props = withDefaults(defineProps<ScrollAreaScrollbarProps & { class?: HTMLAttributes['class'] }>(), {
+  orientation: 'vertical',
 })
 
-const delegatedProps = reactiveOmit(props, "class")
+const delegatedProps = reactiveOmit(props, 'class')
 </script>
 
 <template>
   <ScrollAreaScrollbar
-    data-slot="scroll-area-scrollbar"
     v-bind="delegatedProps"
     :class="
       cn('flex touch-none p-px transition-colors select-none',
@@ -23,10 +22,11 @@ const delegatedProps = reactiveOmit(props, "class")
          orientation === 'horizontal'
            && 'h-2.5 flex-col border-t border-t-transparent',
          props.class)"
+    data-slot="scroll-area-scrollbar"
   >
     <ScrollAreaThumb
+      class="relative flex-1 rounded-full bg-border"
       data-slot="scroll-area-thumb"
-      class="bg-border relative flex-1 rounded-full"
     />
   </ScrollAreaScrollbar>
 </template>

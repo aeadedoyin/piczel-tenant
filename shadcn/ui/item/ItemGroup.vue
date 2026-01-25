@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from "vue"
+import type { HTMLAttributes } from 'vue'
 import { cn } from '@@/shadcn/lib/utils'
 
 const props = defineProps<{
-  class?: HTMLAttributes["class"]
+  class?: HTMLAttributes['class']
 }>()
 </script>
 
 <template>
   <div
-    role="list"
-    data-slot="item-group"
     :class="cn('group/item-group flex flex-col', props.class)"
+    data-slot="item-group"
+    role="list"
   >
     <slot />
   </div>

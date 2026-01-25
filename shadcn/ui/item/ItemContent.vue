@@ -1,16 +1,19 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from "vue"
+import type { HTMLAttributes } from 'vue'
 import { cn } from '@@/shadcn/lib/utils'
 
 const props = defineProps<{
-  class?: HTMLAttributes["class"]
+  class?: HTMLAttributes['class']
 }>()
 </script>
 
 <template>
   <div
+    :class="cn(`
+      flex flex-1 flex-col gap-1
+      [&+[data-slot=item-content]]:flex-none
+    `, props.class)"
     data-slot="item-content"
-    :class="cn('flex flex-1 flex-col gap-1 [&+[data-slot=item-content]]:flex-none', props.class)"
   >
     <slot />
   </div>

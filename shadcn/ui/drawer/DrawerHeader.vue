@@ -1,16 +1,16 @@
 <script lang="ts" setup>
-import type { HTMLAttributes } from "vue"
+import type { HTMLAttributes } from 'vue'
 import { cn } from '@@/shadcn/lib/utils'
 
 const props = defineProps<{
-  class?: HTMLAttributes["class"]
+  class?: HTMLAttributes['class']
 }>()
 </script>
 
 <template>
   <div
-    data-slot="drawer-header"
     :class="cn('flex flex-col gap-1.5 p-4', props.class)"
+    data-slot="drawer-header"
   >
     <slot />
   </div>

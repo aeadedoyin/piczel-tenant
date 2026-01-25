@@ -1,20 +1,23 @@
 <script lang="ts" setup>
-import type { PrimitiveProps } from "reka-ui"
-import type { HTMLAttributes } from "vue"
-import { Primitive } from "reka-ui"
+import type { PrimitiveProps } from 'reka-ui'
+import type { HTMLAttributes } from 'vue'
 import { cn } from '@@/shadcn/lib/utils'
+import { Primitive } from 'reka-ui'
 
-const props = withDefaults(defineProps<PrimitiveProps & { class?: HTMLAttributes["class"] }>(), {
-  as: "a",
+const props = withDefaults(defineProps<PrimitiveProps & { class?: HTMLAttributes['class'] }>(), {
+  as: 'a',
 })
 </script>
 
 <template>
   <Primitive
-    data-slot="breadcrumb-link"
     :as="as"
     :as-child="asChild"
-    :class="cn('hover:text-foreground transition-colors', props.class)"
+    :class="cn(`
+      transition-colors
+      hover:text-foreground
+    `, props.class)"
+    data-slot="breadcrumb-link"
   >
     <slot />
   </Primitive>

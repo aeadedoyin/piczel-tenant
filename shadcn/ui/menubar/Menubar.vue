@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import type { MenubarRootEmits, MenubarRootProps } from "reka-ui"
-import type { HTMLAttributes } from "vue"
-import { reactiveOmit } from "@vueuse/core"
+import type { MenubarRootEmits, MenubarRootProps } from 'reka-ui'
+import type { HTMLAttributes } from 'vue'
+import { cn } from '@@/shadcn/lib/utils'
+import { reactiveOmit } from '@vueuse/core'
 import {
   MenubarRoot,
   useForwardPropsEmits,
-} from "reka-ui"
-import { cn } from '@@/shadcn/lib/utils'
+} from 'reka-ui'
 
-const props = defineProps<MenubarRootProps & { class?: HTMLAttributes["class"] }>()
+const props = defineProps<MenubarRootProps & { class?: HTMLAttributes['class'] }>()
 const emits = defineEmits<MenubarRootEmits>()
 
-const delegatedProps = reactiveOmit(props, "class")
+const delegatedProps = reactiveOmit(props, 'class')
 
 const forwarded = useForwardPropsEmits(delegatedProps, emits)
 </script>
@@ -19,14 +19,17 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
 <template>
   <MenubarRoot
     v-slot="slotProps"
-    data-slot="menubar"
     v-bind="forwarded"
     :class="
       cn(
-        'bg-background flex h-9 items-center gap-1 rounded-md border p-1 shadow-xs',
+        `
+          flex h-9 items-center gap-1 rounded-md border bg-background p-1
+          shadow-xs
+        `,
         props.class,
       )
     "
+    data-slot="menubar"
   >
     <slot v-bind="slotProps" />
   </MenubarRoot>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { WithClassAsProps } from "./interface"
+import type { WithClassAsProps } from './interface'
 import { cn } from '@@/shadcn/lib/utils'
-import { useCarousel } from "./useCarousel"
+import { useCarousel } from './useCarousel'
 
 defineOptions({
   inheritAttrs: false,
@@ -15,8 +15,8 @@ const { carouselRef, orientation } = useCarousel()
 <template>
   <div
     ref="carouselRef"
-    data-slot="carousel-content"
     class="overflow-hidden"
+    data-slot="carousel-content"
   >
     <div
       :class="
