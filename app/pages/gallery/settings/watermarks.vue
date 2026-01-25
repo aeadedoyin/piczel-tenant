@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { Switch } from '@/components/shadcn-ui/switch'
-
 definePageMeta({
   title: 'Watermark Presets - Gallery Settings',
 })
@@ -42,7 +40,7 @@ const applyToWebSize = ref(false)
         Apply watermark to web size downloads
       </h3>
       <div class="mt-4 flex items-center gap-3">
-        <Switch
+        <ShadSwitch
           v-model:checked="applyToWebSize"
           class="data-[state=checked]:bg-emerald-500"
         />

@@ -1,15 +1,4 @@
 <script setup lang="ts">
-import { Button } from '@/components/shadcn-ui/button'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/shadcn-ui/select'
-import { Switch } from '@/components/shadcn-ui/switch'
-import { Textarea } from '@/components/shadcn-ui/textarea'
-
 definePageMeta({
   title: 'Preferences - Gallery Settings',
 })
@@ -29,28 +18,28 @@ const cookieBanner = ref(false)
       <h3 class="text-sm font-medium">
         Default Collection Language
       </h3>
-      <Select v-model="language">
-        <SelectTrigger class="mt-3">
-          <SelectValue placeholder="Select language" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="english">
+      <ShadSelect v-model="language">
+        <ShadSelectTrigger class="mt-3">
+          <ShadSelectValue placeholder="Select language" />
+        </ShadSelectTrigger>
+        <ShadSelectContent>
+          <ShadSelectItem value="english">
             English
-          </SelectItem>
-          <SelectItem value="french">
+          </ShadSelectItem>
+          <ShadSelectItem value="french">
             French
-          </SelectItem>
-          <SelectItem value="spanish">
+          </ShadSelectItem>
+          <ShadSelectItem value="spanish">
             Spanish
-          </SelectItem>
-          <SelectItem value="german">
+          </ShadSelectItem>
+          <ShadSelectItem value="german">
             German
-          </SelectItem>
-          <SelectItem value="portuguese">
+          </ShadSelectItem>
+          <ShadSelectItem value="portuguese">
             Portuguese
-          </SelectItem>
-        </SelectContent>
-      </Select>
+          </ShadSelectItem>
+        </ShadSelectContent>
+      </ShadSelect>
       <p class="mt-3 text-sm/relaxed text-muted-foreground">
         Select the default language for newly created collections. You can still change it later in
         each collection's settings.
@@ -62,19 +51,19 @@ const cookieBanner = ref(false)
       <h3 class="text-sm font-medium">
         Filename Display
       </h3>
-      <Select v-model="filenameDisplay">
-        <SelectTrigger class="mt-3">
-          <SelectValue placeholder="Select option" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="show">
+      <ShadSelect v-model="filenameDisplay">
+        <ShadSelectTrigger class="mt-3">
+          <ShadSelectValue placeholder="Select option" />
+        </ShadSelectTrigger>
+        <ShadSelectContent>
+          <ShadSelectItem value="show">
             Show
-          </SelectItem>
-          <SelectItem value="hide">
+          </ShadSelectItem>
+          <ShadSelectItem value="hide">
             Hide
-          </SelectItem>
-        </SelectContent>
-      </Select>
+          </ShadSelectItem>
+        </ShadSelectContent>
+      </ShadSelect>
       <p class="mt-3 text-sm/relaxed text-muted-foreground">
         You can choose to show / hide your filenames on photos in your collections.
       </p>
@@ -85,22 +74,22 @@ const cookieBanner = ref(false)
       <h3 class="text-sm font-medium">
         Search Engine Visibility
       </h3>
-      <Select v-model="searchVisibility">
-        <SelectTrigger class="mt-3">
-          <SelectValue placeholder="Select option" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="homepage">
+      <ShadSelect v-model="searchVisibility">
+        <ShadSelectTrigger class="mt-3">
+          <ShadSelectValue placeholder="Select option" />
+        </ShadSelectTrigger>
+        <ShadSelectContent>
+          <ShadSelectItem value="homepage">
             Homepage Only
-          </SelectItem>
-          <SelectItem value="all">
+          </ShadSelectItem>
+          <ShadSelectItem value="all">
             All Pages
-          </SelectItem>
-          <SelectItem value="none">
+          </ShadSelectItem>
+          <ShadSelectItem value="none">
             None
-          </SelectItem>
-        </SelectContent>
-      </Select>
+          </ShadSelectItem>
+        </ShadSelectContent>
+      </ShadSelect>
       <p class="mt-3 text-sm/relaxed text-muted-foreground">
         Choose whether you want your collections to be searchable on search engines (e.g. Google).
         <a
@@ -117,25 +106,25 @@ const cookieBanner = ref(false)
       <h3 class="text-sm font-medium">
         Sharpening Level
       </h3>
-      <Select v-model="sharpening">
-        <SelectTrigger class="mt-3">
-          <SelectValue placeholder="Select level" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="none">
+      <ShadSelect v-model="sharpening">
+        <ShadSelectTrigger class="mt-3">
+          <ShadSelectValue placeholder="Select level" />
+        </ShadSelectTrigger>
+        <ShadSelectContent>
+          <ShadSelectItem value="none">
             None
-          </SelectItem>
-          <SelectItem value="low">
+          </ShadSelectItem>
+          <ShadSelectItem value="low">
             Low
-          </SelectItem>
-          <SelectItem value="optimal">
+          </ShadSelectItem>
+          <ShadSelectItem value="optimal">
             Optimal
-          </SelectItem>
-          <SelectItem value="high">
+          </ShadSelectItem>
+          <ShadSelectItem value="high">
             High
-          </SelectItem>
-        </SelectContent>
-      </Select>
+          </ShadSelectItem>
+        </ShadSelectContent>
+      </ShadSelect>
       <p class="mt-3 text-sm/relaxed text-muted-foreground">
         This setting only applies to web display copies of your photos. Your originals are not altered.
         <a
@@ -153,7 +142,7 @@ const cookieBanner = ref(false)
         <h3 class="text-sm font-medium">
           RAW Photo Support
         </h3>
-        <Button
+        <ShadButton
           class="
             h-8 gap-1.5 border-emerald-500/30 text-emerald-500
             hover:bg-emerald-500/10
@@ -161,10 +150,10 @@ const cookieBanner = ref(false)
         >
           <LucideSparkles class="size-3.5" />
           Upgrade
-        </Button>
+        </ShadButton>
       </div>
       <div class="mt-3 flex items-center gap-3">
-        <Switch
+        <ShadSwitch
           v-model:checked="rawSupport"
           class="data-[state=checked]:bg-emerald-500"
         />
@@ -228,7 +217,7 @@ const cookieBanner = ref(false)
             <LucideUnlink class="size-4" />
           </button>
         </div>
-        <Textarea
+        <ShadTextarea
           class="
             min-h-32 resize-none rounded-none border-0
             focus-visible:ring-0
@@ -294,7 +283,7 @@ const cookieBanner = ref(false)
             <LucideUnlink class="size-4" />
           </button>
         </div>
-        <Textarea
+        <ShadTextarea
           class="
             min-h-32 resize-none rounded-none border-0
             focus-visible:ring-0
@@ -313,7 +302,7 @@ const cookieBanner = ref(false)
         Enable Cookie Banner
       </h3>
       <div class="mt-3 flex items-center gap-3">
-        <Switch
+        <ShadSwitch
           v-model:checked="cookieBanner"
           class="data-[state=checked]:bg-emerald-500"
         />

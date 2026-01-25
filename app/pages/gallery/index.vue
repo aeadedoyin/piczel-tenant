@@ -52,14 +52,14 @@ function handlePhotoView(_photo: Photo) {
 
       <!-- Quick Actions -->
       <div class="flex gap-2">
-        <Button variant="outline" @click="handleNewCollection">
+        <ShadButton variant="outline" @click="handleNewCollection">
           <LucideFolderPlus class="mr-2 size-4" />
           New Collection
-        </Button>
-        <Button @click="handleUpload">
+        </ShadButton>
+        <ShadButton @click="handleUpload">
           <LucideUpload class="mr-2 size-4" />
           Upload
-        </Button>
+        </ShadButton>
       </div>
     </div>
 

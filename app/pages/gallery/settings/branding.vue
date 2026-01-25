@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import { Button } from '@/components/shadcn-ui/button'
-import { Input } from '@/components/shadcn-ui/input'
-import { Switch } from '@/components/shadcn-ui/switch'
-
 definePageMeta({
   title: 'Branding - Gallery Settings',
 })
@@ -43,7 +39,7 @@ const piczelBranding = ref(true)
         <h3 class="text-sm font-medium">
           Custom Domain
         </h3>
-        <Button
+        <ShadButton
           class="
             h-8 gap-1.5 border-emerald-500/30 text-emerald-500
             hover:bg-emerald-500/10
@@ -51,9 +47,9 @@ const piczelBranding = ref(true)
         >
           <LucideSparkles class="size-3.5" />
           Upgrade
-        </Button>
+        </ShadButton>
       </div>
-      <Input
+      <ShadInput
         class="bg-muted/80"
         disabled
         placeholder="www.yourdomain.com"
@@ -84,7 +80,7 @@ const piczelBranding = ref(true)
             Upgrade to a paid plan to add your full logo, custom favicon and more.
           </p>
         </div>
-        <Button
+        <ShadButton
           class="
             h-8 shrink-0 gap-1.5 border-emerald-500/30 text-emerald-500
             hover:bg-emerald-500/10
@@ -92,7 +88,7 @@ const piczelBranding = ref(true)
         >
           <LucideSparkles class="size-3.5" />
           Upgrade
-        </Button>
+        </ShadButton>
       </div>
 
       <!-- Logos -->
@@ -157,7 +153,7 @@ const piczelBranding = ref(true)
           Piczel Branding
         </h4>
         <div class="mt-4 flex items-center gap-3">
-          <Switch
+          <ShadSwitch
             v-model:checked="piczelBranding"
             class="data-[state=checked]:bg-emerald-500"
           />

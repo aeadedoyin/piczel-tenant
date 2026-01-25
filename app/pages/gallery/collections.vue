@@ -6,13 +6,6 @@ import type {
   CollectionStatus,
   CreateCollectionData,
 } from '@/types/gallery'
-import { Button } from '@/components/shadcn-ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/shadcn-ui/dropdown-menu'
 
 definePageMeta({
   title: 'Collections',
@@ -201,20 +194,20 @@ function handleView(collection: Collection) {
           Organize your photos into collections.
         </p>
       </div>
-      <Button class="gap-2" @click="openNewModal">
+      <ShadButton class="gap-2" @click="openNewModal">
         <LucidePlus class="size-4" />
         New Collection
-      </Button>
+      </ShadButton>
     </div>
 
     <!-- Filters -->
     <div class="flex flex-wrap items-center gap-2">
-      <DropdownMenu
+      <ShadDropdownMenu
         v-for="filter in filters"
         :key="filter.id"
         :close-on-select="false"
       >
-        <DropdownMenuTrigger as-child>
+        <ShadDropdownMenuTrigger as-child>
           <button
             class="
               inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5
@@ -236,9 +229,9 @@ function handleView(collection: Collection) {
             </span>
             <LucideChevronDown class="size-3 text-muted-foreground" />
           </button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="start" class="min-w-32">
-          <DropdownMenuItem
+        </ShadDropdownMenuTrigger>
+        <ShadDropdownMenuContent align="start" class="min-w-32">
+          <ShadDropdownMenuItem
             v-for="option in filter.options"
             :key="option"
             class="
@@ -253,12 +246,12 @@ function handleView(collection: Collection) {
               v-if="isSelected(filter.id, option)"
               class="size-3.5 text-emerald-500"
             />
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+          </ShadDropdownMenuItem>
+        </ShadDropdownMenuContent>
+      </ShadDropdownMenu>
 
       <!-- Clear filters button -->
-      <Button
+      <ShadButton
         v-if="hasFilters"
         class="h-8 px-2 text-muted-foreground"
         size="sm"
@@ -267,7 +260,7 @@ function handleView(collection: Collection) {
       >
         <LucideX class="mr-1 size-3" />
         Clear
-      </Button>
+      </ShadButton>
     </div>
 
     <!-- Empty State -->

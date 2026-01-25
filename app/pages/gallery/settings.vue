@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { Tabs, TabsList, TabsTrigger } from '@/components/shadcn-ui/tabs'
-
 definePageMeta({
   title: 'Gallery Settings',
 })
@@ -33,9 +31,9 @@ const activeTab = computed(() => {
       </p>
     </div>
 
-    <Tabs class="w-full" :model-value="activeTab">
-      <TabsList class="w-full justify-start">
-        <TabsTrigger
+    <ShadTabs class="w-full" :model-value="activeTab">
+      <ShadTabsList class="w-full justify-start">
+        <ShadTabsTrigger
           v-for="tab in tabs"
           :key="tab.value"
           as-child
@@ -44,9 +42,9 @@ const activeTab = computed(() => {
           <NuxtLink :to="tab.to">
             {{ tab.label }}
           </NuxtLink>
-        </TabsTrigger>
-      </TabsList>
-    </Tabs>
+        </ShadTabsTrigger>
+      </ShadTabsList>
+    </ShadTabs>
 
     <div class="max-w-2xl">
       <NuxtPage />

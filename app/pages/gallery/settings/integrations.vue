@@ -53,9 +53,9 @@ const integrations = [
       <!-- Logo Area -->
       <div class="flex w-40 shrink-0 items-center justify-center">
         <div class="flex items-center gap-4">
-          <Icon :name="integration.icon" class="size-12" mode="svg" />
+          <Icon class="size-12" mode="svg" :name="integration.icon" />
           <LucideArrowRight class="size-5 text-muted-foreground/50" />
-          <Icon name="piczel:piczel-logo-logomark" class="size-12" mode="svg" />
+          <Icon class="size-12" mode="svg" name="piczel:piczel-logo-logomark" />
         </div>
       </div>
 
