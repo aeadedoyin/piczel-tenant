@@ -7,27 +7,27 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <Empty class="py-16">
-    <EmptyMedia>
+  <ShadEmpty class="py-16">
+    <ShadEmptyMedia>
       <div class="relative">
         <LucideImage class="size-12 text-muted-foreground" />
         <LucideStar
           class="absolute -top-1 -right-1 size-5 text-muted-foreground"
         />
       </div>
-    </EmptyMedia>
-    <EmptyContent>
-      <EmptyHeader>
-        <EmptyTitle>No starred items</EmptyTitle>
-        <EmptyDescription>
+    </ShadEmptyMedia>
+    <ShadEmptyContent>
+      <ShadEmptyHeader>
+        <ShadEmptyTitle>No starred items</ShadEmptyTitle>
+        <ShadEmptyDescription>
           Star your favorite photos and collections to find them quickly here.
-        </EmptyDescription>
-      </EmptyHeader>
-      <EmptyActions>
-        <Button variant="outline" @click="emit('browse')">
+        </ShadEmptyDescription>
+      </ShadEmptyHeader>
+      <ShadEmptyActions>
+        <ShadButton variant="outline" @click="emit('browse')">
           Browse Gallery
-        </Button>
-      </EmptyActions>
-    </EmptyContent>
-  </Empty>
+        </ShadButton>
+      </ShadEmptyActions>
+    </ShadEmptyContent>
+  </ShadEmpty>
 </template>

@@ -47,15 +47,13 @@ const isHovered = ref(false)
         <div class="absolute top-2 left-2 flex gap-1">
           <!-- Select Checkbox -->
           <button
-            class="
-              flex size-6 items-center justify-center rounded-full bg-white/90
-              text-gray-700 transition-colors
-              hover:bg-white
-            "
-            :class="{ 'bg-primary text-white hover:bg-primary': selected }"
+            class="flex size-6 items-center justify-center rounded-full transition-colors"
+            :class="selected
+              ? 'bg-primary text-primary-foreground border-2 border-primary-foreground hover:bg-primary/90'
+              : 'bg-white/90 text-gray-700 hover:bg-white'"
             @click.stop="emit('select', photo.id)"
           >
-            <LucideCheck v-if="selected" class="size-3.5" />
+            <LucideCheck v-if="selected" class="size-3.5 text-white" />
             <div
               v-else
               class="size-3.5 rounded-full border-2 border-gray-400"

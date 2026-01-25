@@ -111,17 +111,19 @@ function handleClose() {
 </script>
 
 <template>
-  <Dialog :open="open" @update:open="emit('update:open', $event)">
-    <DialogContent class="sm:max-w-md">
-      <DialogHeader>
-        <DialogTitle>{{ modalTitle }}</DialogTitle>
-      </DialogHeader>
+  <ShadDialog :open="open" @update:open="emit('update:open', $event)">
+    <ShadDialogContent class="sm:max-w-md">
+      <ShadDialogHeader>
+        <ShadDialogTitle>{{ modalTitle }}</ShadDialogTitle>
+      </ShadDialogHeader>
 
       <form class="space-y-4" @submit.prevent="handleSubmit">
         <!-- Title -->
         <div class="space-y-2">
-          <Label for="title">Title</Label>
-          <Input
+          <ShadLabel for="title">
+            Title
+          </ShadLabel>
+          <ShadInput
             id="title"
             v-model="formData.title"
             :class="{ 'border-destructive': errors.title }"
@@ -134,8 +136,10 @@ function handleClose() {
 
         <!-- Description -->
         <div class="space-y-2">
-          <Label for="description">Description</Label>
-          <Textarea
+          <ShadLabel for="description">
+            Description
+          </ShadLabel>
+          <ShadTextarea
             id="description"
             v-model="formData.description"
             :class="{ 'border-destructive': errors.description }"
@@ -156,47 +160,49 @@ function handleClose() {
         >
           <!-- Status -->
           <div class="space-y-2">
-            <Label>Status</Label>
-            <Select v-model="formData.status">
-              <SelectTrigger>
-                <SelectValue placeholder="Select status" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem
+            <ShadLabel>Status</ShadLabel>
+            <ShadSelect v-model="formData.status">
+              <ShadSelectTrigger>
+                <ShadSelectValue placeholder="Select status" />
+              </ShadSelectTrigger>
+              <ShadSelectContent>
+                <ShadSelectItem
                   v-for="option in statusOptions"
                   :key="option.value"
                   :value="option.value"
                 >
                   {{ option.label }}
-                </SelectItem>
-              </SelectContent>
-            </Select>
+                </ShadSelectItem>
+              </ShadSelectContent>
+            </ShadSelect>
           </div>
 
           <!-- Category -->
           <div class="space-y-2">
-            <Label>Category</Label>
-            <Select v-model="formData.category">
-              <SelectTrigger>
-                <SelectValue placeholder="Select category" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem
+            <ShadLabel>Category</ShadLabel>
+            <ShadSelect v-model="formData.category">
+              <ShadSelectTrigger>
+                <ShadSelectValue placeholder="Select category" />
+              </ShadSelectTrigger>
+              <ShadSelectContent>
+                <ShadSelectItem
                   v-for="option in categoryOptions"
                   :key="option.value"
                   :value="option.value"
                 >
                   {{ option.label }}
-                </SelectItem>
-              </SelectContent>
-            </Select>
+                </ShadSelectItem>
+              </ShadSelectContent>
+            </ShadSelect>
           </div>
         </div>
 
         <!-- Password (only for hidden collections) -->
         <div v-if="formData.status === 'hidden'" class="space-y-2">
-          <Label for="password">Password Protection</Label>
-          <Input
+          <ShadLabel for="password">
+            Password Protection
+          </ShadLabel>
+          <ShadInput
             id="password"
             v-model="formData.password"
             placeholder="Enter password (optional)"
@@ -209,23 +215,23 @@ function handleClose() {
 
         <!-- Actions -->
         <div class="flex justify-end gap-2 pt-4">
-          <Button
+          <ShadButton
             :disabled="isSubmitting"
             type="button"
             variant="outline"
             @click="handleClose"
           >
             Cancel
-          </Button>
-          <Button :disabled="isSubmitting" type="submit">
+          </ShadButton>
+          <ShadButton :disabled="isSubmitting" type="submit">
             <LucideLoader2
               v-if="isSubmitting"
               class="mr-2 size-4 animate-spin"
             />
             {{ isEditing ? 'Save Changes' : 'Create Collection' }}
-          </Button>
+          </ShadButton>
         </div>
       </form>
-    </DialogContent>
-  </Dialog>
+    </ShadDialogContent>
+  </ShadDialog>
 </template>

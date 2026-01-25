@@ -34,7 +34,7 @@ const statusConfig: Record<
 </script>
 
 <template>
-  <Card
+  <ShadCard
     class="
       group cursor-pointer overflow-hidden transition-shadow
       hover:shadow-md
@@ -82,18 +82,18 @@ const statusConfig: Record<
 
       <!-- Status Badge -->
       <div class="absolute bottom-2 left-2">
-        <Badge :variant="statusConfig[collection.status].variant">
+        <ShadBadge :variant="statusConfig[collection.status].variant">
           <component
             :is="statusConfig[collection.status].icon"
             class="mr-1 size-3"
           />
           {{ statusConfig[collection.status].label }}
-        </Badge>
+        </ShadBadge>
       </div>
     </div>
 
     <!-- Content -->
-    <CardContent class="p-4">
+    <ShadCardContent class="p-4">
       <div class="flex items-start justify-between gap-2">
         <div class="min-w-0 flex-1">
           <h3 class="truncate font-medium">
@@ -105,31 +105,31 @@ const statusConfig: Record<
         </div>
 
         <!-- Actions Dropdown -->
-        <DropdownMenu>
-          <DropdownMenuTrigger as-child>
-            <Button
+        <ShadDropdownMenu>
+          <ShadDropdownMenuTrigger as-child>
+            <ShadButton
               class="size-8 shrink-0"
               size="icon"
               variant="ghost"
               @click.stop
             >
               <LucideEllipsisVertical class="size-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem @click.stop="emit('star', collection.id)">
+            </ShadButton>
+          </ShadDropdownMenuTrigger>
+          <ShadDropdownMenuContent align="end">
+            <ShadDropdownMenuItem @click.stop="emit('star', collection.id)">
               <LucideStar
                 class="mr-2 size-4"
                 :class="{ 'fill-yellow-400 text-yellow-400': collection.starred }"
               />
               {{ collection.starred ? 'Unstar' : 'Star' }}
-            </DropdownMenuItem>
-            <DropdownMenuItem @click.stop="emit('edit', collection)">
+            </ShadDropdownMenuItem>
+            <ShadDropdownMenuItem @click.stop="emit('edit', collection)">
               <LucidePencil class="mr-2 size-4" />
               Edit
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem
+            </ShadDropdownMenuItem>
+            <ShadDropdownMenuSeparator />
+            <ShadDropdownMenuItem
               class="
                 text-destructive
                 focus:text-destructive
@@ -138,9 +138,9 @@ const statusConfig: Record<
             >
               <LucideTrash2 class="mr-2 size-4" />
               Delete
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+            </ShadDropdownMenuItem>
+          </ShadDropdownMenuContent>
+        </ShadDropdownMenu>
       </div>
 
       <!-- Description -->
@@ -150,6 +150,6 @@ const statusConfig: Record<
       >
         {{ collection.description }}
       </p>
-    </CardContent>
-  </Card>
+    </ShadCardContent>
+  </ShadCard>
 </template>

@@ -12,36 +12,36 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <Empty class="py-16">
-    <EmptyMedia>
+  <ShadEmpty class="py-16">
+    <ShadEmptyMedia>
       <LucideFolderOpen class="size-12 text-muted-foreground" />
-    </EmptyMedia>
-    <EmptyContent>
-      <EmptyHeader>
-        <EmptyTitle>
+    </ShadEmptyMedia>
+    <ShadEmptyContent>
+      <ShadEmptyHeader>
+        <ShadEmptyTitle>
           {{ hasFilters ? 'No collections match your filters' : 'No collections yet' }}
-        </EmptyTitle>
-        <EmptyDescription>
+        </ShadEmptyTitle>
+        <ShadEmptyDescription>
           {{
             hasFilters
               ? 'Try adjusting your filters or clear them to see all collections.'
               : 'Create your first collection to organize your photos.'
           }}
-        </EmptyDescription>
-      </EmptyHeader>
-      <EmptyActions>
-        <Button
+        </ShadEmptyDescription>
+      </ShadEmptyHeader>
+      <ShadEmptyActions>
+        <ShadButton
           v-if="hasFilters"
           variant="outline"
           @click="emit('clearFilters')"
         >
           Clear Filters
-        </Button>
-        <Button @click="emit('create')">
+        </ShadButton>
+        <ShadButton @click="emit('create')">
           <LucidePlus class="mr-2 size-4" />
           New Collection
-        </Button>
-      </EmptyActions>
-    </EmptyContent>
-  </Empty>
+        </ShadButton>
+      </ShadEmptyActions>
+    </ShadEmptyContent>
+  </ShadEmpty>
 </template>
