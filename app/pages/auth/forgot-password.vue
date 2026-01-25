@@ -1,8 +1,5 @@
 <script setup lang="ts">
 import { toast } from 'vue-sonner'
-import { Button } from '@/components/shadcn-ui/button'
-import { Input } from '@/components/shadcn-ui/input'
-import { Label } from '@/components/shadcn-ui/label'
 
 definePageMeta({
   layout: 'auth',
@@ -58,8 +55,10 @@ async function handleSubmit() {
     <template v-if="!submitted">
       <form class="space-y-4" @submit.prevent="handleSubmit">
         <div class="space-y-2">
-          <Label for="email">Email</Label>
-          <Input
+          <ShadLabel for="email">
+            Email
+          </ShadLabel>
+          <ShadInput
             id="email"
             v-model="formData.email"
             :disabled="loading"
@@ -72,10 +71,10 @@ async function handleSubmit() {
           </p>
         </div>
 
-        <Button class="w-full" :disabled="loading" type="submit">
+        <ShadButton class="w-full" :disabled="loading" type="submit">
           <LucideLoader2 v-if="loading" class="mr-2 size-4 animate-spin" />
           {{ loading ? 'Sending...' : 'Send reset link' }}
-        </Button>
+        </ShadButton>
       </form>
     </template>
 
@@ -89,13 +88,13 @@ async function handleSubmit() {
           We've sent a password reset link to
           <strong>{{ formData.email }}</strong>
         </p>
-        <Button
+        <ShadButton
           class="mt-4"
           variant="outline"
           @click="submitted = false"
         >
           Try another email
-        </Button>
+        </ShadButton>
       </div>
     </template>
 

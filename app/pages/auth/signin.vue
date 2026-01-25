@@ -1,8 +1,5 @@
 <script setup lang="ts">
 import { toast } from 'vue-sonner'
-import { Button } from '@/components/shadcn-ui/button'
-import { Input } from '@/components/shadcn-ui/input'
-import { Label } from '@/components/shadcn-ui/label'
 
 definePageMeta({
   layout: 'auth',
@@ -58,8 +55,10 @@ async function handleSubmit() {
 
     <form class="space-y-4" @submit.prevent="handleSubmit">
       <div class="space-y-2">
-        <Label for="email">Email</Label>
-        <Input
+        <ShadLabel for="email">
+          Email
+        </ShadLabel>
+        <ShadInput
           id="email"
           v-model="formData.email"
           :disabled="loading"
@@ -74,7 +73,9 @@ async function handleSubmit() {
 
       <div class="space-y-2">
         <div class="flex items-center justify-between">
-          <Label for="password">Password</Label>
+          <ShadLabel for="password">
+            Password
+          </ShadLabel>
           <NuxtLink
             class="
               text-sm text-muted-foreground underline-offset-4
@@ -85,7 +86,7 @@ async function handleSubmit() {
             Forgot password?
           </NuxtLink>
         </div>
-        <Input
+        <ShadInput
           id="password"
           v-model="formData.password"
           :disabled="loading"
@@ -98,10 +99,10 @@ async function handleSubmit() {
         </p>
       </div>
 
-      <Button class="w-full" :disabled="loading" type="submit">
+      <ShadButton class="w-full" :disabled="loading" type="submit">
         <LucideLoader2 v-if="loading" class="mr-2 size-4 animate-spin" />
         {{ loading ? 'Signing in...' : 'Sign in' }}
-      </Button>
+      </ShadButton>
     </form>
 
     <div class="text-center text-sm">

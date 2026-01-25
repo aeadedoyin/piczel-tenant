@@ -1,8 +1,5 @@
 <script setup lang="ts">
 import { toast } from 'vue-sonner'
-import { Button } from '@/components/shadcn-ui/button'
-import { Input } from '@/components/shadcn-ui/input'
-import { Label } from '@/components/shadcn-ui/label'
 
 definePageMeta({
   layout: 'auth',
@@ -59,8 +56,10 @@ async function handleSubmit() {
 
     <form class="space-y-4" @submit.prevent="handleSubmit">
       <div class="space-y-2">
-        <Label for="name">Full name</Label>
-        <Input
+        <ShadLabel for="name">
+          Full name
+        </ShadLabel>
+        <ShadInput
           id="name"
           v-model="formData.name"
           :disabled="loading"
@@ -74,8 +73,10 @@ async function handleSubmit() {
       </div>
 
       <div class="space-y-2">
-        <Label for="email">Email</Label>
-        <Input
+        <ShadLabel for="email">
+          Email
+        </ShadLabel>
+        <ShadInput
           id="email"
           v-model="formData.email"
           :disabled="loading"
@@ -89,8 +90,10 @@ async function handleSubmit() {
       </div>
 
       <div class="space-y-2">
-        <Label for="password">Password</Label>
-        <Input
+        <ShadLabel for="password">
+          Password
+        </ShadLabel>
+        <ShadInput
           id="password"
           v-model="formData.password"
           :disabled="loading"
@@ -104,8 +107,10 @@ async function handleSubmit() {
       </div>
 
       <div class="space-y-2">
-        <Label for="password-confirmation">Confirm password</Label>
-        <Input
+        <ShadLabel for="password-confirmation">
+          Confirm password
+        </ShadLabel>
+        <ShadInput
           id="password-confirmation"
           v-model="formData.passwordConfirmation"
           :disabled="loading"
@@ -118,10 +123,10 @@ async function handleSubmit() {
         </p>
       </div>
 
-      <Button class="w-full" :disabled="loading" type="submit">
+      <ShadButton class="w-full" :disabled="loading" type="submit">
         <LucideLoader2 v-if="loading" class="mr-2 size-4 animate-spin" />
         {{ loading ? 'Creating account...' : 'Create account' }}
-      </Button>
+      </ShadButton>
     </form>
 
     <p class="text-center text-xs text-muted-foreground">

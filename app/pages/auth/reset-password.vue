@@ -1,8 +1,5 @@
 <script setup lang="ts">
 import { toast } from 'vue-sonner'
-import { Button } from '@/components/shadcn-ui/button'
-import { Input } from '@/components/shadcn-ui/input'
-import { Label } from '@/components/shadcn-ui/label'
 
 definePageMeta({
   layout: 'auth',
@@ -64,8 +61,10 @@ async function handleSubmit() {
     <template v-if="!success">
       <form class="space-y-4" @submit.prevent="handleSubmit">
         <div class="space-y-2">
-          <Label for="email">Email</Label>
-          <Input
+          <ShadLabel for="email">
+            Email
+          </ShadLabel>
+          <ShadInput
             id="email"
             v-model="formData.email"
             :disabled="loading"
@@ -79,8 +78,10 @@ async function handleSubmit() {
         </div>
 
         <div class="space-y-2">
-          <Label for="password">New password</Label>
-          <Input
+          <ShadLabel for="password">
+            New password
+          </ShadLabel>
+          <ShadInput
             id="password"
             v-model="formData.password"
             :disabled="loading"
@@ -94,8 +95,10 @@ async function handleSubmit() {
         </div>
 
         <div class="space-y-2">
-          <Label for="password-confirmation">Confirm new password</Label>
-          <Input
+          <ShadLabel for="password-confirmation">
+            Confirm new password
+          </ShadLabel>
+          <ShadInput
             id="password-confirmation"
             v-model="formData.passwordConfirmation"
             :disabled="loading"
@@ -110,10 +113,10 @@ async function handleSubmit() {
 
         <input v-model="formData.token" name="token" type="hidden">
 
-        <Button class="w-full" :disabled="loading" type="submit">
+        <ShadButton class="w-full" :disabled="loading" type="submit">
           <LucideLoader2 v-if="loading" class="mr-2 size-4 animate-spin" />
           {{ loading ? 'Resetting...' : 'Reset password' }}
-        </Button>
+        </ShadButton>
       </form>
     </template>
 
@@ -126,11 +129,11 @@ async function handleSubmit() {
         <p class="mt-2 text-sm text-muted-foreground">
           Your password has been reset. You can now sign in with your new password.
         </p>
-        <Button as-child class="mt-4">
+        <ShadButton as-child class="mt-4">
           <NuxtLink to="/auth/signin">
             Sign in
           </NuxtLink>
-        </Button>
+        </ShadButton>
       </div>
     </template>
 
