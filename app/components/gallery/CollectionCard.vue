@@ -82,7 +82,10 @@ const statusConfig: Record<
 
       <!-- Status Badge -->
       <div class="absolute bottom-2 left-2">
-        <ShadBadge :variant="statusConfig[collection.status].variant">
+        <ShadBadge
+          :class="{ 'bg-background': collection.status === 'draft' }"
+          :variant="statusConfig[collection.status].variant"
+        >
           <component
             :is="statusConfig[collection.status].icon"
             class="mr-1 size-3"
