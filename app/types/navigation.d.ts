@@ -1,10 +1,11 @@
-import type { Component, ConcreteComponent } from 'vue'
+import type { Component } from 'vue'
 
 export interface NavItem {
   title: string
   url: string
-  icon: Component | ConcreteComponent | string
+  icon: Component
   isActive?: boolean
+  external?: boolean
   items?: NavSubItem[]
 }
 
