@@ -31,8 +31,8 @@ const activeTab = computed(() => {
       </p>
     </div>
 
-    <ShadTabs class="w-full" :model-value="activeTab">
-      <ShadTabsList class="w-full justify-start">
+    <ShadTabs :model-value="activeTab">
+      <ShadTabsList>
         <ShadTabsTrigger
           v-for="tab in tabs"
           :key="tab.value"
