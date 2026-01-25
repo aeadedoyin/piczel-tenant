@@ -60,7 +60,7 @@ const baseOptions = {
 }
 
 const shadcnOptions = {
-  files: ['app/components/shadcn-ui/**/*', 'app/composables/useSidebar.ts'],
+  files: ['@@/shadcn', '@/composables/useSidebar.ts'],
   rules: {
     'no-restricted-imports': 'off',
     'better-tailwindcss/no-unknown-classes': 'off',

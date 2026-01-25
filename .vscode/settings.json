@@ -1,10 +1,8 @@
 {
   "search.exclude": {
-    "**/shadcn-ui/**": true
+    "shadcn/**": true
   },
-  "files.exclude": {
-    "**/shadcn-ui/**": true
-  },
+  "explorer.excludeGitIgnore": true,
   "prettier.enable": false,
   "editor.codeActionsOnSave": {
     "source.fixAll": "always"
