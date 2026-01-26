@@ -24,6 +24,7 @@ export interface Collection {
   coverUrl?: string
   status: CollectionStatus
   category: CollectionCategory
+  eventDate?: string
   photoCount: number
   starred: boolean
   password?: string
@@ -50,8 +51,8 @@ export interface CollectionFilters {
 export interface CreateCollectionData {
   title: string
   description?: string
-  status: CollectionStatus
   category: CollectionCategory
+  eventDate?: string
   password?: string
 }
 

@@ -57,6 +57,7 @@ function generateMockCollections(): Collection[] {
       coverUrl: getCollectionImage(1),
       status: 'published',
       category: 'wedding',
+      eventDate: new Date(Date.now() - 5 * 86400000).toISOString(),
       photoCount: 45,
       starred: true,
       createdAt: new Date(Date.now() - 5 * 86400000).toISOString(),
@@ -69,6 +70,7 @@ function generateMockCollections(): Collection[] {
       coverUrl: getCollectionImage(2),
       status: 'published',
       category: 'event',
+      eventDate: new Date(Date.now() - 10 * 86400000).toISOString(),
       photoCount: 28,
       starred: false,
       createdAt: new Date(Date.now() - 10 * 86400000).toISOString(),
@@ -295,8 +297,9 @@ export const useGallery = defineStore('gallery', () => {
       title: data.title,
       description: data.description,
       coverUrl: undefined,
-      status: data.status,
+      status: 'draft',
       category: data.category,
+      eventDate: data.eventDate,
       photoCount: 0,
       starred: false,
       password: data.password,
@@ -318,10 +321,10 @@ export const useGallery = defineStore('gallery', () => {
       collection.title = data.title
     if (data.description !== undefined)
       collection.description = data.description
-    if (data.status !== undefined)
-      collection.status = data.status
     if (data.category !== undefined)
       collection.category = data.category
+    if (data.eventDate !== undefined)
+      collection.eventDate = data.eventDate
     if (data.password !== undefined)
       collection.password = data.password
     collection.updatedAt = new Date().toISOString()
