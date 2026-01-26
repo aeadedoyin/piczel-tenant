@@ -12,7 +12,7 @@ const quote = {
     <div class="flex flex-1/3 flex-col justify-center bg-background px-6 py-12 md:px-10">
       <div class="mx-auto w-full max-w-md">
         <NuxtLink class="mb-16 flex items-center" to="/">
-          <Icon class="h-20 w-auto" mode="svg" name="piczel:piczel-logo-wordmark" />
+          <Icon class="h-20 w-auto" mode="svg" name="piczel:logo-wordmark" />
         </NuxtLink>
         <slot />
       </div>
