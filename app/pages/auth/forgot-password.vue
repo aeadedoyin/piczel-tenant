@@ -47,7 +47,7 @@ async function handleSubmit() {
 <template>
   <div class="flex flex-col gap-6">
     <ShadCard class="overflow-hidden p-0">
-      <ShadCardContent class="grid p-0 lg:grid-cols-2 lg:min-h-[75vh]">
+      <ShadCardContent class="grid p-0 lg:grid-cols-2 lg:min-h-[75vh] xl:min-h-[70vh]">
         <div class="flex flex-col justify-center gap-6 p-6 md:p-8">
           <div class="flex flex-col items-center gap-2 text-center">
             <h1 class="text-2xl font-bold">

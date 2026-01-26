@@ -52,7 +52,7 @@ function handleSocialLogin(provider: string) {
 <template>
   <div class="flex flex-col gap-6">
     <ShadCard class="overflow-hidden p-0">
-      <ShadCardContent class="grid p-0 lg:grid-cols-2 lg:min-h-[75vh]">
+      <ShadCardContent class="grid p-0 lg:grid-cols-2 lg:min-h-[75vh] xl:min-h-[70vh]">
         <form class="flex flex-col justify-center gap-6 p-6 md:p-8" @submit.prevent="handleSubmit">
           <div class="flex flex-col items-center gap-2 text-center">
             <h1 class="text-2xl font-bold">
@@ -173,5 +173,17 @@ function handleSocialLogin(provider: string) {
         </div>
       </ShadCardContent>
     </ShadCard>
+
+    <!-- Terms -->
+    <p class="px-6 text-center text-xs text-muted-foreground">
+      By clicking continue, you agree to our
+      <NuxtLink class="underline underline-offset-4 hover:text-primary" to="/terms">
+        Terms of Service
+      </NuxtLink>
+      and
+      <NuxtLink class="underline underline-offset-4 hover:text-primary" to="/privacy">
+        Privacy Policy
+      </NuxtLink>.
+    </p>
   </div>
 </template>
