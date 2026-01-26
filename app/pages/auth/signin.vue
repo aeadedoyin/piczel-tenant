@@ -87,6 +87,7 @@ function handleSocialLogin(provider: string) {
           </ShadLabel>
           <NuxtLink
             class="text-sm text-muted-foreground underline-offset-4 hover:text-primary hover:underline"
+            tabindex="-1"
             to="/auth/forgot-password"
           >
             Forgot password?
