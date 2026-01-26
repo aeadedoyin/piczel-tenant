@@ -2,6 +2,11 @@
 import { LucideMoon, LucideSun, LucideSunMoon } from '#components'
 
 const colorMode = useColorMode()
+const mounted = ref(false)
+
+onMounted(() => {
+  mounted.value = true
+})
 
 const modes = ['light', 'dark', 'system'] as const
 type Mode = typeof modes[number]
@@ -17,6 +22,8 @@ function cycleMode() {
 }
 
 const iconComponent = computed(() => {
+  if (!mounted.value)
+    return null
   switch (colorMode.preference) {
     case 'light':
       return LucideSun
@@ -28,6 +35,8 @@ const iconComponent = computed(() => {
 })
 
 const label = computed(() => {
+  if (!mounted.value)
+    return 'Toggle color mode'
   switch (colorMode.preference) {
     case 'light':
       return 'Light mode'
@@ -55,6 +64,7 @@ const label = computed(() => {
     <Transition mode="out-in" name="icon">
       <component
         :is="iconComponent"
+        v-if="iconComponent"
         :key="colorMode.preference"
         class="size-4"
       />
@@ -67,9 +77,9 @@ const label = computed(() => {
         transition-colors duration-300
       "
       :class="{
-        'bg-amber-500': colorMode.preference === 'light',
-        'bg-indigo-500': colorMode.preference === 'dark',
-        'bg-emerald-500': colorMode.preference === 'system',
+        'bg-amber-500': mounted && colorMode.preference === 'light',
+        'bg-indigo-500': mounted && colorMode.preference === 'dark',
+        'bg-emerald-500': !mounted || colorMode.preference === 'system',
       }"
     />
   </button>
