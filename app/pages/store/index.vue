@@ -42,11 +42,11 @@ useHead({
       </div>
       <div class="rounded-xl border bg-card p-6">
         <div class="flex items-center gap-2">
-          <LucideDollarSign class="size-4 text-muted-foreground" />
+          <LucideCoins class="size-4 text-muted-foreground" />
           <span class="text-sm font-medium text-muted-foreground">Revenue</span>
         </div>
         <div class="mt-2 text-2xl font-bold">
-          $12,450
+          ₦2,120,450
         </div>
       </div>
       <div class="rounded-xl border bg-card p-6">
