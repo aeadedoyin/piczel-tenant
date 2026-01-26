@@ -286,7 +286,7 @@ function handleSocialLogin(provider: string) {
           <img
             alt="Photography"
             class="absolute inset-0 size-full object-cover dark:brightness-[0.2] dark:grayscale"
-            src="https://images.unsplash.com/photo-1554048612-b6a482bc67e5?w=800&q=80"
+            src="/images/auth/register-bg.jpg"
           >
         </div>
       </ShadCardContent>

@@ -12,16 +12,28 @@ function delay(ms: number = 300): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
 
+// Sample image helpers (1-15 for collections, 16-30 for media)
+function getCollectionImage(index: number): string {
+  const imageNumber = ((index - 1) % 15) + 1
+  return `/images/samples/photo-${imageNumber}.jpg`
+}
+
+function getMediaImage(index: number): string {
+  const imageNumber = ((index - 1) % 15) + 16
+  return `/images/samples/photo-${imageNumber}.jpg`
+}
+
 // Generate mock photos
 function generateMockPhotos(): Photo[] {
   const photos: Photo[] = []
   for (let i = 1; i <= 18; i++) {
     const width = 800 + Math.floor(Math.random() * 400)
     const height = 600 + Math.floor(Math.random() * 300)
+    const imageUrl = getMediaImage(i)
     photos.push({
       id: `photo-${i}`,
-      url: `https://picsum.photos/seed/${i}/${width}/${height}`,
-      thumbnailUrl: `https://picsum.photos/seed/${i}/${Math.floor(width / 1.2)}/${Math.floor(height / 1.2)}`,
+      url: imageUrl,
+      thumbnailUrl: imageUrl,
       title: `Photo ${i}`,
       width,
       height,
@@ -42,7 +54,7 @@ function generateMockCollections(): Collection[] {
       id: 'collection-1',
       title: 'Summer Wedding 2024',
       description: 'Beautiful outdoor wedding ceremony',
-      coverUrl: 'https://picsum.photos/seed/wedding1/800/600',
+      coverUrl: getCollectionImage(1),
       status: 'published',
       category: 'wedding',
       photoCount: 45,
@@ -54,7 +66,7 @@ function generateMockCollections(): Collection[] {
       id: 'collection-2',
       title: 'Corporate Event',
       description: 'Annual company celebration',
-      coverUrl: 'https://picsum.photos/seed/event1/800/600',
+      coverUrl: getCollectionImage(2),
       status: 'published',
       category: 'event',
       photoCount: 28,
@@ -66,7 +78,7 @@ function generateMockCollections(): Collection[] {
       id: 'collection-3',
       title: 'Family Portrait Session',
       description: 'Studio portraits for the Johnson family',
-      coverUrl: 'https://picsum.photos/seed/portrait1/800/600',
+      coverUrl: getCollectionImage(3),
       status: 'hidden',
       category: 'portrait',
       photoCount: 15,
@@ -79,7 +91,7 @@ function generateMockCollections(): Collection[] {
       id: 'collection-4',
       title: 'Nature Walk',
       description: 'Autumn landscapes and wildlife',
-      coverUrl: 'https://picsum.photos/seed/nature1/800/600',
+      coverUrl: getCollectionImage(4),
       status: 'hidden',
       category: 'nature',
       photoCount: 32,
@@ -91,7 +103,7 @@ function generateMockCollections(): Collection[] {
       id: 'collection-5',
       title: 'Beach Wedding',
       description: 'Sunset ceremony by the ocean',
-      coverUrl: 'https://picsum.photos/seed/wedding2/800/600',
+      coverUrl: getCollectionImage(5),
       status: 'draft',
       category: 'wedding',
       photoCount: 0,
@@ -115,7 +127,7 @@ function generateMockCollections(): Collection[] {
       id: 'collection-7',
       title: 'Graduation Ceremony',
       description: 'Class of 2024 graduation photos',
-      coverUrl: 'https://picsum.photos/seed/grad1/800/600',
+      coverUrl: getCollectionImage(7),
       status: 'published',
       category: 'event',
       photoCount: 52,
@@ -127,7 +139,7 @@ function generateMockCollections(): Collection[] {
       id: 'collection-8',
       title: 'Product Shoot',
       description: 'E-commerce product photography',
-      coverUrl: 'https://picsum.photos/seed/product1/800/600',
+      coverUrl: getCollectionImage(8),
       status: 'hidden',
       category: 'other',
       photoCount: 24,
@@ -139,7 +151,7 @@ function generateMockCollections(): Collection[] {
       id: 'collection-9',
       title: 'Engagement Session',
       description: 'Pre-wedding couple photoshoot',
-      coverUrl: 'https://picsum.photos/seed/engage1/800/600',
+      coverUrl: getCollectionImage(9),
       status: 'published',
       category: 'wedding',
       photoCount: 38,
@@ -151,7 +163,7 @@ function generateMockCollections(): Collection[] {
       id: 'collection-10',
       title: 'Birthday Party',
       description: 'Kids birthday celebration',
-      coverUrl: 'https://picsum.photos/seed/bday1/800/600',
+      coverUrl: getCollectionImage(10),
       status: 'draft',
       category: 'event',
       photoCount: 19,

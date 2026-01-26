@@ -120,7 +120,7 @@ async function handleSubmit() {
           <img
             alt="Photography"
             class="absolute inset-0 size-full object-cover dark:brightness-[0.2] dark:grayscale"
-            src="https://images.unsplash.com/photo-1493863641943-9b68992a8d07?w=800&q=80"
+            src="/images/auth/reset-password-bg.jpg"
           >
         </div>
       </ShadCardContent>
