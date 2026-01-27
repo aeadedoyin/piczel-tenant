@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const quote = {
   text: 'Photography is the story I fail to put into words.',
-  author: 'Destin Sparks',
+  author: 'Jane Doe',
   image: '/images/auth/signin-bg.jpg',
 }
 </script>
