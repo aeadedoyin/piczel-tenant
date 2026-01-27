@@ -12,12 +12,12 @@ export default defineNuxtPlugin(() => {
     ogSiteName: title,
     ogTitle: title,
     ogDescription: description,
-    ogImage: `${appUrl}/og-image.jpg`,
+    ogImage: `${appUrl}/og-image.jpg?v=${Date.now()}`,
     ogImageWidth: 1200,
     ogImageHeight: 630,
     twitterCard: 'summary_large_image',
     twitterTitle: title,
     twitterDescription: description,
-    twitterImage: `${appUrl}/og-image.jpg`,
+    twitterImage: `${appUrl}/og-image.jpg?v=${Date.now()}`,
   })
 })
