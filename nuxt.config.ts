@@ -7,10 +7,6 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: 'Piczel',
-      meta: [
-        { name: 'description', content: 'Photo gallery management for photographers' },
-      ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
         { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/favicon-96x96.png' },
@@ -65,6 +61,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
+      appUrl: '',
       apiBaseUrl: '/api',
       prefillCredential: false,
     },
