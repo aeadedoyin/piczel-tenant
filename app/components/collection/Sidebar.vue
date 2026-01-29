@@ -11,6 +11,7 @@ import {
 defineProps<{
   collection: Collection
   photos: Photo[]
+  sectionPhotoCounts: Record<string, number>
 }>()
 
 defineEmits<{
@@ -25,55 +26,16 @@ const tabs: { id: CollectionTab, icon: Component, label: string }[] = [
   { id: 'settings', icon: LucideSettings, label: 'Settings' },
   { id: 'activity', icon: LucideActivity, label: 'Activity' },
 ]
-
-// Format date for display
-function formatDate(dateString?: string): string {
-  if (!dateString)
-    return ''
-  return new Date(dateString).toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-  })
-}
 </script>
 
 <template>
   <aside
-    class="relative flex shrink-0 flex-col border-r bg-background transition-all duration-200 ease-in-out"
+    class="relative flex shrink-0 flex-col border-r transition-all duration-200 ease-in-out"
     :class="[
-      collectionSidebar.isOpen ? 'w-60' : 'w-0 overflow-hidden border-r-0',
+      collectionSidebar.isOpen ? 'w-80' : 'w-0 overflow-hidden border-r-0',
     ]"
   >
-    <div class="flex h-full w-60 flex-col">
-      <!-- Header -->
-      <div class="shrink-0 border-b p-3">
-        <!-- Back link -->
-        <NuxtLink
-          class="mb-3 inline-flex items-center gap-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground"
-          to="/gallery/collections"
-        >
-          <LucideArrowLeft class="size-3" />
-          Collections
-        </NuxtLink>
-
-        <!-- Title and metadata -->
-        <h2 class="text-sm font-semibold leading-tight truncate">
-          {{ collection.title }}
-        </h2>
-        <div class="mt-1 flex items-center gap-2">
-          <span class="text-xs text-muted-foreground">
-            {{ formatDate(collection.eventDate || collection.createdAt) }}
-          </span>
-          <ShadBadge
-            class="text-[10px] h-4 px-1.5"
-            :variant="collectionStatusConfig[collection.status].variant"
-          >
-            {{ collectionStatusConfig[collection.status].label }}
-          </ShadBadge>
-        </div>
-      </div>
-
+    <div class="flex h-full w-80 flex-col">
       <!-- Cover Thumbnail -->
       <div class="shrink-0 border-b p-3">
         <div class="aspect-video overflow-hidden rounded-md bg-muted">
@@ -124,6 +86,7 @@ function formatDate(dateString?: string): string {
           <!-- Photos Tab -->
           <CollectionSidebarPhotos
             v-if="collectionSidebar.activeTab === 'photos'"
+            :section-photo-counts="sectionPhotoCounts"
           />
 
           <!-- Design Tab -->

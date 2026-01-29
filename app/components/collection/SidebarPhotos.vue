@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { LucideGripVertical, LucidePlus } from '#components'
 
+const props = defineProps<{
+  sectionPhotoCounts: Record<string, number>
+}>()
+
 const collectionSidebar = useCollectionSidebar()
 
 // Modal state
@@ -24,9 +28,25 @@ function handleSave() {
   isModalOpen.value = false
 }
 
-function scrollToSection(sectionId: string) {
-  const el = document.getElementById(sectionId)
-  el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+function selectSection(sectionId: string) {
+  collectionSidebar.setActivePhotoSection(sectionId)
+}
+
+function formatRelativeDate(dateString: string): string {
+  const date = new Date(dateString)
+  const now = new Date()
+  const diffMs = now.getTime() - date.getTime()
+  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24))
+
+  if (diffDays === 0)
+    return 'Today'
+  if (diffDays === 1)
+    return 'Yesterday'
+  if (diffDays < 7)
+    return `${diffDays}d ago`
+  if (diffDays < 30)
+    return `${Math.floor(diffDays / 7)}w ago`
+  return new Date(dateString).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
 }
 </script>
 
@@ -50,11 +70,22 @@ function scrollToSection(sectionId: string) {
       <button
         v-for="section in collectionSidebar.photoSections"
         :key="section.id"
-        class="group flex w-full items-center gap-2 rounded-md px-1.5 py-1.5 text-sm transition-colors hover:bg-accent/50"
-        @click="scrollToSection(section.id)"
+        class="group flex w-full items-center gap-2 rounded-md px-1.5 py-2 text-sm transition-colors"
+        :class="[
+          collectionSidebar.activePhotoSection === section.id
+            ? 'bg-accent text-accent-foreground font-medium'
+            : 'hover:bg-accent/50',
+        ]"
+        @click="selectSection(section.id)"
       >
         <LucideGripVertical class="size-3.5 shrink-0 text-muted-foreground/50 cursor-grab" />
-        <span class="truncate text-left text-foreground">{{ section.name }}</span>
+        <div class="flex flex-col items-start min-w-0 flex-1">
+          <span class="truncate text-left w-full">
+            {{ section.name }}
+            <span class="text-muted-foreground font-normal">({{ props.sectionPhotoCounts[section.id] || 0 }})</span>
+          </span>
+          <span class="text-[10px] text-muted-foreground">{{ formatRelativeDate(section.createdAt) }}</span>
+        </div>
       </button>
     </div>
 
