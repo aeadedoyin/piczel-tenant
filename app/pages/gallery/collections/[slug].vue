@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { Collection, CreateCollectionData, Photo } from '@/types/gallery'
-import { toast } from 'vue-sonner'
 
 const route = useRoute()
 const router = useRouter()
@@ -165,7 +164,7 @@ function handlePhotoView(photo: Photo) {
     handlePhotoSelect(photo.id)
   }
   else {
-    toast.info(`Viewing: ${photo.title}`)
+    sonnerToast(`Viewing: ${photo.title}`)
   }
 }
 
@@ -193,7 +192,7 @@ async function handleDelete() {
 function handleShare() {
   const shareUrl = `${window.location.origin}/gallery/${slug.value}`
   navigator.clipboard.writeText(shareUrl)
-  toast.success('Link copied to clipboard')
+  sonnerToast.success('Link copied to clipboard')
 }
 
 // Fetch data

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { Collection } from '@/types/gallery'
-import { toast } from 'vue-sonner'
 
 defineProps<{
   collection: Collection
@@ -8,7 +7,7 @@ defineProps<{
 
 function copyLink() {
   navigator.clipboard.writeText(`${window.location.origin}/gallery/share/example-link`)
-  toast.success('Link copied to clipboard')
+  sonnerToast.success('Link copied to clipboard')
 }
 </script>
 

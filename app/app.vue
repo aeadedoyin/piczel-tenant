@@ -6,5 +6,5 @@
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
-  <ShadToaster />
+  <ShadToaster rich-colors />
 </template>

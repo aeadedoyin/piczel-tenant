@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { toast } from 'vue-sonner'
-
 definePageMeta({
   layout: 'auth',
   middleware: ['guest'],
@@ -27,7 +25,7 @@ async function handleSubmit() {
   try {
     await auth.forgotPassword(formData)
     submitted.value = true
-    toast.success('Password reset email sent!')
+    sonnerToast.success('Password reset email sent!')
   }
   catch (error: unknown) {
     const err = error as { statusCode?: number, data?: { message?: string, errors?: Record<string, string[]> } }
@@ -35,7 +33,7 @@ async function handleSubmit() {
       errors.value = err.data.errors
     }
     else {
-      toast.error(err?.data?.message || 'Failed to send reset email. Please try again.')
+      sonnerToast.error(err?.data?.message || 'Failed to send reset email. Please try again.')
     }
   }
   finally {

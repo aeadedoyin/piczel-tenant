@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { toast } from 'vue-sonner'
-
 definePageMeta({
   layout: 'auth',
   middleware: ['guest'],
@@ -46,7 +44,7 @@ async function handleSubmit() {
       password: formData.password,
       passwordConfirmation: formData.password,
     })
-    toast.success('Account created successfully!')
+    sonnerToast.success('Account created successfully!')
     await navigateTo('/dashboard')
   }
   catch (error: unknown) {
@@ -55,7 +53,7 @@ async function handleSubmit() {
       errors.value = err.data.errors
     }
     else {
-      toast.error(err?.data?.message || 'Failed to create account. Please try again.')
+      sonnerToast.error(err?.data?.message || 'Failed to create account. Please try again.')
     }
   }
   finally {
@@ -64,7 +62,7 @@ async function handleSubmit() {
 }
 
 function handleSocialLogin(provider: string) {
-  toast.info(`${provider} login coming soon`)
+  sonnerToast(`${provider} login coming soon`)
 }
 </script>
 

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { toast } from 'vue-sonner'
-
 definePageMeta({
   layout: 'auth',
   middleware: ['guest'],
@@ -27,7 +25,7 @@ async function handleSubmit() {
 
   try {
     await auth.signIn(formData)
-    toast.success('Welcome back!')
+    sonnerToast.success('Welcome back!')
     await navigateTo('/dashboard')
   }
   catch (error: unknown) {
@@ -36,7 +34,7 @@ async function handleSubmit() {
       errors.value = err.data.errors
     }
     else {
-      toast.error(err?.data?.message || 'Invalid credentials. Please try again.')
+      sonnerToast.error(err?.data?.message || 'Invalid credentials. Please try again.')
     }
   }
   finally {
@@ -45,7 +43,7 @@ async function handleSubmit() {
 }
 
 function handleSocialLogin(provider: string) {
-  toast.info(`${provider} login coming soon`)
+  sonnerToast(`${provider} login coming soon`)
 }
 </script>
 
