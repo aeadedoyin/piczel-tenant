@@ -66,9 +66,9 @@ function formatRelativeDate(dateString: string): string {
     </div>
 
     <!-- Sections list -->
-    <div v-if="collectionSidebar.photoSections.length > 0" class="space-y-0.5">
+    <div class="space-y-0.5">
       <button
-        v-for="section in collectionSidebar.photoSections"
+        v-for="section in collectionSidebar.allSections"
         :key="section.id"
         class="group flex w-full items-center gap-2 rounded-md px-1.5 py-2 text-sm transition-colors"
         :class="[
@@ -84,17 +84,9 @@ function formatRelativeDate(dateString: string): string {
             {{ section.name }}
             <span class="text-muted-foreground font-normal">({{ props.sectionPhotoCounts[section.id] || 0 }})</span>
           </span>
-          <span class="text-[10px] text-muted-foreground">{{ formatRelativeDate(section.createdAt) }}</span>
+          <span v-if="section.description" class="text-[10px] text-muted-foreground">{{ formatRelativeDate(section.createdAt) }}</span>
         </div>
       </button>
-    </div>
-
-    <!-- Empty state -->
-    <div v-else class="flex flex-col items-center py-6 text-center">
-      <LucideGripVertical class="size-8 text-muted-foreground/40 mb-2" />
-      <p class="text-xs text-muted-foreground">
-        No sections yet
-      </p>
     </div>
   </div>
 

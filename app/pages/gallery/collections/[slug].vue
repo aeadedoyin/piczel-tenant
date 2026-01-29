@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Collection, CreateCollectionData, Photo } from '@/types/gallery'
+import { DEFAULT_SECTION_ID } from '@/composables/useCollectionSidebar'
 
 const route = useRoute()
 const router = useRouter()
@@ -39,17 +40,45 @@ const demoPhotos = computed(() => {
 })
 
 // Split photos across sections for demo display
+// Custom sections get an even share; remaining photos go to Highlights
 const allPhotosBySection = computed(() => {
-  const sections = collectionSidebar.photoSections
+  const sections = collectionSidebar.allSections
   const allPhotos = demoPhotos.value
-  if (sections.length === 0 || allPhotos.length === 0)
+  if (allPhotos.length === 0)
     return []
 
-  const perSection = Math.ceil(allPhotos.length / sections.length)
-  return sections.map((section, i) => ({
-    ...section,
-    photos: allPhotos.slice(i * perSection, (i + 1) * perSection),
-  }))
+  const customSections = sections.filter(s => s.id !== DEFAULT_SECTION_ID)
+
+  // No custom sections — all photos go to Highlights
+  if (customSections.length === 0) {
+    const highlights = sections.find(s => s.id === DEFAULT_SECTION_ID)!
+    return [{ ...highlights, photos: allPhotos }]
+  }
+
+  // Distribute ~70% across custom sections, rest goes to Highlights
+  const customPhotoCount = Math.floor(allPhotos.length * 0.7)
+  const perSection = Math.ceil(customPhotoCount / customSections.length)
+
+  const result = []
+  let offset = 0
+
+  // Highlights first with the remaining photos
+  const highlightsSection = sections.find(s => s.id === DEFAULT_SECTION_ID)!
+  const highlightsPhotos = allPhotos.slice(customSections.length * perSection)
+  if (highlightsPhotos.length > 0) {
+    result.push({ ...highlightsSection, photos: highlightsPhotos })
+  }
+
+  // Custom sections
+  for (const section of customSections) {
+    const sectionPhotos = allPhotos.slice(offset, offset + perSection)
+    if (sectionPhotos.length > 0) {
+      result.push({ ...section, photos: sectionPhotos })
+    }
+    offset += perSection
+  }
+
+  return result
 })
 
 // Counts per section (for sidebar display)
@@ -130,28 +159,6 @@ watch(() => collectionSidebar.isOpen, (collectionIsOpen) => {
 })
 
 // Selection
-const selectedCount = computed(() => gallery.selectedPhotoIds.size)
-const hasSelection = computed(() => selectedCount.value > 0)
-const allSelected = computed(() =>
-  demoPhotos.value.length > 0 && selectedCount.value === demoPhotos.value.length,
-)
-
-function toggleSelectMode() {
-  isSelecting.value = !isSelecting.value
-  if (!isSelecting.value) {
-    gallery.clearSelection()
-  }
-}
-
-function handleSelectAll() {
-  if (allSelected.value) {
-    gallery.clearSelection()
-  }
-  else {
-    demoPhotos.value.forEach(p => gallery.selectPhoto(p.id))
-  }
-}
-
 function handlePhotoSelect(photoId: string) {
   if (!isSelecting.value) {
     isSelecting.value = true
@@ -213,6 +220,7 @@ async function loadData() {
 
   if (collection.value) {
     photos.value = gallery.getPhotosByCollection(collection.value.id)
+    collectionSidebar.loadSectionsForCollection(collection.value.id)
   }
 
   isLoading.value = false
@@ -290,27 +298,45 @@ watch(slug, loadData)
     <div class="flex flex-1 flex-col">
       <!-- Top Action Bar -->
       <div class="shrink-0 flex items-center justify-between border-b bg-background px-6 py-3">
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-2">
           <h1 class="text-lg font-semibold">
             {{ collection.title }}
           </h1>
-          <ShadBadge
-            class="text-xs"
-            :variant="collectionStatusConfig[collection.status].variant"
-          >
-            <component
-              :is="collectionStatusConfig[collection.status].icon"
-              class="mr-1 size-3"
-            />
-            {{ collectionStatusConfig[collection.status].label }}
-          </ShadBadge>
+          <span class="text-xs text-muted-foreground">
+            {{ new Date(collection.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) }}
+          </span>
         </div>
 
         <div class="flex items-center gap-2">
-          <ShadButton size="sm" variant="outline" @click="handleShare">
-            <LucideShare2 class="mr-2 size-4" />
-            Share
-          </ShadButton>
+          <ShadDropdownMenu>
+            <ShadDropdownMenuTrigger as-child>
+              <ShadButton size="sm" variant="outline">
+                <component
+                  :is="collectionStatusConfig[collection.status].icon"
+                  class="mr-1.5 size-3.5"
+                />
+                {{ collectionStatusConfig[collection.status].label }}
+                <LucideChevronDown class="ml-1 size-3 text-muted-foreground" />
+              </ShadButton>
+            </ShadDropdownMenuTrigger>
+            <ShadDropdownMenuContent align="end">
+              <ShadDropdownMenuItem
+                v-for="option in collectionStatusOptions"
+                :key="option.value"
+                @select="collection!.status = option.value"
+              >
+                <component
+                  :is="collectionStatusConfig[option.value].icon"
+                  class="mr-2 size-4"
+                />
+                {{ option.label }}
+                <LucideCheck
+                  v-if="collection!.status === option.value"
+                  class="ml-auto size-4"
+                />
+              </ShadDropdownMenuItem>
+            </ShadDropdownMenuContent>
+          </ShadDropdownMenu>
 
           <ShadButton size="sm" variant="outline" @click="handleStar">
             <LucideStar
@@ -327,6 +353,10 @@ watch(slug, loadData)
               </ShadButton>
             </ShadDropdownMenuTrigger>
             <ShadDropdownMenuContent align="end">
+              <ShadDropdownMenuItem @select="handleShare">
+                <LucideShare2 class="mr-2 size-4" />
+                Share
+              </ShadDropdownMenuItem>
               <ShadDropdownMenuItem @select="isEditModalOpen = true">
                 <LucidePencil class="mr-2 size-4" />
                 Edit Details
@@ -579,60 +609,7 @@ watch(slug, loadData)
   </div>
 
   <!-- Floating Bulk Actions Toolbar -->
-  <Transition
-    enter-active-class="transition-all duration-300 ease-out"
-    enter-from-class="translate-y-full opacity-0"
-    enter-to-class="translate-y-0 opacity-100"
-    leave-active-class="transition-all duration-200 ease-in"
-    leave-from-class="translate-y-0 opacity-100"
-    leave-to-class="translate-y-full opacity-0"
-  >
-    <div
-      v-if="hasSelection"
-      class="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-lg border bg-background px-6 py-4 shadow-lg"
-    >
-      <div class="flex items-center gap-4">
-        <div class="flex items-center gap-3">
-          <ShadCheckbox
-            :checked="allSelected"
-            :indeterminate="hasSelection && !allSelected"
-            @update:checked="handleSelectAll"
-          />
-          <span class="text-sm font-medium">
-            {{ selectedCount }} {{ selectedCount === 1 ? 'photo' : 'photos' }} selected
-          </span>
-        </div>
-
-        <div class="h-4 w-px bg-border" />
-
-        <div class="flex items-center gap-2">
-          <ShadButton size="sm" variant="outline">
-            <LucideStar class="mr-2 size-4" />
-            Star
-          </ShadButton>
-          <ShadButton size="sm" variant="outline">
-            <LucideDownload class="mr-2 size-4" />
-            Download
-          </ShadButton>
-          <ShadButton size="sm" variant="outline">
-            <LucideFolderInput class="mr-2 size-4" />
-            Move
-          </ShadButton>
-          <ShadButton size="sm" variant="destructive">
-            <LucideTrash2 class="mr-2 size-4" />
-            Delete
-          </ShadButton>
-          <ShadButton
-            size="sm"
-            variant="ghost"
-            @click="toggleSelectMode"
-          >
-            <LucideX class="size-4" />
-          </ShadButton>
-        </div>
-      </div>
-    </div>
-  </Transition>
+  <GalleryBulkToolbar :total-count="demoPhotos.length" />
 
   <!-- Edit Collection Modal -->
   <GalleryCollectionModal

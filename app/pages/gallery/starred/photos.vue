@@ -48,5 +48,8 @@ function handlePhotoView(_photo: Photo) {
       v-else
       @browse="router.push('/gallery')"
     />
+
+    <!-- Floating Bulk Actions Toolbar -->
+    <GalleryBulkToolbar :total-count="gallery.starredPhotos.length" />
   </div>
 </template>

@@ -206,5 +206,8 @@ function handleCollectionEdit(collection: Collection) {
       v-model:open="isModalOpen"
       @save="handleSaveCollection"
     />
+
+    <!-- Floating Bulk Actions Toolbar -->
+    <GalleryBulkToolbar :total-count="gallery.recentPhotos.length" />
   </div>
 </template>
