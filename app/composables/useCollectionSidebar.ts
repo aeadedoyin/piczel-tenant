@@ -4,6 +4,7 @@ export interface PhotoSection {
   id: string
   name: string
   description: string
+  createdAt: string
 }
 
 export const useCollectionSidebar = defineStore('collectionSidebar', () => {
@@ -13,16 +14,24 @@ export const useCollectionSidebar = defineStore('collectionSidebar', () => {
 
   // Photo sections
   const photoSections = ref<PhotoSection[]>([
-    { id: 'section-1', name: 'Getting Ready', description: 'Bridal prep and morning moments' },
-    { id: 'section-2', name: 'Ceremony', description: 'Vows and ring exchange' },
-    { id: 'section-3', name: 'Reception', description: 'Party, speeches, first dance' },
+    { id: 'section-1', name: 'Getting Ready', description: 'Bridal prep and morning moments', createdAt: new Date(Date.now() - 5 * 86400000).toISOString() },
+    { id: 'section-2', name: 'Ceremony', description: 'Vows and ring exchange', createdAt: new Date(Date.now() - 3 * 86400000).toISOString() },
+    { id: 'section-3', name: 'Reception', description: 'Party, speeches, first dance', createdAt: new Date(Date.now() - 1 * 86400000).toISOString() },
   ])
+
+  // Active photo section — null means show all
+  const activePhotoSection = ref<string | null>(photoSections.value[0]?.id ?? null)
+
+  function setActivePhotoSection(sectionId: string | null) {
+    activePhotoSection.value = sectionId
+  }
 
   function addSection(name: string, description: string) {
     photoSections.value.push({
       id: `section-${Date.now()}`,
       name: name.trim(),
       description: description.trim(),
+      createdAt: new Date().toISOString(),
     })
   }
 
@@ -53,7 +62,9 @@ export const useCollectionSidebar = defineStore('collectionSidebar', () => {
 
   function getDefaultSection(tab: CollectionTab): string {
     switch (tab) {
-      case 'photos': return ''
+      case 'photos':
+        activePhotoSection.value = photoSections.value[0]?.id ?? null
+        return ''
       case 'design': return 'cover'
       case 'settings': return 'general'
       case 'activity': return 'downloads'
@@ -76,6 +87,7 @@ export const useCollectionSidebar = defineStore('collectionSidebar', () => {
     isOpen.value = true
     activeTab.value = 'photos'
     activeSection.value = ''
+    activePhotoSection.value = photoSections.value[0]?.id ?? null
   }
 
   /**
@@ -94,11 +106,13 @@ export const useCollectionSidebar = defineStore('collectionSidebar', () => {
     activeTab,
     activeSection,
     photoSections,
+    activePhotoSection,
     open,
     close,
     toggle,
     setTab,
     setSection,
+    setActivePhotoSection,
     addSection,
     initCoordination,
     restoreMainSidebar,
