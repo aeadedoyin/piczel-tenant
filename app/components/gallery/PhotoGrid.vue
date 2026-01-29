@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { PhotoCardAction } from '@/components/gallery/PhotoCard.vue'
 import type { Photo } from '@/types/gallery'
 
 defineProps<{
@@ -12,6 +13,7 @@ const emit = defineEmits<{
   star: [photoId: string]
   select: [photoId: string]
   view: [photo: Photo]
+  action: [action: PhotoCardAction, photo: Photo]
 }>()
 </script>
 
@@ -51,6 +53,7 @@ const emit = defineEmits<{
         :key="photo.id"
         :photo="photo"
         :selected="selectedIds?.has(photo.id)"
+        @action="(action: any, photo: any) => emit('action', action, photo)"
         @select="emit('select', $event)"
         @star="emit('star', $event)"
         @view="emit('view', $event)"
