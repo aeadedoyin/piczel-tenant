@@ -12,17 +12,6 @@ const limitPerVisitor = ref(0)
 
 <template>
   <div class="space-y-6">
-    <div>
-      <h3 class="text-lg font-semibold">
-        Favorite Settings
-      </h3>
-      <p class="text-sm text-muted-foreground">
-        Allow visitors to mark their favorite photos in this collection.
-      </p>
-    </div>
-
-    <ShadSeparator />
-
     <div class="space-y-6 max-w-lg">
       <!-- Enable Favorites -->
       <div class="flex items-center justify-between">

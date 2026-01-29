@@ -14,17 +14,6 @@ function copyLink() {
 
 <template>
   <div class="space-y-6">
-    <div>
-      <h3 class="text-lg font-semibold">
-        Quick Share Links
-      </h3>
-      <p class="text-sm text-muted-foreground">
-        Create and manage shareable links for this collection.
-      </p>
-    </div>
-
-    <ShadSeparator />
-
     <!-- Create Link -->
     <div class="space-y-3 max-w-lg">
       <ShadButton variant="outline" @click="copyLink">

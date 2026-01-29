@@ -8,17 +8,6 @@ defineProps<{
 
 <template>
   <div class="space-y-6">
-    <div>
-      <h3 class="text-lg font-semibold">
-        Store Orders
-      </h3>
-      <p class="text-sm text-muted-foreground">
-        Track orders placed from this collection's store.
-      </p>
-    </div>
-
-    <ShadSeparator />
-
     <!-- Empty State -->
     <div class="flex flex-col items-center py-12 text-center">
       <div class="mb-4 rounded-full bg-muted p-4">

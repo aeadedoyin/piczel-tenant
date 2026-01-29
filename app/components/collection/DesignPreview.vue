@@ -48,17 +48,6 @@ const currentSection = computed((): SectionInfo => sectionLabels[props.section] 
 
 <template>
   <div class="space-y-6">
-    <div>
-      <h3 class="text-lg font-semibold">
-        {{ currentSection.title }}
-      </h3>
-      <p class="text-sm text-muted-foreground">
-        {{ currentSection.description }}
-      </p>
-    </div>
-
-    <ShadSeparator />
-
     <!-- Placeholder -->
     <div class="flex flex-col items-center py-16 text-center">
       <div class="mb-4 rounded-full bg-muted p-4">

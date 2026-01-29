@@ -14,17 +14,6 @@ const isPinRequired = ref(false)
 
 <template>
   <div class="space-y-6">
-    <div>
-      <h3 class="text-lg font-semibold">
-        Download Settings
-      </h3>
-      <p class="text-sm text-muted-foreground">
-        Control how visitors can download photos from this collection.
-      </p>
-    </div>
-
-    <ShadSeparator />
-
     <div class="space-y-6 max-w-lg">
       <!-- Enable Downloads -->
       <div class="flex items-center justify-between">

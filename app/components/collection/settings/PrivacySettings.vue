@@ -13,17 +13,6 @@ const isExifHidden = ref(true)
 
 <template>
   <div class="space-y-6">
-    <div>
-      <h3 class="text-lg font-semibold">
-        Privacy Settings
-      </h3>
-      <p class="text-sm text-muted-foreground">
-        Control who can access this collection and what they can do.
-      </p>
-    </div>
-
-    <ShadSeparator />
-
     <div class="space-y-6 max-w-lg">
       <!-- Password Protection -->
       <div class="space-y-3">

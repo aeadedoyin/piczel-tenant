@@ -40,17 +40,6 @@ watch(() => props.collection, (c) => {
 
 <template>
   <div class="space-y-6">
-    <div>
-      <h3 class="text-lg font-semibold">
-        General Settings
-      </h3>
-      <p class="text-sm text-muted-foreground">
-        Basic information about this collection.
-      </p>
-    </div>
-
-    <ShadSeparator />
-
     <div class="space-y-4 max-w-lg">
       <!-- Title -->
       <div class="space-y-2">
