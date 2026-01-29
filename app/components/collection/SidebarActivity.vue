@@ -13,7 +13,7 @@ const collectionSidebar = useCollectionSidebar()
 const items = [
   { id: 'downloads', label: 'Download Activity', icon: LucideDownload },
   { id: 'favorites', label: 'Favorite Activity', icon: LucideHeart },
-  { id: 'orders', label: 'Store Orders', icon: LucideShoppingCart },
+  { id: 'orders', label: 'Shop Orders', icon: LucideShoppingCart },
   { id: 'email', label: 'Email Registration', icon: LucideMail },
   { id: 'share-links', label: 'Quick Share Links', icon: LucideLink },
   { id: 'private-photos', label: 'Private Photos', icon: LucideLock },

@@ -24,7 +24,7 @@ const applyToWebSize = ref(false)
       </button>
       <p class="mt-4 text-sm/relaxed text-muted-foreground">
         Protect your photos with custom watermarks. Watermarks will not appear on prints ordered
-        through Store.
+        through Shop.
         <a
           class="
             text-emerald-500
@@ -48,7 +48,7 @@ const applyToWebSize = ref(false)
       </div>
       <p class="mt-4 text-sm/relaxed text-muted-foreground">
         Enable to apply watermark to web size downloads from your collections and web size
-        downloads sold through Store.
+        downloads sold through Shop.
       </p>
     </section>
   </div>

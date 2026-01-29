@@ -11,7 +11,7 @@ useHead({
         Edit Site
       </h1>
       <p class="text-muted-foreground">
-        Customize your portfolio website.
+        Customize your portfolio.
       </p>
     </div>
 
@@ -19,10 +19,10 @@ useHead({
     <div class="rounded-xl border bg-muted/50 p-12 text-center">
       <LucidePencil class="mx-auto size-12 text-muted-foreground" />
       <h3 class="mt-4 font-medium">
-        Website Editor
+        Portfolio Editor
       </h3>
       <p class="mt-2 text-sm text-muted-foreground">
-        Drag-and-drop website editor coming soon...
+        Drag-and-drop portfolio editor coming soon...
       </p>
     </div>
 

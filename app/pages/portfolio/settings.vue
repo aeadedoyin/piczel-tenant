@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useHead({
-  title: 'Website Settings | Piczel',
+  title: 'Portfolio Settings | Piczel',
 })
 </script>
 
@@ -8,10 +8,10 @@ useHead({
   <div class="space-y-6">
     <div>
       <h1 class="text-2xl font-semibold tracking-tight">
-        Website Settings
+        Portfolio Settings
       </h1>
       <p class="text-muted-foreground">
-        Configure your website domain, SEO, and other settings.
+        Configure your portfolio domain, SEO, and other settings.
       </p>
     </div>
 

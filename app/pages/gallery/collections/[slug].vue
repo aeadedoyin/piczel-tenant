@@ -117,12 +117,12 @@ const sectionHeaders: Record<string, Record<string, { title: string, description
     privacy: { title: 'Privacy', description: 'Control access and visibility.' },
     download: { title: 'Download', description: 'Configure download options.' },
     favorite: { title: 'Favorites', description: 'Configure favorites feature.' },
-    store: { title: 'Store', description: 'Configure store options.' },
+    shop: { title: 'Shop', description: 'Configure shop options.' },
   },
   activity: {
     'downloads': { title: 'Download Activity', description: 'Track photo downloads.' },
     'favorites': { title: 'Favorite Activity', description: 'See favorited photos.' },
-    'orders': { title: 'Store Orders', description: 'Track store orders.' },
+    'orders': { title: 'Shop Orders', description: 'Track shop orders.' },
     'email': { title: 'Email Registration', description: 'Collected visitor emails.' },
     'share-links': { title: 'Quick Share Links', description: 'Manage shareable links.' },
     'private-photos': { title: 'Private Photos', description: 'Hidden photos from public view.' },
@@ -555,8 +555,8 @@ watch(slug, loadData)
                 v-else-if="collectionSidebar.activeSection === 'favorite'"
                 :collection="collection"
               />
-              <CollectionSettingsStoreSettings
-                v-else-if="collectionSidebar.activeSection === 'store'"
+              <CollectionSettingsShopSettings
+                v-else-if="collectionSidebar.activeSection === 'shop'"
                 :collection="collection"
               />
             </div>
@@ -585,7 +585,7 @@ watch(slug, loadData)
                 v-else-if="collectionSidebar.activeSection === 'favorites'"
                 :collection="collection"
               />
-              <CollectionActivityStoreOrders
+              <CollectionActivityShopOrders
                 v-else-if="collectionSidebar.activeSection === 'orders'"
                 :collection="collection"
               />

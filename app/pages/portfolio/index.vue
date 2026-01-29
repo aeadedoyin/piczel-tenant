@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useHead({
-  title: 'Website | Piczel',
+  title: 'Portfolio | Piczel',
 })
 </script>
 
@@ -8,20 +8,20 @@ useHead({
   <div class="space-y-6">
     <div>
       <h1 class="text-2xl font-semibold tracking-tight">
-        Website
+        Portfolio
       </h1>
       <p class="text-muted-foreground">
-        Manage your portfolio website and online presence.
+        Manage your portfolio and online presence.
       </p>
     </div>
 
-    <!-- Website Preview -->
+    <!-- Portfolio Preview -->
     <div class="overflow-hidden rounded-xl border bg-card">
       <div class="flex aspect-video items-center justify-center bg-muted">
         <div class="text-center">
           <LucideGlobe class="mx-auto size-12 text-muted-foreground" />
           <p class="mt-2 text-muted-foreground">
-            Website Preview
+            Portfolio Preview
           </p>
         </div>
       </div>

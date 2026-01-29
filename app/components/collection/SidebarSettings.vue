@@ -14,7 +14,7 @@ const items = [
   { id: 'privacy', label: 'Privacy', icon: LucideShield, enabled: true },
   { id: 'download', label: 'Download', icon: LucideDownload, enabled: true },
   { id: 'favorite', label: 'Favorite', icon: LucideHeart, enabled: false },
-  { id: 'store', label: 'Store', icon: LucideShoppingBag, enabled: false },
+  { id: 'shop', label: 'Shop', icon: LucideShoppingBag, enabled: false },
 ]
 </script>
 

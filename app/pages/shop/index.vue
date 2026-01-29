@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useHead({
-  title: 'Store | Piczel',
+  title: 'Shop | Piczel',
 })
 </script>
 
@@ -8,7 +8,7 @@ useHead({
   <div class="space-y-6">
     <div>
       <h1 class="text-2xl font-semibold tracking-tight">
-        Store
+        Shop
       </h1>
       <p class="text-muted-foreground">
         Manage your product catalog and orders.
@@ -64,7 +64,7 @@ useHead({
     <div class="rounded-xl border bg-muted/50 p-12 text-center">
       <LucideShoppingBag class="mx-auto size-12 text-muted-foreground" />
       <h3 class="mt-4 font-medium">
-        Store Overview
+        Shop Overview
       </h3>
       <p class="mt-2 text-sm text-muted-foreground">
         Quick access to orders and products.

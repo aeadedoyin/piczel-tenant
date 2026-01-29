@@ -5,7 +5,7 @@ defineProps<{
   collection: Collection
 }>()
 
-const isStoreEnabled = ref(false)
+const isShopEnabled = ref(false)
 const currency = ref('NGN')
 const allowDigitalDownload = ref(true)
 const allowPrints = ref(false)
@@ -14,20 +14,20 @@ const allowPrints = ref(false)
 <template>
   <div class="space-y-6">
     <div class="space-y-6 max-w-lg">
-      <!-- Enable Store -->
+      <!-- Enable Shop -->
       <div class="flex items-center justify-between">
         <div>
           <p class="text-sm font-medium">
-            Enable Store
+            Enable Shop
           </p>
           <p class="text-xs text-muted-foreground">
             Allow visitors to purchase photos from this collection.
           </p>
         </div>
-        <ShadSwitch v-model:checked="isStoreEnabled" />
+        <ShadSwitch v-model:checked="isShopEnabled" />
       </div>
 
-      <template v-if="isStoreEnabled">
+      <template v-if="isShopEnabled">
         <ShadSeparator />
 
         <!-- Currency -->

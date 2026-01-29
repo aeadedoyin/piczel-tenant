@@ -41,18 +41,18 @@ export function getApps(): AppDefinition[] {
       url: '/studio',
     },
     {
-      id: 'website',
-      name: 'Website',
-      description: 'Site builder',
+      id: 'portfolio',
+      name: 'Portfolio',
+      description: 'Portfolio builder',
       icon: LucidIcons.LucideGlobe,
-      url: '/website',
+      url: '/portfolio',
     },
     {
-      id: 'store',
-      name: 'Store',
+      id: 'shop',
+      name: 'Shop',
       description: 'E-commerce',
       icon: LucidIcons.LucideShoppingBag,
-      url: '/store',
+      url: '/shop',
     },
   ]
 }
@@ -146,49 +146,49 @@ export function getAppNavigation(): Record<string, NavItem[]> {
         icon: LucidIcons.LucideCreditCard,
       },
     ],
-    website: [
+    portfolio: [
       {
         title: 'Overview',
-        url: '/website',
+        url: '/portfolio',
         icon: LucidIcons.LucideGlobe,
       },
       {
         title: 'Edit Site',
-        url: '/website/edit',
+        url: '/portfolio/edit',
         icon: LucidIcons.LucidePenSquare,
       },
       // TODO: Add pages page when implemented
       // {
       //   title: 'Pages',
-      //   url: '/website/pages',
+      //   url: '/portfolio/pages',
       //   icon: LucidIcons.LucideFileText,
       // },
       {
         title: 'Settings',
-        url: '/website/settings',
+        url: '/portfolio/settings',
         icon: LucidIcons.LucideSettings,
       },
     ],
-    store: [
+    shop: [
       {
         title: 'Overview',
-        url: '/store',
+        url: '/shop',
         icon: LucidIcons.LucideShoppingBag,
       },
       {
         title: 'Orders',
-        url: '/store/orders',
+        url: '/shop/orders',
         icon: LucidIcons.LucidePackage,
       },
       {
         title: 'Catalog',
-        url: '/store/catalog',
+        url: '/shop/catalog',
         icon: LucidIcons.LucideGrid3x3,
       },
       // TODO: Add customers page when implemented
       // {
       //   title: 'Customers',
-      //   url: '/store/customers',
+      //   url: '/shop/customers',
       //   icon: LucidIcons.LucideUsers,
       // },
     ],
@@ -229,9 +229,9 @@ export function getActiveAppId(path: string): string {
     return 'gallery'
   if (path.startsWith('/studio'))
     return 'studio'
-  if (path.startsWith('/website'))
-    return 'website'
-  if (path.startsWith('/store'))
-    return 'store'
+  if (path.startsWith('/portfolio'))
+    return 'portfolio'
+  if (path.startsWith('/shop'))
+    return 'shop'
   return 'dashboard'
 }
