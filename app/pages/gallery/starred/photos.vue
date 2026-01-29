@@ -16,7 +16,7 @@ function handlePhotoView(_photo: Photo) {
 <template>
   <div class="space-y-4">
     <template v-if="gallery.isLoadingPhotos">
-      <div class="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div class="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 py-6">
         <div
           v-for="i in 8"
           :key="i"
