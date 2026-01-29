@@ -40,7 +40,7 @@ const demoPhotos = computed(() => {
 })
 
 // Split photos across sections for demo display
-const photosBySection = computed(() => {
+const allPhotosBySection = computed(() => {
   const sections = collectionSidebar.photoSections
   const allPhotos = demoPhotos.value
   if (sections.length === 0 || allPhotos.length === 0)
@@ -51,6 +51,60 @@ const photosBySection = computed(() => {
     ...section,
     photos: allPhotos.slice(i * perSection, (i + 1) * perSection),
   }))
+})
+
+// Counts per section (for sidebar display)
+const sectionPhotoCounts = computed(() => {
+  const counts: Record<string, number> = {}
+  for (const s of allPhotosBySection.value) {
+    counts[s.id] = s.photos.length
+  }
+  return counts
+})
+
+// Visible sections based on active sidebar selection
+const visibleSections = computed(() => {
+  const active = collectionSidebar.activePhotoSection
+  if (!active)
+    return allPhotosBySection.value
+  return allPhotosBySection.value.filter(s => s.id === active)
+})
+
+// Sort state
+const sortField = ref<'upload' | 'date' | 'name' | 'random'>('upload')
+const sortAsc = ref(true)
+const sortLabels: Record<string, string> = { upload: 'Upload', date: 'Date', name: 'Name', random: 'Random' }
+const sortLabel = computed(() => sortLabels[sortField.value])
+
+// Section header info for non-photo tabs
+const sectionHeaders: Record<string, Record<string, { title: string, description: string }>> = {
+  design: {
+    cover: { title: 'Cover Design', description: 'Customize the cover image, layout, and style.' },
+    typography: { title: 'Typography', description: 'Choose fonts and text styles.' },
+    color: { title: 'Color', description: 'Set the color palette and theme.' },
+    grid: { title: 'Grid Layout', description: 'Configure photo grid display.' },
+  },
+  settings: {
+    general: { title: 'General', description: 'Basic information about this collection.' },
+    privacy: { title: 'Privacy', description: 'Control access and visibility.' },
+    download: { title: 'Download', description: 'Configure download options.' },
+    favorite: { title: 'Favorites', description: 'Configure favorites feature.' },
+    store: { title: 'Store', description: 'Configure store options.' },
+  },
+  activity: {
+    'downloads': { title: 'Download Activity', description: 'Track photo downloads.' },
+    'favorites': { title: 'Favorite Activity', description: 'See favorited photos.' },
+    'orders': { title: 'Store Orders', description: 'Track store orders.' },
+    'email': { title: 'Email Registration', description: 'Collected visitor emails.' },
+    'share-links': { title: 'Quick Share Links', description: 'Manage shareable links.' },
+    'private-photos': { title: 'Private Photos', description: 'Hidden photos from public view.' },
+  },
+}
+
+const currentSectionInfo = computed(() => {
+  const tab = collectionSidebar.activeTab
+  const section = collectionSidebar.activeSection
+  return sectionHeaders[tab]?.[section] ?? null
 })
 
 // Sidebar coordination
@@ -215,11 +269,12 @@ watch(slug, loadData)
   </div>
 
   <!-- Collection Content -->
-  <div v-else class="-m-4 flex h-[calc(100dvh-82px)]">
+  <div v-else class="flex h-[calc(100dvh-7.125rem)] border-t">
     <!-- Collection Sidebar -->
     <CollectionSidebar
       :collection="collection"
       :photos="demoPhotos"
+      :section-photo-counts="sectionPhotoCounts"
       @photo-select="handlePhotoView"
     />
 
@@ -233,9 +288,9 @@ watch(slug, loadData)
     </button>
 
     <!-- Main Content Area -->
-    <div class="flex-1 overflow-y-auto">
+    <div class="flex flex-1 flex-col">
       <!-- Top Action Bar -->
-      <div class="sticky top-0 z-10 flex items-center justify-between border-b bg-background px-6 py-3">
+      <div class="shrink-0 flex items-center justify-between border-b bg-background px-6 py-3">
         <div class="flex items-center gap-3">
           <h1 class="text-lg font-semibold">
             {{ collection.title }}
@@ -281,10 +336,6 @@ watch(slug, loadData)
                 <LucideDownload class="mr-2 size-4" />
                 Download All
               </ShadDropdownMenuItem>
-              <ShadDropdownMenuItem>
-                <LucideUpload class="mr-2 size-4" />
-                Upload Photos
-              </ShadDropdownMenuItem>
               <ShadDropdownMenuSeparator />
               <ShadDropdownMenuItem
                 class="text-destructive focus:text-destructive"
@@ -299,141 +350,112 @@ watch(slug, loadData)
       </div>
 
       <!-- Tab Content -->
-      <div class="p-6">
+      <div class="flex min-h-0 flex-1 flex-col">
         <!-- Photos Tab -->
         <template v-if="collectionSidebar.activeTab === 'photos'">
-          <!-- Selection Toolbar -->
-          <Transition
-            enter-active-class="transition-all duration-200 ease-out"
-            enter-from-class="opacity-0 -translate-y-2"
-            enter-to-class="opacity-100 translate-y-0"
-            leave-active-class="transition-all duration-150 ease-in"
-            leave-from-class="opacity-100 translate-y-0"
-            leave-to-class="opacity-0 -translate-y-2"
-          >
-            <div
-              v-if="isSelecting || hasSelection"
-              class="mb-4 flex items-center justify-between rounded-lg border bg-muted/50 p-3"
-            >
-              <div class="flex items-center gap-3">
-                <ShadCheckbox
-                  :checked="allSelected"
-                  :indeterminate="hasSelection && !allSelected"
-                  @update:checked="handleSelectAll"
-                />
-                <span class="text-sm">
-                  <template v-if="hasSelection">
-                    {{ selectedCount }} {{ selectedCount === 1 ? 'photo' : 'photos' }} selected
-                  </template>
-                  <template v-else>
-                    Select photos
-                  </template>
-                </span>
-              </div>
-
-              <div class="flex items-center gap-2">
-                <template v-if="hasSelection">
-                  <ShadButton size="sm" variant="outline">
-                    <LucideStar class="mr-2 size-4" />
-                    Star
-                  </ShadButton>
-                  <ShadButton size="sm" variant="outline">
-                    <LucideDownload class="mr-2 size-4" />
-                    Download
-                  </ShadButton>
-                  <ShadButton size="sm" variant="outline">
-                    <LucideFolderInput class="mr-2 size-4" />
-                    Move
-                  </ShadButton>
-                  <ShadButton class="text-destructive" size="sm" variant="outline">
-                    <LucideTrash2 class="mr-2 size-4" />
-                    Delete
-                  </ShadButton>
-                </template>
-                <ShadButton
-                  size="sm"
-                  variant="ghost"
-                  @click="toggleSelectMode"
-                >
-                  <LucideX class="mr-2 size-4" />
-                  Cancel
-                </ShadButton>
-              </div>
-            </div>
-          </Transition>
-
-          <!-- View Toggle & Photo Count -->
-          <div
-            v-if="demoPhotos.length > 0"
-            class="mb-4 flex items-center justify-between"
-          >
-            <h2 class="text-sm font-medium text-muted-foreground">
-              {{ demoPhotos.length }} {{ demoPhotos.length === 1 ? 'photo' : 'photos' }}
-            </h2>
-            <div class="flex items-center gap-2">
-              <ShadButton
-                size="sm"
-                :variant="!isSelecting ? 'outline' : 'secondary'"
-                @click="toggleSelectMode"
-              >
-                <LucideCheckSquare class="mr-2 size-4" />
-                Select
-              </ShadButton>
-
-              <ShadToggleGroup
-                v-model="viewMode"
-                class="border"
-                type="single"
-              >
-                <ShadToggleGroupItem
-                  aria-label="Grid view"
-                  class="px-3"
-                  value="grid"
-                >
-                  <LucideLayoutGrid class="size-4" />
-                </ShadToggleGroupItem>
-                <ShadToggleGroupItem
-                  aria-label="Masonry view"
-                  class="px-3"
-                  value="masonry"
-                >
-                  <LucideLayoutDashboard class="size-4" />
-                </ShadToggleGroupItem>
-              </ShadToggleGroup>
-            </div>
-          </div>
-
-          <!-- Sectioned Photos Grid -->
+          <!-- Sectioned Photos -->
           <template v-if="demoPhotos.length > 0">
             <div
-              v-for="section in photosBySection"
-              :id="section.id"
+              v-for="section in visibleSections"
               :key="section.id"
-              class="mb-8 scroll-mt-16"
+              class="flex min-h-0 flex-1 flex-col"
             >
-              <div class="mb-3">
-                <h3 class="text-sm font-semibold">
-                  {{ section.name }}
-                </h3>
-                <p v-if="section.description" class="text-xs text-muted-foreground">
-                  {{ section.description }}
-                </p>
+              <!-- Section header + controls -->
+              <div class="shrink-0 flex items-center justify-between border-b bg-background px-6 py-3">
+                <div>
+                  <h3 class="text-sm font-semibold">
+                    {{ section.name }}
+                  </h3>
+                  <p v-if="section.description" class="text-xs text-muted-foreground">
+                    {{ section.description }}
+                  </p>
+                </div>
+                <div class="flex items-center gap-2">
+                  <!-- Upload -->
+                  <ShadButton size="sm" variant="default">
+                    <LucideUpload class="mr-2 size-4" />
+                    Upload
+                  </ShadButton>
+
+                  <!-- Sort -->
+                  <ShadDropdownMenu>
+                    <ShadDropdownMenuTrigger as-child>
+                      <ShadButton size="sm" variant="outline">
+                        <LucideArrowUpDown class="mr-1.5 size-3.5" />
+                        Sort
+                        <span class="ml-1 text-xs text-muted-foreground">{{ sortLabel }}</span>
+                        <LucideArrowUp v-if="sortField !== 'random' && sortAsc" class="ml-0.5 size-3 text-muted-foreground" />
+                        <LucideArrowDown v-else-if="sortField !== 'random' && !sortAsc" class="ml-0.5 size-3 text-muted-foreground" />
+                      </ShadButton>
+                    </ShadDropdownMenuTrigger>
+                    <ShadDropdownMenuContent align="end">
+                      <ShadDropdownMenuItem @select="sortField = 'upload'; sortAsc = !sortAsc">
+                        <LucideUpload class="mr-2 size-4" />
+                        Upload Date
+                        <LucideArrowUp v-if="sortField === 'upload' && sortAsc" class="ml-auto size-3.5" />
+                        <LucideArrowDown v-else-if="sortField === 'upload' && !sortAsc" class="ml-auto size-3.5" />
+                      </ShadDropdownMenuItem>
+                      <ShadDropdownMenuItem @select="sortField = 'date'; sortAsc = !sortAsc">
+                        <LucideCalendar class="mr-2 size-4" />
+                        Date Taken
+                        <LucideArrowUp v-if="sortField === 'date' && sortAsc" class="ml-auto size-3.5" />
+                        <LucideArrowDown v-else-if="sortField === 'date' && !sortAsc" class="ml-auto size-3.5" />
+                      </ShadDropdownMenuItem>
+                      <ShadDropdownMenuItem @select="sortField = 'name'; sortAsc = !sortAsc">
+                        <LucideType class="mr-2 size-4" />
+                        Name
+                        <LucideArrowUp v-if="sortField === 'name' && sortAsc" class="ml-auto size-3.5" />
+                        <LucideArrowDown v-else-if="sortField === 'name' && !sortAsc" class="ml-auto size-3.5" />
+                      </ShadDropdownMenuItem>
+                      <ShadDropdownMenuItem @select="sortField = 'random'">
+                        <LucideShuffle class="mr-2 size-4" />
+                        Random
+                      </ShadDropdownMenuItem>
+                    </ShadDropdownMenuContent>
+                  </ShadDropdownMenu>
+
+                  <!-- Grid Toggle -->
+                  <ShadToggleGroup
+                    v-model="viewMode"
+                    class="border"
+                    type="single"
+                  >
+                    <ShadToggleGroupItem
+                      aria-label="Grid view"
+                      class="px-3"
+                      value="grid"
+                    >
+                      <LucideLayoutGrid class="size-4" />
+                    </ShadToggleGroupItem>
+                    <ShadToggleGroupItem
+                      aria-label="Masonry view"
+                      class="px-3"
+                      value="masonry"
+                    >
+                      <LucideLayoutDashboard class="size-4" />
+                    </ShadToggleGroupItem>
+                  </ShadToggleGroup>
+                </div>
               </div>
-              <GalleryPhotoGrid
-                :columns="4"
-                :photos="section.photos"
-                :selected-ids="gallery.selectedPhotoIds"
-                @select="handlePhotoSelect"
-                @star="gallery.togglePhotoStar"
-                @view="handlePhotoView"
-              />
+
+              <!-- Scrollable photo grid -->
+              <div class="flex-1 overflow-y-auto p-6">
+                <GalleryPhotoGrid
+                  :columns="4"
+                  :photos="section.photos"
+                  :selected-ids="gallery.selectedPhotoIds"
+                  @select="handlePhotoSelect"
+                  @star="gallery.togglePhotoStar"
+                  @view="handlePhotoView"
+                />
+              </div>
             </div>
           </template>
 
           <!-- Empty Photos State -->
           <div
             v-else
-            class="flex flex-col items-center justify-center rounded-xl border-2 border-dashed py-20 text-center"
+            class="flex flex-1 flex-col items-center justify-center rounded-xl border-2 border-dashed px-6 py-20 text-center"
           >
             <div class="mb-4 rounded-full bg-muted p-4">
               <LucideImagePlus class="size-12 text-muted-foreground" />
@@ -453,67 +475,165 @@ watch(slug, loadData)
 
         <!-- Design Tab -->
         <template v-else-if="collectionSidebar.activeTab === 'design'">
-          <CollectionDesignPreview
-            :collection="collection"
-            :section="collectionSidebar.activeSection || 'cover'"
-          />
+          <div class="flex min-h-0 flex-1 flex-col">
+            <div class="shrink-0 flex items-center justify-between border-b bg-background px-6 py-3">
+              <div>
+                <h3 class="text-sm font-semibold">
+                  {{ currentSectionInfo?.title }}
+                </h3>
+                <p v-if="currentSectionInfo?.description" class="text-xs text-muted-foreground">
+                  {{ currentSectionInfo?.description }}
+                </p>
+              </div>
+            </div>
+            <div class="flex-1 overflow-y-auto p-6">
+              <CollectionDesignPreview
+                :collection="collection"
+                :section="collectionSidebar.activeSection || 'cover'"
+              />
+            </div>
+          </div>
         </template>
 
         <!-- Settings Tab -->
         <template v-else-if="collectionSidebar.activeTab === 'settings'">
-          <CollectionSettingsGeneralSettings
-            v-if="collectionSidebar.activeSection === 'general' || !collectionSidebar.activeSection"
-            :collection="collection"
-            @save="handleEditSave"
-          />
-          <CollectionSettingsPrivacySettings
-            v-else-if="collectionSidebar.activeSection === 'privacy'"
-            :collection="collection"
-          />
-          <CollectionSettingsDownloadSettings
-            v-else-if="collectionSidebar.activeSection === 'download'"
-            :collection="collection"
-          />
-          <CollectionSettingsFavoriteSettings
-            v-else-if="collectionSidebar.activeSection === 'favorite'"
-            :collection="collection"
-          />
-          <CollectionSettingsStoreSettings
-            v-else-if="collectionSidebar.activeSection === 'store'"
-            :collection="collection"
-          />
+          <div class="flex min-h-0 flex-1 flex-col">
+            <div class="shrink-0 flex items-center justify-between border-b bg-background px-6 py-3">
+              <div>
+                <h3 class="text-sm font-semibold">
+                  {{ currentSectionInfo?.title }}
+                </h3>
+                <p v-if="currentSectionInfo?.description" class="text-xs text-muted-foreground">
+                  {{ currentSectionInfo?.description }}
+                </p>
+              </div>
+            </div>
+            <div class="flex-1 overflow-y-auto p-6">
+              <CollectionSettingsGeneralSettings
+                v-if="collectionSidebar.activeSection === 'general' || !collectionSidebar.activeSection"
+                :collection="collection"
+                @save="handleEditSave"
+              />
+              <CollectionSettingsPrivacySettings
+                v-else-if="collectionSidebar.activeSection === 'privacy'"
+                :collection="collection"
+              />
+              <CollectionSettingsDownloadSettings
+                v-else-if="collectionSidebar.activeSection === 'download'"
+                :collection="collection"
+              />
+              <CollectionSettingsFavoriteSettings
+                v-else-if="collectionSidebar.activeSection === 'favorite'"
+                :collection="collection"
+              />
+              <CollectionSettingsStoreSettings
+                v-else-if="collectionSidebar.activeSection === 'store'"
+                :collection="collection"
+              />
+            </div>
+          </div>
         </template>
 
         <!-- Activity Tab -->
         <template v-else-if="collectionSidebar.activeTab === 'activity'">
-          <CollectionActivityDownloadActivity
-            v-if="collectionSidebar.activeSection === 'downloads' || !collectionSidebar.activeSection"
-            :collection="collection"
-          />
-          <CollectionActivityFavoriteActivity
-            v-else-if="collectionSidebar.activeSection === 'favorites'"
-            :collection="collection"
-          />
-          <CollectionActivityStoreOrders
-            v-else-if="collectionSidebar.activeSection === 'orders'"
-            :collection="collection"
-          />
-          <CollectionActivityEmailRegistration
-            v-else-if="collectionSidebar.activeSection === 'email'"
-            :collection="collection"
-          />
-          <CollectionActivityQuickShareLinks
-            v-else-if="collectionSidebar.activeSection === 'share-links'"
-            :collection="collection"
-          />
-          <CollectionActivityPrivatePhotos
-            v-else-if="collectionSidebar.activeSection === 'private-photos'"
-            :collection="collection"
-          />
+          <div class="flex min-h-0 flex-1 flex-col">
+            <div class="shrink-0 flex items-center justify-between border-b bg-background px-6 py-3">
+              <div>
+                <h3 class="text-sm font-semibold">
+                  {{ currentSectionInfo?.title }}
+                </h3>
+                <p v-if="currentSectionInfo?.description" class="text-xs text-muted-foreground">
+                  {{ currentSectionInfo?.description }}
+                </p>
+              </div>
+            </div>
+            <div class="flex-1 overflow-y-auto p-6">
+              <CollectionActivityDownloadActivity
+                v-if="collectionSidebar.activeSection === 'downloads' || !collectionSidebar.activeSection"
+                :collection="collection"
+              />
+              <CollectionActivityFavoriteActivity
+                v-else-if="collectionSidebar.activeSection === 'favorites'"
+                :collection="collection"
+              />
+              <CollectionActivityStoreOrders
+                v-else-if="collectionSidebar.activeSection === 'orders'"
+                :collection="collection"
+              />
+              <CollectionActivityEmailRegistration
+                v-else-if="collectionSidebar.activeSection === 'email'"
+                :collection="collection"
+              />
+              <CollectionActivityQuickShareLinks
+                v-else-if="collectionSidebar.activeSection === 'share-links'"
+                :collection="collection"
+              />
+              <CollectionActivityPrivatePhotos
+                v-else-if="collectionSidebar.activeSection === 'private-photos'"
+                :collection="collection"
+              />
+            </div>
+          </div>
         </template>
       </div>
     </div>
   </div>
+
+  <!-- Floating Bulk Actions Toolbar -->
+  <Transition
+    enter-active-class="transition-all duration-300 ease-out"
+    enter-from-class="translate-y-full opacity-0"
+    enter-to-class="translate-y-0 opacity-100"
+    leave-active-class="transition-all duration-200 ease-in"
+    leave-from-class="translate-y-0 opacity-100"
+    leave-to-class="translate-y-full opacity-0"
+  >
+    <div
+      v-if="hasSelection"
+      class="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-lg border bg-background px-6 py-4 shadow-lg"
+    >
+      <div class="flex items-center gap-4">
+        <div class="flex items-center gap-3">
+          <ShadCheckbox
+            :checked="allSelected"
+            :indeterminate="hasSelection && !allSelected"
+            @update:checked="handleSelectAll"
+          />
+          <span class="text-sm font-medium">
+            {{ selectedCount }} {{ selectedCount === 1 ? 'photo' : 'photos' }} selected
+          </span>
+        </div>
+
+        <div class="h-4 w-px bg-border" />
+
+        <div class="flex items-center gap-2">
+          <ShadButton size="sm" variant="outline">
+            <LucideStar class="mr-2 size-4" />
+            Star
+          </ShadButton>
+          <ShadButton size="sm" variant="outline">
+            <LucideDownload class="mr-2 size-4" />
+            Download
+          </ShadButton>
+          <ShadButton size="sm" variant="outline">
+            <LucideFolderInput class="mr-2 size-4" />
+            Move
+          </ShadButton>
+          <ShadButton size="sm" variant="destructive">
+            <LucideTrash2 class="mr-2 size-4" />
+            Delete
+          </ShadButton>
+          <ShadButton
+            size="sm"
+            variant="ghost"
+            @click="toggleSelectMode"
+          >
+            <LucideX class="size-4" />
+          </ShadButton>
+        </div>
+      </div>
+    </div>
+  </Transition>
 
   <!-- Edit Collection Modal -->
   <GalleryCollectionModal
